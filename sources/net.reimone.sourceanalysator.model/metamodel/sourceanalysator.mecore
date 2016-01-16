@@ -1,0 +1,23 @@
+sourceanalysator <http://www.reimone.net/sourceanalysator>
+
+Library (
+	generalSources GeneralSource*
+	sources Source*
+	articles Article*
+)
+
+GeneralSource (
+	name EString
+	~sources Source* <> Source.generalSource
+)
+
+Source (
+	url EString
+	~generalSource GeneralSource (1..1) <> GeneralSource.sources
+	~articles Article* <> Article.sources
+)
+
+Article (
+	name EString
+	~sources Source* <> Source.articles
+)

@@ -1,7 +1,15 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: Source Analysator Metamodel
-Bundle-SymbolicName: net.reimone.sourceanalysator.model
+Bundle-Name: %pluginName
+Bundle-SymbolicName: net.reimone.sourceanalysator.model;singleton:=true
 Bundle-Version: 1.0.0.qualifier
-Bundle-Vendor: Jan Reimann
+Bundle-ClassPath: .
+Bundle-Vendor: %providerName
+Bundle-Localization: plugin
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
+Export-Package: net.reimone.sourceanalysator,
+ net.reimone.sourceanalysator.impl,
+ net.reimone.sourceanalysator.util
+Require-Bundle: org.eclipse.core.runtime,
+ org.eclipse.emf.ecore;visibility:=reexport
+Bundle-ActivationPolicy: lazy
