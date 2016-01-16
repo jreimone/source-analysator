@@ -1,0 +1,7 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Source Analysator Metamodel
+Bundle-SymbolicName: net.reimone.sourceanalysator.model
+Bundle-Version: 1.0.0.qualifier
+Bundle-Vendor: Jan Reimann
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8
