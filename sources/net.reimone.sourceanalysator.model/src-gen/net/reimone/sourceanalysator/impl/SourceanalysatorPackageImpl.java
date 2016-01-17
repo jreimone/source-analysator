@@ -225,8 +225,8 @@ public class SourceanalysatorPackageImpl extends EPackageImpl implements Sourcea
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getArticle_Name() {
-		return (EAttribute)articleEClass.getEStructuralFeatures().get(0);
+	public EReference getArticle_Sources() {
+		return (EReference)articleEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -234,8 +234,8 @@ public class SourceanalysatorPackageImpl extends EPackageImpl implements Sourcea
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getArticle_Sources() {
-		return (EReference)articleEClass.getEStructuralFeatures().get(1);
+	public EAttribute getArticle_Title() {
+		return (EAttribute)articleEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -281,8 +281,8 @@ public class SourceanalysatorPackageImpl extends EPackageImpl implements Sourcea
 		createEReference(libraryEClass, LIBRARY__ARTICLES);
 
 		articleEClass = createEClass(ARTICLE);
-		createEAttribute(articleEClass, ARTICLE__NAME);
 		createEReference(articleEClass, ARTICLE__SOURCES);
+		createEAttribute(articleEClass, ARTICLE__TITLE);
 	}
 
 	/**
@@ -330,8 +330,8 @@ public class SourceanalysatorPackageImpl extends EPackageImpl implements Sourcea
 		initEReference(getLibrary_Articles(), this.getArticle(), null, "articles", null, 0, -1, Library.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(articleEClass, Article.class, "Article", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getArticle_Name(), ecorePackage.getEString(), "name", null, 1, 1, Article.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getArticle_Sources(), this.getSource(), this.getSource_Articles(), "sources", null, 0, -1, Article.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getArticle_Title(), ecorePackage.getEString(), "title", null, 1, 1, Article.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Create resource
 		createResource(eNS_URI);
@@ -428,13 +428,13 @@ public class SourceanalysatorPackageImpl extends EPackageImpl implements Sourcea
 			 "WARNING", "This element was generated from an .mecore file. Removing this annotation will signal the MinimalEcore builder to keep this element."
 		   });	
 		addAnnotation
-		  (getArticle_Name(), 
+		  (getArticle_Sources(), 
 		   source, 
 		   new String[] {
 			 "WARNING", "This element was generated from an .mecore file. Removing this annotation will signal the MinimalEcore builder to keep this element."
 		   });	
 		addAnnotation
-		  (getArticle_Sources(), 
+		  (getArticle_Title(), 
 		   source, 
 		   new String[] {
 			 "WARNING", "This element was generated from an .mecore file. Removing this annotation will signal the MinimalEcore builder to keep this element."

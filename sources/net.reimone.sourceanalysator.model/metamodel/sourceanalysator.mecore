@@ -18,6 +18,6 @@ Source (
 )
 
 Article (
-	name EString
+	title EString
 	~sources Source* <> Source.articles
 )

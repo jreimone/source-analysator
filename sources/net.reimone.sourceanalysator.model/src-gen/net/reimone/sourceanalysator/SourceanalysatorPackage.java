@@ -224,22 +224,22 @@ public interface SourceanalysatorPackage extends EPackage {
 	int ARTICLE = 3;
 
 	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ARTICLE__NAME = 0;
-
-	/**
 	 * The feature id for the '<em><b>Sources</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ARTICLE__SOURCES = 1;
+	int ARTICLE__SOURCES = 0;
+
+	/**
+	 * The feature id for the '<em><b>Title</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ARTICLE__TITLE = 1;
 
 	/**
 	 * The number of structural features of the '<em>Article</em>' class.
@@ -389,17 +389,6 @@ public interface SourceanalysatorPackage extends EPackage {
 	EClass getArticle();
 
 	/**
-	 * Returns the meta object for the attribute '{@link net.reimone.sourceanalysator.Article#getName <em>Name</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Name</em>'.
-	 * @see net.reimone.sourceanalysator.Article#getName()
-	 * @see #getArticle()
-	 * @generated
-	 */
-	EAttribute getArticle_Name();
-
-	/**
 	 * Returns the meta object for the reference list '{@link net.reimone.sourceanalysator.Article#getSources <em>Sources</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -409,6 +398,17 @@ public interface SourceanalysatorPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getArticle_Sources();
+
+	/**
+	 * Returns the meta object for the attribute '{@link net.reimone.sourceanalysator.Article#getTitle <em>Title</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Title</em>'.
+	 * @see net.reimone.sourceanalysator.Article#getTitle()
+	 * @see #getArticle()
+	 * @generated
+	 */
+	EAttribute getArticle_Title();
 
 	/**
 	 * Returns the factory that creates the instances of the model.
@@ -538,20 +538,20 @@ public interface SourceanalysatorPackage extends EPackage {
 		EClass ARTICLE = eINSTANCE.getArticle();
 
 		/**
-		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute ARTICLE__NAME = eINSTANCE.getArticle_Name();
-
-		/**
 		 * The meta object literal for the '<em><b>Sources</b></em>' reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
 		EReference ARTICLE__SOURCES = eINSTANCE.getArticle_Sources();
+
+		/**
+		 * The meta object literal for the '<em><b>Title</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute ARTICLE__TITLE = eINSTANCE.getArticle_Title();
 
 	}
 

@@ -11,5 +11,6 @@ Export-Package: net.reimone.sourceanalysator.tests
 Require-Bundle: org.eclipse.core.runtime,
  net.reimone.sourceanalysator.model;visibility:=reexport,
  org.eclipse.emf.ecore.xmi;visibility:=reexport,
- org.junit;visibility:=reexport
+ org.junit;visibility:=reexport,
+ net.reimone.sourceanalysator.core
 Bundle-ActivationPolicy: lazy
