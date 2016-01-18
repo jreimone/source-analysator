@@ -12,5 +12,6 @@ Require-Bundle: org.eclipse.core.runtime,
  net.reimone.sourceanalysator.model;visibility:=reexport,
  org.eclipse.emf.ecore.xmi;visibility:=reexport,
  org.junit;visibility:=reexport,
- net.reimone.sourceanalysator.core
+ net.reimone.sourceanalysator.core,
+ com.google.guava_18_0
 Bundle-ActivationPolicy: lazy

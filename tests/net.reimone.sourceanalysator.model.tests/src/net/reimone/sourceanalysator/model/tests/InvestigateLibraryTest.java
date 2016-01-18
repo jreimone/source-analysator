@@ -1,17 +1,22 @@
 package net.reimone.sourceanalysator.model.tests;
 
-import static org.hamcrest.core.Is.is;
-import static org.hamcrest.core.IsEqual.equalTo;
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
+import static org.junit.Assert.fail;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.junit.BeforeClass;
 import org.junit.Test;
+
+import com.google.common.collect.Iterables;
+import com.google.common.collect.Lists;
 
 import net.reimone.sourceanalysator.Article;
 import net.reimone.sourceanalysator.GeneralSource;
@@ -32,29 +37,54 @@ public class InvestigateLibraryTest {
 				.put(Resource.Factory.Registry.DEFAULT_EXTENSION, new XMIResourceFactoryImpl());
 		EPackage.Registry.INSTANCE.put(SourceanalysatorPackage.eNS_URI, SourceanalysatorPackage.eINSTANCE);
 	}
+
+	private GeneralSource spiegel;
+	private GeneralSource guardian;
 	
 	@Test
 	public void analyseSingleArticleSourcesTest() {
 		Library library = createSimpleLibrary();
 		Article article = library.getArticles().get(0);
-		assertThat(article.getTitle(), is(equalTo("Fuck the system")));
+		assertThat("name of article", article.getTitle(), is(equalTo("Fuck the system")));
 		
 		ISourceAnalysator analysator = new SourceAnalysator(library);
 		Map<GeneralSource, List<Source>> generalSources = analysator.getGeneralSourcesOfArticle(article);
+		assertThat("general sopurces count", generalSources.size(), is(equalTo(2)));
 		
-		assertThat(generalSources.size(), is(equalTo(2)));
-		
+		List<GeneralSource> requiredSources = Lists.newArrayList(spiegel, guardian);
+		for (Entry<GeneralSource, List<Source>> entry : generalSources.entrySet()) {
+			GeneralSource generalSource = entry.getKey();
+			boolean removedGeneralSource = requiredSources.remove(generalSource);
+			assertThat("expected general source was found", removedGeneralSource, is(true));
+			List<Source> sources = entry.getValue();
+			if (generalSource.equals(spiegel)) {
+				assertThat("count of referenced articles of " + generalSource.getName(), sources.size(), is(equalTo(2)));
+			} else if (generalSource.equals(guardian)) {
+				assertThat("count of referenced articles of " + generalSource.getName(), sources.size(), is(equalTo(1)));
+			} else {
+				fail("wrong general source");
+			}
+		}
+		printSourcesOfArticles(Lists.newArrayList(article), generalSources);
 	}
 
+	private void printSourcesOfArticles(List<Article> articles, Map<GeneralSource, List<Source>> generalSources) {
+		System.out.println("Selected articles: " + Iterables.toString(articles));
+		for (GeneralSource generalSource : generalSources.keySet()) {
+			List<Source> sources = generalSources.get(generalSource);
+			System.out.println(generalSource.getName() + " " + sources.size() + "x");
+		}
+	}
+	
 	private Library createSimpleLibrary() {
 		Library library = factory.createLibrary();
 		
 		// create sources
-		GeneralSource spiegel = factory.createGeneralSource();
+		spiegel = factory.createGeneralSource();
 		spiegel.setName("Spiegel");
 		library.getGeneralSources().add(spiegel);
 		
-		GeneralSource guardian = factory.createGeneralSource();
+		guardian = factory.createGeneralSource();
 		guardian.setName("Guardian");
 		library.getGeneralSources().add(guardian);
 		
