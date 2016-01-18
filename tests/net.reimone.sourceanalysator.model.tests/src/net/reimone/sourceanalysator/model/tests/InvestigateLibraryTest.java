@@ -2,6 +2,7 @@ package net.reimone.sourceanalysator.model.tests;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.junit.Assert.assertThat;
 import static org.junit.Assert.fail;
 
@@ -41,6 +42,31 @@ public class InvestigateLibraryTest {
 
 	private GeneralSource spiegel;
 	private GeneralSource guardian;
+	
+	@Test
+	public void analyseNullArticleTest() {
+		Article article = null;
+		Library library = createSimpleLibrary();
+		
+		ISourceAnalysator analysator = new SourceAnalysator(library);
+		Map<GeneralSource, List<Source>> generalSources = analysator.getGeneralSourcesOfArticle(article);
+		
+		assertThat("general sources of null article", generalSources, is(notNullValue()));
+		assertThat("count of general sources of null article", generalSources.size(), is(equalTo(0)));
+	}
+	
+	@Test
+	public void analyseNullLibraryTest() {
+		Library library = createSimpleLibrary();
+		Article article = library.getArticles().get(0);
+		library = null;
+		
+		ISourceAnalysator analysator = new SourceAnalysator(library);
+		Map<GeneralSource, List<Source>> generalSources = analysator.getGeneralSourcesOfArticle(article);
+		
+		assertThat("general sources of null article", generalSources, is(notNullValue()));
+		assertThat("count of general sources of null article", generalSources.size(), is(equalTo(0)));
+	}
 	
 	@Test
 	public void analyseSingleArticleSourcesTest() {

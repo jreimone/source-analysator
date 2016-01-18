@@ -1,5 +1,6 @@
 package net.reimone.sourceanalysator.core.impl;
 
+import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -23,17 +24,20 @@ public class SourceAnalysator implements ISourceAnalysator {
 
 	@Override
 	public Map<GeneralSource, List<Source>> getGeneralSourcesOfArticle(Article article) {
+		if (article == null) {
+			return Collections.emptyMap();
+		}
 		return getGeneralSourcesOfArticles(Lists.newArrayList(article));
 	}
 
 	@Override
 	public Map<GeneralSource, List<Source>> getGeneralSourcesOfArticles(List<Article> articles) {
 		if (articles == null) {
-			return null;
+			return Collections.emptyMap();
 		}
 		
 		if (library == null) {
-			return null;
+			return Collections.emptyMap();
 		}
 
 		Map<GeneralSource, List<Source>> result = new LinkedHashMap<>();
