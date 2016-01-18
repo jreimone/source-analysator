@@ -14,4 +14,9 @@ public interface ISourceAnalysator {
 	 */
 	Map<GeneralSource, List<Source>> getGeneralSourcesOfArticle(Article article);
 
+	/**
+	 * Returns a map which maps a general source to the sources referenced by the given articles 
+	 */
+	Map<GeneralSource, List<Source>> getGeneralSourcesOfArticles(List<Article> articles);
+
 }

@@ -15,6 +15,7 @@ import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import com.google.common.base.Function;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 
@@ -67,9 +68,47 @@ public class InvestigateLibraryTest {
 		}
 		printSourcesOfArticles(Lists.newArrayList(article), generalSources);
 	}
+	
+	@Test
+	public void analyseMultipleArticleSourcesTest() {
+		Library library = createSimpleLibrary();
+		
+		Article article1 = library.getArticles().get(0);
+		assertThat("name of article", article1.getTitle(), is(equalTo("Fuck the system")));
+		
+		Article article2 = library.getArticles().get(1);
+		assertThat("name of article", article2.getTitle(), is(equalTo("Refugees welcome")));
+		
+		ISourceAnalysator analysator = new SourceAnalysator(library);
+		List<Article> articles = Lists.newArrayList(article1, article2);
+		Map<GeneralSource, List<Source>> generalSources = analysator.getGeneralSourcesOfArticles(articles);
+		assertThat("general sopurces count", generalSources.size(), is(equalTo(2)));
+		
+		List<GeneralSource> requiredSources = Lists.newArrayList(spiegel, guardian);
+		for (Entry<GeneralSource, List<Source>> entry : generalSources.entrySet()) {
+			GeneralSource generalSource = entry.getKey();
+			boolean removedGeneralSource = requiredSources.remove(generalSource);
+			assertThat("expected general source was found", removedGeneralSource, is(true));
+			List<Source> sources = entry.getValue();
+			if (generalSource.equals(spiegel)) {
+				assertThat("count of referenced articles of " + generalSource.getName(), sources.size(), is(equalTo(3)));
+			} else if (generalSource.equals(guardian)) {
+				assertThat("count of referenced articles of " + generalSource.getName(), sources.size(), is(equalTo(2)));
+			} else {
+				fail("wrong general source");
+			}
+		}
+		printSourcesOfArticles(Lists.newArrayList(article1, article2), generalSources);
+	}
 
 	private void printSourcesOfArticles(List<Article> articles, Map<GeneralSource, List<Source>> generalSources) {
-		System.out.println("Selected articles: " + Iterables.toString(articles));
+		System.out.println("Selected articles: " + Iterables.toString(Lists.transform(articles, new Function<Article, String>() {
+
+			@Override
+			public String apply(Article input) {
+				return input.getTitle();
+			}
+		})));
 		for (GeneralSource generalSource : generalSources.keySet()) {
 			List<Source> sources = generalSources.get(generalSource);
 			System.out.println(generalSource.getName() + " " + sources.size() + "x");
