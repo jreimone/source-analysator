@@ -26,13 +26,12 @@ import net.reimone.sourceanalysator.Library;
 import net.reimone.sourceanalysator.Source;
 import net.reimone.sourceanalysator.SourceanalysatorFactory;
 import net.reimone.sourceanalysator.SourceanalysatorPackage;
+import net.reimone.sourceanalysator.core.ILibraryFactory;
 import net.reimone.sourceanalysator.core.ISourceAnalysator;
 import net.reimone.sourceanalysator.core.impl.SourceAnalysator;
 
 public class InvestigateLibraryTest {
 
-	private static SourceanalysatorFactory factory = SourceanalysatorFactory.eINSTANCE;
-	
 	@BeforeClass
 	public static void setUp() {
 		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap()
@@ -44,24 +43,22 @@ public class InvestigateLibraryTest {
 	private GeneralSource guardian;
 	
 	@Test
-	public void analyseNullArticleTest() {
-		Article article = null;
-		Library library = createSimpleLibrary();
+	public void getSingletonLibraryTest() {
+		ILibraryFactory libraryFactory = new TestLibraryFactory();
+		ISourceAnalysator analysator = new SourceAnalysator();
+		analysator.initialize(libraryFactory);
 		
-		ISourceAnalysator analysator = new SourceAnalysator(library);
-		Map<GeneralSource, List<Source>> generalSources = analysator.getGeneralSourcesOfArticle(article);
+		Library library1 = analysator.getSingleLibrary();
+		Library library2 = analysator.getSingleLibrary();
 		
-		assertThat("general sources of null article", generalSources, is(notNullValue()));
-		assertThat("count of general sources of null article", generalSources.size(), is(equalTo(0)));
+		assertThat(library1, is(equalTo(library2)));
 	}
 	
 	@Test
-	public void analyseNullLibraryTest() {
+	public void analyseNullArticleTest() {
+		Article article = null;
 		Library library = createSimpleLibrary();
-		Article article = library.getArticles().get(0);
-		library = null;
-		
-		ISourceAnalysator analysator = new SourceAnalysator(library);
+		ISourceAnalysator analysator = getSourceAnalysator(library);
 		Map<GeneralSource, List<Source>> generalSources = analysator.getGeneralSourcesOfArticle(article);
 		
 		assertThat("general sources of null article", generalSources, is(notNullValue()));
@@ -74,7 +71,7 @@ public class InvestigateLibraryTest {
 		Article article = library.getArticles().get(0);
 		assertThat("name of article", article.getTitle(), is(equalTo("Fuck the system")));
 		
-		ISourceAnalysator analysator = new SourceAnalysator(library);
+		ISourceAnalysator analysator = getSourceAnalysator(library);
 		Map<GeneralSource, List<Source>> generalSources = analysator.getGeneralSourcesOfArticle(article);
 		assertThat("general sopurces count", generalSources.size(), is(equalTo(2)));
 		
@@ -105,7 +102,7 @@ public class InvestigateLibraryTest {
 		Article article2 = library.getArticles().get(1);
 		assertThat("name of article", article2.getTitle(), is(equalTo("Refugees welcome")));
 		
-		ISourceAnalysator analysator = new SourceAnalysator(library);
+		ISourceAnalysator analysator = getSourceAnalysator(library);
 		List<Article> articles = Lists.newArrayList(article1, article2);
 		Map<GeneralSource, List<Source>> generalSources = analysator.getGeneralSourcesOfArticles(articles);
 		assertThat("general sopurces count", generalSources.size(), is(equalTo(2)));
@@ -127,6 +124,14 @@ public class InvestigateLibraryTest {
 		printSourcesOfArticles(Lists.newArrayList(article1, article2), generalSources);
 	}
 
+	private ISourceAnalysator getSourceAnalysator(Library library) {
+		TestLibraryFactory libraryFactory = new TestLibraryFactory();
+		libraryFactory.setLibrary(library);
+		ISourceAnalysator analysator = new SourceAnalysator();
+		analysator.initialize(libraryFactory);
+		return analysator;
+	}
+
 	private void printSourcesOfArticles(List<Article> articles, Map<GeneralSource, List<Source>> generalSources) {
 		System.out.println("Selected articles: " + Iterables.toString(Lists.transform(articles, new Function<Article, String>() {
 
@@ -142,6 +147,7 @@ public class InvestigateLibraryTest {
 	}
 	
 	private Library createSimpleLibrary() {
+		SourceanalysatorFactory factory = SourceanalysatorFactory.eINSTANCE;
 		Library library = factory.createLibrary();
 		
 		// create sources

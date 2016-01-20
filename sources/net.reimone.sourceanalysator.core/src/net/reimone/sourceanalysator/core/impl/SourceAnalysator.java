@@ -12,15 +12,13 @@ import net.reimone.sourceanalysator.Article;
 import net.reimone.sourceanalysator.GeneralSource;
 import net.reimone.sourceanalysator.Library;
 import net.reimone.sourceanalysator.Source;
+import net.reimone.sourceanalysator.core.ILibraryFactory;
 import net.reimone.sourceanalysator.core.ISourceAnalysator;
 
 public class SourceAnalysator implements ISourceAnalysator {
 
 	private Library library;
-
-	public SourceAnalysator(Library library) {
-		this.library = library;
-	}
+	private ILibraryFactory libraryFactory;
 
 	@Override
 	public Map<GeneralSource, List<Source>> getGeneralSourcesOfArticle(Article article) {
@@ -37,7 +35,7 @@ public class SourceAnalysator implements ISourceAnalysator {
 		}
 		
 		if (library == null) {
-			return Collections.emptyMap();
+			initLibrary();
 		}
 
 		Map<GeneralSource, List<Source>> result = new LinkedHashMap<>();
@@ -61,4 +59,25 @@ public class SourceAnalysator implements ISourceAnalysator {
 		return result;
 	}
 
+	@Override
+	public void initialize(ILibraryFactory libraryFactory) {
+		this.libraryFactory = libraryFactory;
+		initLibrary();
+	}
+
+	private void initLibrary() {
+		if (libraryFactory == null) {
+			throw new NullPointerException("The library factory hasn't been set. Invoke initialize(..) first");
+		}
+		
+		if (library == null) {
+			library = libraryFactory.createLibrary();
+		}
+	}
+
+	@Override
+	public Library getSingleLibrary() {
+		initLibrary();
+		return library;
+	}
 }
