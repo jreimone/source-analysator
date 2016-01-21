@@ -32,4 +32,9 @@ public interface ISourceAnalysator {
 	 */
 	public Library getSingleLibrary();
 
+	/**
+	 * Creates a new article with the given name without sources. 
+	 */
+	public void createArticle(String articleTitle);
+
 }

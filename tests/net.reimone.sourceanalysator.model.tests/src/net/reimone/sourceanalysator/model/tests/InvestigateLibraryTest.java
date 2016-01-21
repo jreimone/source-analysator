@@ -10,10 +10,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
-import org.eclipse.emf.ecore.EPackage;
-import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
-import org.junit.BeforeClass;
 import org.junit.Test;
 
 import com.google.common.base.Function;
@@ -25,34 +21,13 @@ import net.reimone.sourceanalysator.GeneralSource;
 import net.reimone.sourceanalysator.Library;
 import net.reimone.sourceanalysator.Source;
 import net.reimone.sourceanalysator.SourceanalysatorFactory;
-import net.reimone.sourceanalysator.SourceanalysatorPackage;
-import net.reimone.sourceanalysator.core.ILibraryFactory;
 import net.reimone.sourceanalysator.core.ISourceAnalysator;
 import net.reimone.sourceanalysator.core.impl.SourceAnalysator;
 
-public class InvestigateLibraryTest {
-
-	@BeforeClass
-	public static void setUp() {
-		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap()
-				.put(Resource.Factory.Registry.DEFAULT_EXTENSION, new XMIResourceFactoryImpl());
-		EPackage.Registry.INSTANCE.put(SourceanalysatorPackage.eNS_URI, SourceanalysatorPackage.eINSTANCE);
-	}
+public class InvestigateLibraryTest extends AbstractSourceAnalysatorTest {
 
 	private GeneralSource spiegel;
 	private GeneralSource guardian;
-	
-	@Test
-	public void getSingletonLibraryTest() {
-		ILibraryFactory libraryFactory = new TestLibraryFactory();
-		ISourceAnalysator analysator = new SourceAnalysator();
-		analysator.initialize(libraryFactory);
-		
-		Library library1 = analysator.getSingleLibrary();
-		Library library2 = analysator.getSingleLibrary();
-		
-		assertThat(library1, is(equalTo(library2)));
-	}
 	
 	@Test
 	public void analyseNullArticleTest() {

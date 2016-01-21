@@ -12,6 +12,7 @@ import net.reimone.sourceanalysator.Article;
 import net.reimone.sourceanalysator.GeneralSource;
 import net.reimone.sourceanalysator.Library;
 import net.reimone.sourceanalysator.Source;
+import net.reimone.sourceanalysator.SourceanalysatorFactory;
 import net.reimone.sourceanalysator.core.ILibraryFactory;
 import net.reimone.sourceanalysator.core.ISourceAnalysator;
 
@@ -79,5 +80,16 @@ public class SourceAnalysator implements ISourceAnalysator {
 	public Library getSingleLibrary() {
 		initLibrary();
 		return library;
+	}
+
+	@Override
+	public void createArticle(String articleTitle) {
+		if (articleTitle == null || articleTitle.isEmpty()) {
+			return;
+		}
+		
+		Article article = SourceanalysatorFactory.eINSTANCE.createArticle();
+		article.setTitle(articleTitle);
+		getSingleLibrary().getArticles().add(article);
 	}
 }
