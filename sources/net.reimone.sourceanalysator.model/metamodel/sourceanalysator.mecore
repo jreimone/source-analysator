@@ -9,6 +9,7 @@ Library (
 GeneralSource (
 	name EString
 	~sources Source* <> Source.generalSource
+	aliases EString*
 )
 
 Source (

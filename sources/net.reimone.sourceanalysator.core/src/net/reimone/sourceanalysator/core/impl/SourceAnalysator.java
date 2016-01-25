@@ -1,5 +1,6 @@
 package net.reimone.sourceanalysator.core.impl;
 
+import java.net.URI;
 import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.LinkedList;
@@ -7,6 +8,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.google.common.collect.Lists;
+import com.google.common.net.InternetDomainName;
 
 import net.reimone.sourceanalysator.Article;
 import net.reimone.sourceanalysator.GeneralSource;
@@ -83,13 +85,175 @@ public class SourceAnalysator implements ISourceAnalysator {
 	}
 
 	@Override
-	public void createArticle(String articleTitle) {
+	public Article createOrGetArticle(String articleTitle) {
 		if (articleTitle == null || articleTitle.isEmpty()) {
+			return null;
+		}
+		
+		Article article = getArticleByTitle(articleTitle);
+		if (article != null) {
+			return article;
+		}
+		
+		article = SourceanalysatorFactory.eINSTANCE.createArticle();
+		article.setTitle(articleTitle);
+		getSingleLibrary().getArticles().add(article);
+		return article;
+	}
+
+	@Override
+	public GeneralSource createOrGetGeneralSource(String generalSourceName) {
+		if (generalSourceName == null || generalSourceName.isEmpty()) {
+			return null;
+		}
+		
+		GeneralSource generalSource = getGeneralSourceByName(generalSourceName);
+		if (generalSource != null) {
+			return generalSource;
+		}
+		
+		generalSource = SourceanalysatorFactory.eINSTANCE.createGeneralSource();
+		generalSource.setName(generalSourceName);
+		library.getGeneralSources().add(generalSource);
+		return generalSource;
+	}
+	
+	private Article getArticleByTitle(String articleTitle) {
+		if (articleTitle == null || articleTitle.isEmpty()) {
+			return null;
+		}
+		
+		List<Article> articles = library.getArticles();
+		for (Article article : articles) {
+			if (article.getTitle().equals(articleTitle)) {
+				return article;
+			}
+		}
+		
+		return null;
+	}
+	
+	private GeneralSource getGeneralSourceByName(String generalSourceName) {
+		if (generalSourceName == null || generalSourceName.isEmpty()) {
+			return null;
+		}
+		
+		List<GeneralSource> generalSources = library.getGeneralSources();
+		for (GeneralSource generalSource : generalSources) {
+			if (generalSource.getName().equals(generalSourceName)) {
+				return generalSource;
+			}
+		}
+		
+		return null;
+	}
+
+	@Override
+	public String recommendGeneralSourceName(String url) {
+		InternetDomainName topPrivateDomain = getPrivateDomainNameForURL(url);
+		String privateDomainName = topPrivateDomain.toString();
+		
+		// first, search for existing aliases
+		GeneralSource generalSourceByAlias = getGeneralSourceByAlias(privateDomainName);
+		if (generalSourceByAlias != null) {
+			return generalSourceByAlias.getName();
+		}
+		
+		// second, return the domain
+		String[] split = privateDomainName.split("\\.");
+		String domain = split[0];
+		return domain;
+	}
+
+	private InternetDomainName getPrivateDomainNameForURL(String url) {
+		if (url == null || url.isEmpty()) {
+			return null;
+		}
+		
+		URI uri = URI.create(url);
+		String host = uri.getHost();
+		
+		InternetDomainName domainName = null;
+		if (host != null) {
+			// when the url has no protocol like 'http://'
+			domainName = InternetDomainName.from(host);
+		} else {
+			// get url without path or query
+			url = url.split("/")[0];
+			domainName = InternetDomainName.from(url);
+		}
+			
+		InternetDomainName topPrivateDomain = domainName.topPrivateDomain();
+		return topPrivateDomain;
+	}
+	
+	private GeneralSource getGeneralSourceByAlias(String alias) {
+		if (alias == null || alias.isEmpty()) {
+			return null;
+		}
+		
+		List<GeneralSource> generalSources = library.getGeneralSources();
+		for (GeneralSource generalSource : generalSources) {
+			List<String> aliases = generalSource.getAliases();
+			for (String generalSourceAlias : aliases) {
+				if (generalSourceAlias.equals(alias)) {
+					return generalSource;
+				}
+			}
+		}
+		
+		return null;
+	}
+
+	@Override
+	public Source createOrGetSource(String url) {
+		if (url == null || url.isEmpty()) {
+			return null;
+		}
+		
+		Source source = getSourceByURL(url);
+		if (source != null) {
+			return source;
+		}
+		
+		source = SourceanalysatorFactory.eINSTANCE.createSource();
+		source.setUrl(url);
+		library.getSources().add(source);
+		return source;
+	}
+	
+	private Source getSourceByURL(String sourceURL) {
+		if (sourceURL == null || sourceURL.isEmpty()) {
+			return null;
+		}
+		
+		List<Source> sources = library.getSources();
+		for (Source source : sources) {
+			if (source.getUrl().equals(sourceURL)) {
+				return source;
+			}
+		}
+		
+		return null;
+	}
+
+	@Override
+	public void linkSourceWithGeneralSource(Source source, GeneralSource generalSource) {
+		if (source == null) {
 			return;
 		}
 		
-		Article article = SourceanalysatorFactory.eINSTANCE.createArticle();
-		article.setTitle(articleTitle);
-		getSingleLibrary().getArticles().add(article);
+		if (generalSource == null) {
+			return;
+		}
+		
+		source.setGeneralSource(generalSource);
+		String url = source.getUrl();
+		InternetDomainName domainName = getPrivateDomainNameForURL(url);
+		List<String> aliases = generalSource.getAliases();
+		String alias = domainName.toString();
+		if (!aliases.contains(alias)) {
+			aliases.add(alias);
+		}
 	}
 }

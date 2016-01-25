@@ -16,6 +16,7 @@ import org.eclipse.emf.ecore.EObject;
  * <ul>
  *   <li>{@link net.reimone.sourceanalysator.GeneralSource#getName <em>Name</em>}</li>
  *   <li>{@link net.reimone.sourceanalysator.GeneralSource#getSources <em>Sources</em>}</li>
+ *   <li>{@link net.reimone.sourceanalysator.GeneralSource#getAliases <em>Aliases</em>}</li>
  * </ul>
  *
  * @see net.reimone.sourceanalysator.SourceanalysatorPackage#getGeneralSource()
@@ -68,5 +69,21 @@ public interface GeneralSource extends EObject {
 	 * @generated
 	 */
 	EList<Source> getSources();
+
+	/**
+	 * Returns the value of the '<em><b>Aliases</b></em>' attribute list.
+	 * The list contents are of type {@link java.lang.String}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Aliases</em>' attribute list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Aliases</em>' attribute list.
+	 * @see net.reimone.sourceanalysator.SourceanalysatorPackage#getGeneralSource_Aliases()
+	 * @model annotation="org.emftext.language.mecore.resource.mecore.mopp.MecoreWrapper WARNING='This element was generated from an .mecore file. Removing this annotation will signal the MinimalEcore builder to keep this element.'"
+	 * @generated
+	 */
+	EList<String> getAliases();
 
 } // GeneralSource

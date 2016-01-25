@@ -11,6 +11,7 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
+import org.eclipse.emf.ecore.util.EDataTypeUniqueEList;
 import org.eclipse.emf.ecore.util.EObjectWithInverseResolvingEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
@@ -28,6 +29,7 @@ import net.reimone.sourceanalysator.SourceanalysatorPackage;
  * <ul>
  *   <li>{@link net.reimone.sourceanalysator.impl.GeneralSourceImpl#getName <em>Name</em>}</li>
  *   <li>{@link net.reimone.sourceanalysator.impl.GeneralSourceImpl#getSources <em>Sources</em>}</li>
+ *   <li>{@link net.reimone.sourceanalysator.impl.GeneralSourceImpl#getAliases <em>Aliases</em>}</li>
  * </ul>
  *
  * @generated
@@ -62,6 +64,16 @@ public class GeneralSourceImpl extends MinimalEObjectImpl.Container implements G
 	 * @ordered
 	 */
 	protected EList<Source> sources;
+
+	/**
+	 * The cached value of the '{@link #getAliases() <em>Aliases</em>}' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getAliases()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<String> aliases;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -120,6 +132,18 @@ public class GeneralSourceImpl extends MinimalEObjectImpl.Container implements G
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EList<String> getAliases() {
+		if (aliases == null) {
+			aliases = new EDataTypeUniqueEList<String>(String.class, this, SourceanalysatorPackage.GENERAL_SOURCE__ALIASES);
+		}
+		return aliases;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
@@ -156,6 +180,8 @@ public class GeneralSourceImpl extends MinimalEObjectImpl.Container implements G
 				return getName();
 			case SourceanalysatorPackage.GENERAL_SOURCE__SOURCES:
 				return getSources();
+			case SourceanalysatorPackage.GENERAL_SOURCE__ALIASES:
+				return getAliases();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -176,6 +202,10 @@ public class GeneralSourceImpl extends MinimalEObjectImpl.Container implements G
 				getSources().clear();
 				getSources().addAll((Collection<? extends Source>)newValue);
 				return;
+			case SourceanalysatorPackage.GENERAL_SOURCE__ALIASES:
+				getAliases().clear();
+				getAliases().addAll((Collection<? extends String>)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -194,6 +224,9 @@ public class GeneralSourceImpl extends MinimalEObjectImpl.Container implements G
 			case SourceanalysatorPackage.GENERAL_SOURCE__SOURCES:
 				getSources().clear();
 				return;
+			case SourceanalysatorPackage.GENERAL_SOURCE__ALIASES:
+				getAliases().clear();
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -210,6 +243,8 @@ public class GeneralSourceImpl extends MinimalEObjectImpl.Container implements G
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 			case SourceanalysatorPackage.GENERAL_SOURCE__SOURCES:
 				return sources != null && !sources.isEmpty();
+			case SourceanalysatorPackage.GENERAL_SOURCE__ALIASES:
+				return aliases != null && !aliases.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}
@@ -226,6 +261,8 @@ public class GeneralSourceImpl extends MinimalEObjectImpl.Container implements G
 		StringBuffer result = new StringBuffer(super.toString());
 		result.append(" (name: ");
 		result.append(name);
+		result.append(", aliases: ");
+		result.append(aliases);
 		result.append(')');
 		return result.toString();
 	}

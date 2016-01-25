@@ -33,8 +33,31 @@ public interface ISourceAnalysator {
 	public Library getSingleLibrary();
 
 	/**
-	 * Creates a new article with the given name without sources. 
+	 * Creates a new article with the given name or retrieves the existing article with that name. 
+	 * @return 
 	 */
-	public void createArticle(String articleTitle);
+	public Article createOrGetArticle(String articleTitle);
+
+	/**
+	 * Creates a new {@link GeneralSource} or retrieves the existing one with the given name. 
+	 */
+	public GeneralSource createOrGetGeneralSource(String generalSourceName);
+
+	/**
+	 * First, extracts the domain (without contry code) from the given domain.
+	 * If articles from that domain already exist and are linked to another general source,
+	 * the name of the linked general source is returned. Otherwise, the extracted domain.
+	 */
+	public String recommendGeneralSourceName(String url);
+
+	/**
+	 * Creates a new {@link Source} or retrieves the existing one with the given url. 
+	 */
+	public Source createOrGetSource(String url);
+
+	/**
+	 * Links the given source with the given general source.
+	 */
+	public void linkSourceWithGeneralSource(Source source, GeneralSource generalSource);
 
 }

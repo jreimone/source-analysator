@@ -143,6 +143,15 @@ public class SourceanalysatorPackageImpl extends EPackageImpl implements Sourcea
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getGeneralSource_Aliases() {
+		return (EAttribute)generalSourceEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getSource() {
 		return sourceEClass;
 	}
@@ -268,6 +277,7 @@ public class SourceanalysatorPackageImpl extends EPackageImpl implements Sourcea
 		generalSourceEClass = createEClass(GENERAL_SOURCE);
 		createEAttribute(generalSourceEClass, GENERAL_SOURCE__NAME);
 		createEReference(generalSourceEClass, GENERAL_SOURCE__SOURCES);
+		createEAttribute(generalSourceEClass, GENERAL_SOURCE__ALIASES);
 
 		sourceEClass = createEClass(SOURCE);
 		createEAttribute(sourceEClass, SOURCE__URL);
@@ -317,6 +327,7 @@ public class SourceanalysatorPackageImpl extends EPackageImpl implements Sourcea
 		initEClass(generalSourceEClass, GeneralSource.class, "GeneralSource", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getGeneralSource_Name(), ecorePackage.getEString(), "name", null, 1, 1, GeneralSource.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getGeneralSource_Sources(), this.getSource(), this.getSource_GeneralSource(), "sources", null, 0, -1, GeneralSource.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getGeneralSource_Aliases(), ecorePackage.getEString(), "aliases", null, 0, -1, GeneralSource.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(sourceEClass, Source.class, "Source", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getSource_Url(), ecorePackage.getEString(), "url", null, 1, 1, Source.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -368,6 +379,12 @@ public class SourceanalysatorPackageImpl extends EPackageImpl implements Sourcea
 		   });	
 		addAnnotation
 		  (getGeneralSource_Sources(), 
+		   source, 
+		   new String[] {
+			 "WARNING", "This element was generated from an .mecore file. Removing this annotation will signal the MinimalEcore builder to keep this element."
+		   });	
+		addAnnotation
+		  (getGeneralSource_Aliases(), 
 		   source, 
 		   new String[] {
 			 "WARNING", "This element was generated from an .mecore file. Removing this annotation will signal the MinimalEcore builder to keep this element."
