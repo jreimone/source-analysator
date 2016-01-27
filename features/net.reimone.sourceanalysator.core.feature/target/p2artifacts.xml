@@ -1,10 +1,10 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <?artifactRepository version='1.1.0'?>
 <artifacts size='1'>
-  <artifact classifier='org.eclipse.update.feature' id='net.reimone.sourceanalysator.core.feature' version='0.0.1.201601272322'>
+  <artifact classifier='org.eclipse.update.feature' id='net.reimone.sourceanalysator.core.feature' version='0.0.1.201601272335'>
     <properties size='6'>
-      <property name='artifact.size' value='771'/>
-      <property name='download.size' value='771'/>
+      <property name='artifact.size' value='787'/>
+      <property name='download.size' value='787'/>
       <property name='maven-groupId' value='net.reimone.sourceanalysator.core.feature'/>
       <property name='maven-artifactId' value='net.reimone.sourceanalysator.core.feature'/>
       <property name='maven-version' value='0.0.1-SNAPSHOT'/>
