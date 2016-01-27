@@ -13,16 +13,6 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
 
-	<modules>
-		<module>
-			sources/net.reimone.sourceanalysator.model
-		</module>
-		<module>sources/net.reimone.sourceanalysator.core</module>
-		<module>
-			tests/net.reimone.sourceanalysator.model.tests
-		</module>
-
-	</modules>
 
 	<build>
 		<plugins>
@@ -81,4 +71,9 @@
 		</repository>
 	</repositories>
 
+	<modules>
+		<module>sources/net.reimone.sourceanalysator.core</module>
+		<module>sources/net.reimone.sourceanalysator.model</module>
+		<module>tests/net.reimone.sourceanalysator.model.tests</module>
+	</modules>
 </project>

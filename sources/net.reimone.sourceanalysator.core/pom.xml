@@ -7,7 +7,7 @@
 		<groupId>net.reimone.sourceanalysator</groupId>
 		<artifactId>net.reimone.sourceanalysator.parent</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
-		<relativePath>../../build/net.reimone.sourceanalysator.parent</relativePath>
+		<relativePath>../..</relativePath>
 	</parent>
 
 	<build>
