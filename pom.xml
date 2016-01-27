@@ -84,5 +84,8 @@
 		<module>
 			product/net.reimone.sourceanalysator.product.feature
 		</module>
+		<module>
+			build/net.reimone.sourceanalysator.parent.product
+		</module>
 	</modules>
 </project>
