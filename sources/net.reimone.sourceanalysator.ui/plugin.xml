@@ -6,7 +6,7 @@
          id="product"
          point="org.eclipse.core.runtime.products">
       <product
-            name="net.reimone.sourceanalysator.ui"
+            name="SourceAnalysator*in 6000"
             application="org.eclipse.e4.ui.workbench.swt.E4Application">
          <property
                name="lifeCycleURI"
@@ -15,6 +15,10 @@
          <property
                name="applicationCSS"
                value="platform:/plugin/net.reimone.sourceanalysator.ui/css/default.css">
+         </property>
+         <property
+               name="appName"
+               value="SourceAnalysator*in 6000">
          </property>
       </product>
    </extension>
