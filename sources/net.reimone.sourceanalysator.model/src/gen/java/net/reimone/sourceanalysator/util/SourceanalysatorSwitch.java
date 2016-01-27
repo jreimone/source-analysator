@@ -2,15 +2,12 @@
  */
 package net.reimone.sourceanalysator.util;
 
+import net.reimone.sourceanalysator.*;
+
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
-import org.eclipse.emf.ecore.util.Switch;
 
-import net.reimone.sourceanalysator.Article;
-import net.reimone.sourceanalysator.GeneralSource;
-import net.reimone.sourceanalysator.Library;
-import net.reimone.sourceanalysator.Source;
-import net.reimone.sourceanalysator.SourceanalysatorPackage;
+import org.eclipse.emf.ecore.util.Switch;
 
 /**
  * <!-- begin-user-doc -->
