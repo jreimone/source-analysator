@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?pde version="3.5"?>
 
-<product name="net.reimone.sourceanalysator.product" id="net.reimone.sourceanalysator.product.product" application="org.eclipse.e4.ui.workbench.swt.E4Application" version="0.0.1.qualifier" useFeatures="true" includeLaunchers="true">
+<product name="net.reimone.sourceanalysator.product" uid="net.reimone.sourceanalysator.parent.product" id="net.reimone.sourceanalysator.product.product" application="org.eclipse.e4.ui.workbench.swt.E4Application" version="0.0.1.qualifier" useFeatures="true" includeLaunchers="true">
 
    <configIni use="default">
    </configIni>

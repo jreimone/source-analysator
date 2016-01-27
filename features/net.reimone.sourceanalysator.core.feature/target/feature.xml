@@ -2,7 +2,7 @@
 <feature
       id="net.reimone.sourceanalysator.core.feature"
       label="SourceAnalysator Core Features"
-      version="0.0.1.201601272230">
+      version="0.0.1.201601272322">
 
    <description url="http://www.example.com/description">
       [Enter Feature Description here.]
@@ -20,7 +20,7 @@
          id="net.reimone.sourceanalysator.model"
          download-size="26"
          install-size="58"
-         version="0.0.1.201601272229"
+         version="0.0.1.201601272322"
          unpack="false"/>
 
 </feature>

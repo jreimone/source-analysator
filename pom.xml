@@ -24,36 +24,28 @@
 			</plugin>
 			<plugin>
 				<groupId>org.eclipse.tycho</groupId>
+				<artifactId>tycho-versions-plugin</artifactId>
+				<version>${tycho.version}</version>
+				<executions>
+					<execution>
+						<id>versions</id>
+						<goals>
+							<goal>update-pom</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.eclipse.tycho</groupId>
 				<artifactId>target-platform-configuration</artifactId>
 				<version>${tycho.version}</version>
 				<configuration>
-				<!-- 
-					<pomDependencies>consider</pomDependencies>
-					 -->
+					<!-- <pomDependencies>consider</pomDependencies> -->
 					<environments>
-						<environment>
-							<os>linux</os>
-							<ws>gtk</ws>
-							<arch>x86</arch>
-						</environment>
-						<environment>
-							<os>linux</os>
-							<ws>gtk</ws>
-							<arch>x86_64</arch>
-						</environment>
+						<!-- <environment> <os>win32</os> <ws>win32</ws> <arch>x86</arch> </environment> -->
 						<environment>
 							<os>win32</os>
 							<ws>win32</ws>
-							<arch>x86</arch>
-						</environment>
-						<environment>
-							<os>win32</os>
-							<ws>win32</ws>
-							<arch>x86_64</arch>
-						</environment>
-						<environment>
-							<os>macosx</os>
-							<ws>cocoa</ws>
 							<arch>x86_64</arch>
 						</environment>
 					</environments>
@@ -75,7 +67,7 @@
 		<module>sources/net.reimone.sourceanalysator.core</module>
 		<module>sources/net.reimone.sourceanalysator.model</module>
 		<module>tests/net.reimone.sourceanalysator.model.tests</module>
-		
+
 		<module>
 			features/net.reimone.sourceanalysator.core.feature
 		</module>
