@@ -75,5 +75,6 @@
 		<module>sources/net.reimone.sourceanalysator.core</module>
 		<module>sources/net.reimone.sourceanalysator.model</module>
 		<module>tests/net.reimone.sourceanalysator.model.tests</module>
+		<module>sources/net.reimone.sourceanalysator.ui</module>
 	</modules>
 </project>

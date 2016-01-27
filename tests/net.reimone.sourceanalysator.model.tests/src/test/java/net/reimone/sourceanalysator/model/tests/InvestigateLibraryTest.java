@@ -12,8 +12,7 @@ import java.util.Map.Entry;
 
 import org.junit.Test;
 
-import com.google.common.base.Function;
-import com.google.common.collect.Iterables;
+import com.google.common.collect.Iterators;
 import com.google.common.collect.Lists;
 
 import net.reimone.sourceanalysator.Article;
@@ -108,13 +107,7 @@ public class InvestigateLibraryTest extends AbstractSourceAnalysatorTest {
 	}
 
 	private void printSourcesOfArticles(List<Article> articles, Map<GeneralSource, List<Source>> generalSources) {
-		System.out.println("Selected articles: " + Iterables.toString(Lists.transform(articles, new Function<Article, String>() {
-
-			@Override
-			public String apply(Article input) {
-				return input.getTitle();
-			}
-		})));
+		System.out.println("Selected articles: " + Iterators.toString(articles.stream().map(article -> article.getTitle()).iterator()));
 		for (GeneralSource generalSource : generalSources.keySet()) {
 			List<Source> sources = generalSources.get(generalSource);
 			System.out.println(generalSource.getName() + " " + sources.size() + "x");
