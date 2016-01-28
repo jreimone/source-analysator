@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-SymbolicName: net.reimone.sourceanalysator.product;singleton:=t
  rue
 Bundle-Name: SourceAnalysator Product
-Bundle-Version: 0.0.1.201601272335
+Bundle-Version: 0.0.1.201601280554
 Require-Bundle: javax.inject;bundle-version="0.0.0",org.eclipse.swt;bu
  ndle-version="0.0.0",org.eclipse.e4.ui.model.workbench;bundle-version
  ="0.0.0",org.eclipse.jface;bundle-version="0.0.0",org.eclipse.e4.ui.s

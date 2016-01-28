@@ -13,25 +13,17 @@
 	<build>
 		<plugins>
 			<plugin>
-				<groupId>org.eclipse.tycho</groupId>
-				<artifactId>tycho-versions-plugin</artifactId>
-				<version>0.24.0</version>
+				<groupId>org.jacoco</groupId>
+				<artifactId>jacoco-maven-plugin</artifactId>
+				<version>0.7.5.201505241946</version>
 				<executions>
 					<execution>
-						<id>versions</id>
+						<id>prepare-agent</id>
 						<goals>
-							<goal>update-pom</goal>
+							<goal>prepare-agent</goal>
 						</goals>
 					</execution>
 				</executions>
-			</plugin>
-			<plugin>
-				<groupId>org.eclipse.tycho</groupId>
-				<artifactId>tycho-surefire-plugin</artifactId>
-				<version>${tycho.version}</version>
-				<configuration>
-					<useUIHarness>false</useUIHarness>
-				</configuration>
 			</plugin>
 		</plugins>
 	</build>
