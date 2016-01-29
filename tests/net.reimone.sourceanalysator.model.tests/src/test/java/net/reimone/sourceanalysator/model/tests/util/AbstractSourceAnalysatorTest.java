@@ -1,4 +1,4 @@
-package net.reimone.sourceanalysator.model.tests;
+package net.reimone.sourceanalysator.model.tests.util;
 
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.Resource;

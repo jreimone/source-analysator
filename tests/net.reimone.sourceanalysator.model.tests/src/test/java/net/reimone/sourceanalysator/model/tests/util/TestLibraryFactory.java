@@ -1,4 +1,4 @@
-package net.reimone.sourceanalysator.model.tests;
+package net.reimone.sourceanalysator.model.tests.util;
 
 import net.reimone.sourceanalysator.Library;
 import net.reimone.sourceanalysator.SourceanalysatorFactory;

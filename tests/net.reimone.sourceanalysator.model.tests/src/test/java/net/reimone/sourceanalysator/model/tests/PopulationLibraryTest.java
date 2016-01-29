@@ -17,6 +17,8 @@ import net.reimone.sourceanalysator.Source;
 import net.reimone.sourceanalysator.core.ILibraryFactory;
 import net.reimone.sourceanalysator.core.ISourceAnalysator;
 import net.reimone.sourceanalysator.core.impl.SourceAnalysator;
+import net.reimone.sourceanalysator.model.tests.util.AbstractSourceAnalysatorTest;
+import net.reimone.sourceanalysator.model.tests.util.TestLibraryFactory;
 
 public class PopulationLibraryTest extends AbstractSourceAnalysatorTest {
 
