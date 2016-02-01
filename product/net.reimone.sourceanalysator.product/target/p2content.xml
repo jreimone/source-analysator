@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <units size='1'>
-  <unit id='net.reimone.sourceanalysator.product' version='0.0.1.201601290832'>
-    <update id='net.reimone.sourceanalysator.product' range='[0.0.0,0.0.1.201601290832)' severity='0'/>
+  <unit id='net.reimone.sourceanalysator.product' version='0.0.1.201602012245'>
+    <update id='net.reimone.sourceanalysator.product' range='[0.0.0,0.0.1.201602012245)' severity='0'/>
     <properties size='4'>
       <property name='org.eclipse.equinox.p2.name' value='SourceAnalysator Product'/>
       <property name='maven-groupId' value='net.reimone.sourceanalysator'/>
@@ -9,11 +9,11 @@
       <property name='maven-version' value='0.0.1-SNAPSHOT'/>
     </properties>
     <provides size='3'>
-      <provided namespace='org.eclipse.equinox.p2.iu' name='net.reimone.sourceanalysator.product' version='0.0.1.201601290832'/>
-      <provided namespace='osgi.bundle' name='net.reimone.sourceanalysator.product' version='0.0.1.201601290832'/>
+      <provided namespace='org.eclipse.equinox.p2.iu' name='net.reimone.sourceanalysator.product' version='0.0.1.201602012245'/>
+      <provided namespace='osgi.bundle' name='net.reimone.sourceanalysator.product' version='0.0.1.201602012245'/>
       <provided namespace='org.eclipse.equinox.p2.eclipse.type' name='bundle' version='1.0.0'/>
     </provides>
-    <requires size='10'>
+    <requires size='11'>
       <required namespace='osgi.bundle' name='javax.inject' range='0.0.0'/>
       <required namespace='osgi.bundle' name='org.eclipse.swt' range='0.0.0'/>
       <required namespace='osgi.bundle' name='org.eclipse.e4.ui.model.workbench' range='0.0.0'/>
@@ -24,15 +24,16 @@
       <required namespace='osgi.bundle' name='org.eclipse.e4.ui.di' range='0.0.0'/>
       <required namespace='osgi.bundle' name='org.eclipse.e4.core.contexts' range='0.0.0'/>
       <required namespace='osgi.bundle' name='org.eclipse.core.runtime' range='0.0.0'/>
+      <required namespace='osgi.bundle' name='net.reimone.sourceanalysator.ui' range='0.0.0'/>
     </requires>
     <artifacts size='1'>
-      <artifact classifier='osgi.bundle' id='net.reimone.sourceanalysator.product' version='0.0.1.201601290832'/>
+      <artifact classifier='osgi.bundle' id='net.reimone.sourceanalysator.product' version='0.0.1.201602012245'/>
     </artifacts>
     <touchpoint id='org.eclipse.equinox.p2.osgi' version='1.0.0'/>
     <touchpointData size='1'>
       <instructions size='1'>
         <instruction key='manifest'>
-          Bundle-SymbolicName: net.reimone.sourceanalysator.product;singleton:=true&#xA;Bundle-Version: 0.0.1.201601290832&#xA;
+          Bundle-SymbolicName: net.reimone.sourceanalysator.product;singleton:=true&#xA;Bundle-Version: 0.0.1.201602012245&#xA;
         </instruction>
       </instructions>
     </touchpointData>

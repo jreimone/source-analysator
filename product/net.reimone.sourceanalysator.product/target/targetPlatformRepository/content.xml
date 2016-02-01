@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <?metadataRepository version='1.1.0'?>
 <repository name='TychoTargetPlatform' type='org.eclipse.equinox.internal.p2.metadata.repository.LocalMetadataRepository' version='0.0.1'>
-  <units size='36'>
+  <units size='40'>
     <unit id='org.eclipse.equinox.registry' version='3.6.0.v20150318-1503'>
       <update id='org.eclipse.equinox.registry' range='[0.0.0,3.6.0.v20150318-1503)' severity='0'/>
       <properties size='8'>
@@ -279,6 +279,54 @@
         <instructions size='1'>
           <instruction key='manifest'>
             Bundle-SymbolicName: org.eclipse.equinox.preferences; singleton:=true&#xA;Bundle-Version: 3.5.300.v20150408-1437
+          </instruction>
+        </instructions>
+      </touchpointData>
+    </unit>
+    <unit id='com.google.guava' version='15.0.0.v201403281430' singleton='false'>
+      <update id='com.google.guava' range='[0.0.0,15.0.0.v201403281430)' severity='0'/>
+      <properties size='6'>
+        <property name='df_LT.providerName' value='Eclipse Orbit'/>
+        <property name='df_LT.bundleName' value='Guava: Google Core Libraries for Java'/>
+        <property name='org.eclipse.equinox.p2.name' value='%bundleName'/>
+        <property name='org.eclipse.equinox.p2.description' value='Guava is a suite of core and expanded libraries that include    utility classes, google&apos;s collections, io classes, and much    much more.    Guava has two code dependencies - javax.annotation    per the JSR-305 spec and javax.inject per the JSR-330 spec.'/>
+        <property name='org.eclipse.equinox.p2.provider' value='%providerName'/>
+        <property name='org.eclipse.equinox.p2.bundle.localization' value='plugin'/>
+      </properties>
+      <provides size='19'>
+        <provided namespace='org.eclipse.equinox.p2.iu' name='com.google.guava' version='15.0.0.v201403281430'/>
+        <provided namespace='osgi.bundle' name='com.google.guava' version='15.0.0.v201403281430'/>
+        <provided namespace='java.package' name='com.google.common.net' version='15.0.0'/>
+        <provided namespace='java.package' name='com.google.common.html' version='15.0.0'/>
+        <provided namespace='java.package' name='com.google.common.collect' version='15.0.0'/>
+        <provided namespace='java.package' name='com.google.common.primitives' version='15.0.0'/>
+        <provided namespace='java.package' name='com.google.common.base' version='15.0.0'/>
+        <provided namespace='java.package' name='com.google.common.escape' version='15.0.0'/>
+        <provided namespace='java.package' name='com.google.common.cache' version='15.0.0'/>
+        <provided namespace='java.package' name='com.google.common.eventbus' version='15.0.0'/>
+        <provided namespace='java.package' name='com.google.common.util.concurrent' version='15.0.0'/>
+        <provided namespace='java.package' name='com.google.common.hash' version='15.0.0'/>
+        <provided namespace='java.package' name='com.google.common.io' version='15.0.0'/>
+        <provided namespace='java.package' name='com.google.common.xml' version='15.0.0'/>
+        <provided namespace='java.package' name='com.google.common.reflect' version='15.0.0'/>
+        <provided namespace='java.package' name='com.google.common.math' version='15.0.0'/>
+        <provided namespace='java.package' name='com.google.common.annotations' version='15.0.0'/>
+        <provided namespace='org.eclipse.equinox.p2.eclipse.type' name='bundle' version='1.0.0'/>
+        <provided namespace='org.eclipse.equinox.p2.localization' name='df_LT' version='1.0.0'/>
+      </provides>
+      <requires size='3'>
+        <required namespace='java.package' name='javax.annotation' range='0.0.0' optional='true' greedy='false'/>
+        <required namespace='java.package' name='javax.inject' range='0.0.0' optional='true' greedy='false'/>
+        <required namespace='java.package' name='sun.misc' range='0.0.0' optional='true' greedy='false'/>
+      </requires>
+      <artifacts size='1'>
+        <artifact classifier='osgi.bundle' id='com.google.guava' version='15.0.0.v201403281430'/>
+      </artifacts>
+      <touchpoint id='org.eclipse.equinox.p2.osgi' version='1.0.0'/>
+      <touchpointData size='1'>
+        <instructions size='1'>
+          <instruction key='manifest'>
+            Bundle-SymbolicName: com.google.guava&#xA;Bundle-Version: 15.0.0.v201403281430
           </instruction>
         </instructions>
       </touchpointData>
@@ -606,34 +654,39 @@
         </instructions>
       </touchpointData>
     </unit>
-    <unit id='com.ibm.icu.base' version='54.1.1.v201501272100'>
-      <update id='com.ibm.icu.base' range='[0.0.0,54.1.1.v201501272100)' severity='0'/>
-      <properties size='5'>
-        <property name='df_LT.providerName' value='IBM Corporation'/>
-        <property name='df_LT.pluginName' value='International Components for Unicode for Java (ICU4J) Replacement plug-in'/>
+    <unit id='net.reimone.sourceanalysator.model' version='0.0.1.201602012245'>
+      <update id='net.reimone.sourceanalysator.model' range='[0.0.0,0.0.1.201602012245)' severity='0'/>
+      <properties size='8'>
+        <property name='df_LT.pluginName' value='Source Analysator Metamodel'/>
+        <property name='df_LT.providerName' value='Jan Reimann'/>
         <property name='org.eclipse.equinox.p2.name' value='%pluginName'/>
         <property name='org.eclipse.equinox.p2.provider' value='%providerName'/>
         <property name='org.eclipse.equinox.p2.bundle.localization' value='plugin'/>
+        <property name='maven-groupId' value='net.reimone.sourceanalysator'/>
+        <property name='maven-artifactId' value='net.reimone.sourceanalysator.model'/>
+        <property name='maven-version' value='0.0.1-SNAPSHOT'/>
       </properties>
-      <provides size='9'>
-        <provided namespace='org.eclipse.equinox.p2.iu' name='com.ibm.icu.base' version='54.1.1.v201501272100'/>
-        <provided namespace='osgi.bundle' name='com.ibm.icu.base' version='54.1.1.v201501272100'/>
-        <provided namespace='java.package' name='com.ibm.icu.impl' version='0.0.0'/>
-        <provided namespace='java.package' name='com.ibm.icu.impl.locale' version='0.0.0'/>
-        <provided namespace='java.package' name='com.ibm.icu.math' version='54.1.1'/>
-        <provided namespace='java.package' name='com.ibm.icu.text' version='54.1.1'/>
-        <provided namespace='java.package' name='com.ibm.icu.util' version='54.1.1'/>
+      <provides size='7'>
+        <provided namespace='org.eclipse.equinox.p2.iu' name='net.reimone.sourceanalysator.model' version='0.0.1.201602012245'/>
+        <provided namespace='osgi.bundle' name='net.reimone.sourceanalysator.model' version='0.0.1.201602012245'/>
+        <provided namespace='java.package' name='net.reimone.sourceanalysator' version='0.0.0'/>
+        <provided namespace='java.package' name='net.reimone.sourceanalysator.impl' version='0.0.0'/>
+        <provided namespace='java.package' name='net.reimone.sourceanalysator.util' version='0.0.0'/>
         <provided namespace='org.eclipse.equinox.p2.eclipse.type' name='bundle' version='1.0.0'/>
         <provided namespace='org.eclipse.equinox.p2.localization' name='df_LT' version='1.0.0'/>
       </provides>
+      <requires size='2'>
+        <required namespace='osgi.bundle' name='org.eclipse.core.runtime' range='0.0.0'/>
+        <required namespace='osgi.bundle' name='org.eclipse.emf.ecore' range='0.0.0'/>
+      </requires>
       <artifacts size='1'>
-        <artifact classifier='osgi.bundle' id='com.ibm.icu.base' version='54.1.1.v201501272100'/>
+        <artifact classifier='osgi.bundle' id='net.reimone.sourceanalysator.model' version='0.0.1.201602012245'/>
       </artifacts>
       <touchpoint id='org.eclipse.equinox.p2.osgi' version='1.0.0'/>
       <touchpointData size='1'>
         <instructions size='1'>
           <instruction key='manifest'>
-            Bundle-SymbolicName: com.ibm.icu.base;singleton:=true&#xA;Bundle-Version: 54.1.1.v201501272100
+            Bundle-SymbolicName: net.reimone.sourceanalysator.model;singleton:=true&#xA;Bundle-Version: 0.0.1.201602012245
           </instruction>
         </instructions>
       </touchpointData>
@@ -818,6 +871,45 @@
         </instructions>
       </touchpointData>
     </unit>
+    <unit id='net.reimone.sourceanalysator.ui' version='0.0.1.201602012245'>
+      <update id='net.reimone.sourceanalysator.ui' range='[0.0.0,0.0.1.201602012245)' severity='0'/>
+      <properties size='4'>
+        <property name='org.eclipse.equinox.p2.name' value='SourceAnalysator UI'/>
+        <property name='maven-groupId' value='net.reimone.sourceanalysator'/>
+        <property name='maven-artifactId' value='net.reimone.sourceanalysator.ui'/>
+        <property name='maven-version' value='0.0.1-SNAPSHOT'/>
+      </properties>
+      <provides size='3'>
+        <provided namespace='org.eclipse.equinox.p2.iu' name='net.reimone.sourceanalysator.ui' version='0.0.1.201602012245'/>
+        <provided namespace='osgi.bundle' name='net.reimone.sourceanalysator.ui' version='0.0.1.201602012245'/>
+        <provided namespace='org.eclipse.equinox.p2.eclipse.type' name='bundle' version='1.0.0'/>
+      </provides>
+      <requires size='12'>
+        <required namespace='osgi.bundle' name='javax.inject' range='0.0.0'/>
+        <required namespace='osgi.bundle' name='org.eclipse.core.runtime' range='0.0.0'/>
+        <required namespace='osgi.bundle' name='org.eclipse.swt' range='0.0.0'/>
+        <required namespace='osgi.bundle' name='org.eclipse.e4.ui.model.workbench' range='0.0.0'/>
+        <required namespace='osgi.bundle' name='org.eclipse.jface' range='0.0.0'/>
+        <required namespace='osgi.bundle' name='org.eclipse.e4.ui.services' range='0.0.0'/>
+        <required namespace='osgi.bundle' name='org.eclipse.e4.ui.workbench' range='0.0.0'/>
+        <required namespace='osgi.bundle' name='org.eclipse.e4.core.di' range='0.0.0'/>
+        <required namespace='osgi.bundle' name='org.eclipse.e4.ui.di' range='0.0.0'/>
+        <required namespace='osgi.bundle' name='org.eclipse.e4.core.contexts' range='0.0.0'/>
+        <required namespace='osgi.bundle' name='net.reimone.sourceanalysator.core' range='0.0.0'/>
+        <required namespace='java.package' name='org.osgi.framework' range='1.3.0'/>
+      </requires>
+      <artifacts size='1'>
+        <artifact classifier='osgi.bundle' id='net.reimone.sourceanalysator.ui' version='0.0.1.201602012245'/>
+      </artifacts>
+      <touchpoint id='org.eclipse.equinox.p2.osgi' version='1.0.0'/>
+      <touchpointData size='1'>
+        <instructions size='1'>
+          <instruction key='manifest'>
+            Bundle-SymbolicName: net.reimone.sourceanalysator.ui;singleton:=true&#xA;Bundle-Version: 0.0.1.201602012245
+          </instruction>
+        </instructions>
+      </touchpointData>
+    </unit>
     <unit id='org.eclipse.core.runtime' version='3.11.1.v20150903-1804'>
       <update id='org.eclipse.core.runtime' range='[0.0.0,3.11.1.v20150903-1804)' severity='0'/>
       <properties size='8'>
@@ -898,6 +990,37 @@
         <instructions size='1'>
           <instruction key='manifest'>
             Bundle-SymbolicName: org.eclipse.core.commands&#xA;Bundle-Version: 3.7.0.v20150422-0725
+          </instruction>
+        </instructions>
+      </touchpointData>
+    </unit>
+    <unit id='net.reimone.sourceanalysator.core' version='0.0.1.201602012245' singleton='false'>
+      <update id='net.reimone.sourceanalysator.core' range='[0.0.0,0.0.1.201602012245)' severity='0'/>
+      <properties size='4'>
+        <property name='org.eclipse.equinox.p2.name' value='Source Analysator Core'/>
+        <property name='maven-groupId' value='net.reimone.sourceanalysator'/>
+        <property name='maven-artifactId' value='net.reimone.sourceanalysator.core'/>
+        <property name='maven-version' value='0.0.1-SNAPSHOT'/>
+      </properties>
+      <provides size='5'>
+        <provided namespace='org.eclipse.equinox.p2.iu' name='net.reimone.sourceanalysator.core' version='0.0.1.201602012245'/>
+        <provided namespace='osgi.bundle' name='net.reimone.sourceanalysator.core' version='0.0.1.201602012245'/>
+        <provided namespace='java.package' name='net.reimone.sourceanalysator.core' version='0.0.0'/>
+        <provided namespace='java.package' name='net.reimone.sourceanalysator.core.impl' version='0.0.0'/>
+        <provided namespace='org.eclipse.equinox.p2.eclipse.type' name='bundle' version='1.0.0'/>
+      </provides>
+      <requires size='2'>
+        <required namespace='osgi.bundle' name='net.reimone.sourceanalysator.model' range='0.0.0'/>
+        <required namespace='osgi.bundle' name='com.google.guava' range='0.0.0'/>
+      </requires>
+      <artifacts size='1'>
+        <artifact classifier='osgi.bundle' id='net.reimone.sourceanalysator.core' version='0.0.1.201602012245'/>
+      </artifacts>
+      <touchpoint id='org.eclipse.equinox.p2.osgi' version='1.0.0'/>
+      <touchpointData size='1'>
+        <instructions size='1'>
+          <instruction key='manifest'>
+            Bundle-SymbolicName: net.reimone.sourceanalysator.core&#xA;Bundle-Version: 0.0.1.201602012245
           </instruction>
         </instructions>
       </touchpointData>
@@ -1744,6 +1867,50 @@
         <instructions size='1'>
           <instruction key='manifest'>
             Bundle-SymbolicName: org.eclipse.e4.ui.workbench;singleton:=true&#xA;Bundle-Version: 1.3.0.v20150531-1948
+          </instruction>
+        </instructions>
+      </touchpointData>
+    </unit>
+    <unit id='com.ibm.icu' version='54.1.1.v201501272100'>
+      <update id='com.ibm.icu' range='[0.0.0,54.1.1.v201501272100)' severity='0'/>
+      <properties size='5'>
+        <property name='df_LT.pluginName' value='International Components for Unicode for Java (ICU4J)'/>
+        <property name='df_LT.providerName' value='IBM Corporation'/>
+        <property name='org.eclipse.equinox.p2.name' value='%pluginName'/>
+        <property name='org.eclipse.equinox.p2.provider' value='%providerName'/>
+        <property name='org.eclipse.equinox.p2.bundle.localization' value='plugin'/>
+      </properties>
+      <provides size='21'>
+        <provided namespace='org.eclipse.equinox.p2.iu' name='com.ibm.icu' version='54.1.1.v201501272100'/>
+        <provided namespace='osgi.bundle' name='com.ibm.icu' version='54.1.1.v201501272100'/>
+        <provided namespace='java.package' name='com.ibm.icu.impl' version='0.0.0'/>
+        <provided namespace='java.package' name='com.ibm.icu.impl.data' version='0.0.0'/>
+        <provided namespace='java.package' name='com.ibm.icu.impl.data.icudt54b' version='0.0.0'/>
+        <provided namespace='java.package' name='com.ibm.icu.impl.data.icudt54b.brkitr' version='0.0.0'/>
+        <provided namespace='java.package' name='com.ibm.icu.impl.data.icudt54b.coll' version='0.0.0'/>
+        <provided namespace='java.package' name='com.ibm.icu.impl.data.icudt54b.curr' version='0.0.0'/>
+        <provided namespace='java.package' name='com.ibm.icu.impl.data.icudt54b.lang' version='0.0.0'/>
+        <provided namespace='java.package' name='com.ibm.icu.impl.data.icudt54b.rbnf' version='0.0.0'/>
+        <provided namespace='java.package' name='com.ibm.icu.impl.data.icudt54b.region' version='0.0.0'/>
+        <provided namespace='java.package' name='com.ibm.icu.impl.data.icudt54b.translit' version='0.0.0'/>
+        <provided namespace='java.package' name='com.ibm.icu.impl.data.icudt54b.zone' version='0.0.0'/>
+        <provided namespace='java.package' name='com.ibm.icu.impl.duration' version='0.0.0'/>
+        <provided namespace='java.package' name='com.ibm.icu.impl.locale' version='0.0.0'/>
+        <provided namespace='java.package' name='com.ibm.icu.lang' version='54.1.1'/>
+        <provided namespace='java.package' name='com.ibm.icu.math' version='54.1.1'/>
+        <provided namespace='java.package' name='com.ibm.icu.text' version='54.1.1'/>
+        <provided namespace='java.package' name='com.ibm.icu.util' version='54.1.1'/>
+        <provided namespace='org.eclipse.equinox.p2.eclipse.type' name='bundle' version='1.0.0'/>
+        <provided namespace='org.eclipse.equinox.p2.localization' name='df_LT' version='1.0.0'/>
+      </provides>
+      <artifacts size='1'>
+        <artifact classifier='osgi.bundle' id='com.ibm.icu' version='54.1.1.v201501272100'/>
+      </artifacts>
+      <touchpoint id='org.eclipse.equinox.p2.osgi' version='1.0.0'/>
+      <touchpointData size='1'>
+        <instructions size='1'>
+          <instruction key='manifest'>
+            Bundle-SymbolicName: com.ibm.icu;singleton:=true&#xA;Bundle-Version: 54.1.1.v201501272100
           </instruction>
         </instructions>
       </touchpointData>

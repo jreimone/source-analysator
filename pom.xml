@@ -114,5 +114,9 @@
 			product/net.reimone.sourceanalysator.product.feature
 		</module>
 
+		<module>sources/net.reimone.sourceanalysator.ui</module>
+		<module>
+			features/net.reimone.sourceanalysator.ui.feature
+		</module>
 	</modules>
 </project>
