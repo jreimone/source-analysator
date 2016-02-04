@@ -116,5 +116,8 @@
       <plugin id="org.w3c.dom.svg"/>
    </plugins>
 
+   <configurations>
+      <property name="osgi.instance.area.default" value="workspace" />
+   </configurations>
 
 </product>

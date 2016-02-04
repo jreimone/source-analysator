@@ -1,13 +1,13 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <?artifactRepository version='1.1.0'?>
 <artifacts size='1'>
-  <artifact classifier='osgi.bundle' id='net.reimone.sourceanalysator.product' version='0.0.1.201602012245'>
+  <artifact classifier='binary' id='net.reimone.sourceanalysator.ui.product.executable.win32.win32.x86_64' version='0.0.1.201602042333'>
     <properties size='5'>
-      <property name='artifact.size' value='6589'/>
-      <property name='download.size' value='6589'/>
       <property name='maven-groupId' value='net.reimone.sourceanalysator'/>
       <property name='maven-artifactId' value='net.reimone.sourceanalysator.product'/>
       <property name='maven-version' value='0.0.1-SNAPSHOT'/>
+      <property name='maven-classifier' value='net.reimone.sourceanalysator.ui.product.executable.win32.win32.x86_64'/>
+      <property name='maven-extension' value='zip'/>
     </properties>
   </artifact>
 </artifacts>
