@@ -1,12 +1,17 @@
 package net.reimone.sourceanalysator.model.tests;
 
 import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.CoreMatchers.hasItems;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.hamcrest.CoreMatchers.nullValue;
 import static org.junit.Assert.assertThat;
+import static org.junit.Assert.fail;
 
+import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import org.junit.Test;
 
@@ -22,7 +27,25 @@ import net.reimone.sourceanalysator.model.tests.util.TestLibraryFactory;
 
 public class PopulationLibraryTest extends AbstractSourceAnalysatorTest {
 
-	private static final String ARTICLE_REFUGEES = "refugees.docx";
+	private static final String ARTICLE_REFUGEES = "src/test/resources/refugees.docx";
+	private static final String ARTICLE_TITLE = "Refugees welcome";
+	private static final String ARTICLE_LOCAL_FILE = "src/test/resources/refugees_small.docx";
+	private static final String[] ARTICLE_HYPERLINKS = new String[]{
+			"http://www.morgenweb.de/nachrichten/politik/sie-konnen-es-nicht-lassen-1.2620328",
+			"https://yougov.de/news/2016/02/09/schiessbefehl-und-verfassungstreue-der-afd-informa/",
+			"http://www.wahlrecht.de/umfragen/insa.htm"
+	};
+	
+	@Test
+	public void retrieveHyperlinksFromLocalFileTest() {
+		ISourceAnalysator sourceAnalysator = createSourceAnalysator();
+		Article article = sourceAnalysator.createOrGetArticle(ARTICLE_TITLE, getAbsolutePathOfFile(ARTICLE_LOCAL_FILE));
+		Set<String> hyperlinks = sourceAnalysator.retrieveHyperlinksFromLocalFile(article);
+		System.out.println(hyperlinks);
+		assertThat("hyperlinks", hyperlinks, is(notNullValue()));
+		assertThat("hyperlinks in localFile", new ArrayList<>(hyperlinks), hasItems(ARTICLE_HYPERLINKS));
+		assertThat("hyperlink count in localFile", hyperlinks.size(), is(equalTo(ARTICLE_HYPERLINKS.length)));
+	}
 	
 	@Test
 	public void recommendGeneralSourceForSourceWithExistingGeneralSourceTest() {
@@ -177,4 +200,12 @@ public class PopulationLibraryTest extends AbstractSourceAnalysatorTest {
 		return analysator;
 	}
 	
+	private static String getAbsolutePathOfFile(String localFile) {
+		File file = new File(localFile);
+		if (!file.exists()) {
+			fail("file " + localFile + " must exist");
+		}
+		
+		return file.getAbsolutePath();
+	}
 }
