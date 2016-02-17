@@ -85,18 +85,23 @@ public class SourceAnalysator implements ISourceAnalysator {
 	}
 
 	@Override
-	public Article createOrGetArticle(String articleTitle) {
+	public Article createOrGetArticle(String articleTitle, String localFile) {
 		if (articleTitle == null || articleTitle.isEmpty()) {
 			return null;
 		}
 		
-		Article article = getArticleByTitle(articleTitle);
+		if (localFile == null || localFile.isEmpty()) {
+			return null;
+		}
+		
+		Article article = getArticleByTitleAndLocalFile(articleTitle, localFile);
 		if (article != null) {
 			return article;
 		}
 		
 		article = SourceanalysatorFactory.eINSTANCE.createArticle();
 		article.setTitle(articleTitle);
+		article.setLocalFile(localFile);
 		getSingleLibrary().getArticles().add(article);
 		return article;
 	}
@@ -118,15 +123,21 @@ public class SourceAnalysator implements ISourceAnalysator {
 		return generalSource;
 	}
 	
-	private Article getArticleByTitle(String articleTitle) {
+	private Article getArticleByTitleAndLocalFile(String articleTitle, String localFile) {
 		if (articleTitle == null || articleTitle.isEmpty()) {
+			return null;
+		}
+		
+		if (localFile == null || localFile.isEmpty()) {
 			return null;
 		}
 		
 		List<Article> articles = library.getArticles();
 		for (Article article : articles) {
 			if (article.getTitle().equals(articleTitle)) {
-				return article;
+				if (article.getLocalFile().equals(localFile)) {
+					return article;
+				}
 			}
 		}
 		

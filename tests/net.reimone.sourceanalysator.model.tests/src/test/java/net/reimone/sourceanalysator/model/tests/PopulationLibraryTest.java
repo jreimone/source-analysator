@@ -22,6 +22,8 @@ import net.reimone.sourceanalysator.model.tests.util.TestLibraryFactory;
 
 public class PopulationLibraryTest extends AbstractSourceAnalysatorTest {
 
+	private static final String ARTICLE_REFUGEES = "refugees.docx";
+	
 	@Test
 	public void recommendGeneralSourceForSourceWithExistingGeneralSourceTest() {
 		ISourceAnalysator sourceAnalysator = createSourceAnalysator();
@@ -139,15 +141,23 @@ public class PopulationLibraryTest extends AbstractSourceAnalysatorTest {
 
 		// create new article
 		String articleTitle = "Refugees welcome";
-		Article newArticle = sourceAnalysator.createOrGetArticle(articleTitle);
+		Article newArticle = sourceAnalysator.createOrGetArticle(articleTitle, ARTICLE_REFUGEES);
 		assertThat("article", newArticle, is(notNullValue()));
 		assertThat("article counts in library", articles.size(), is(equalTo(1)));
-		assertThat("title of the new article", newArticle, is(equalTo(articles.get(0))));
+		assertThat("title of the new article", newArticle.getTitle(), is(equalTo(articles.get(0).getTitle())));
+		assertThat("localFile of the new article", newArticle.getLocalFile(), is(equalTo(articles.get(0).getLocalFile())));
 		
 		// retrieve existing article
-		Article existingArticle = sourceAnalysator.createOrGetArticle(articleTitle);
+		Article existingArticle = sourceAnalysator.createOrGetArticle(articleTitle, ARTICLE_REFUGEES);
 		assertThat("article counts in library", articles.size(), is(equalTo(1)));
-		assertThat("title of the new article", existingArticle, is(equalTo(newArticle)));
+		assertThat("articles are equal", existingArticle, is(equalTo(newArticle)));
+		
+		// create article with different localFile property
+		newArticle = sourceAnalysator.createOrGetArticle(articleTitle, ARTICLE_REFUGEES + ".different");
+		assertThat("article", newArticle, is(notNullValue()));
+		assertThat("article counts in library", articles.size(), is(equalTo(2)));
+		assertThat("title of the new article", newArticle.getTitle(), is(equalTo(articles.get(0).getTitle())));
+		assertThat("localFile of the new article", newArticle.getLocalFile(), is(equalTo(ARTICLE_REFUGEES + ".different")));
 	}
 
 	@Test

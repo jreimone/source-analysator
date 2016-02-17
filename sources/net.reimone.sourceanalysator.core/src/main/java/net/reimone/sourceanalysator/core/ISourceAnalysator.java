@@ -36,7 +36,7 @@ public interface ISourceAnalysator {
 	 * Creates a new article with the given name or retrieves the existing article with that name. 
 	 * @return 
 	 */
-	public Article createOrGetArticle(String articleTitle);
+	public Article createOrGetArticle(String articleTitle, String localFile);
 
 	/**
 	 * Creates a new {@link GeneralSource} or retrieves the existing one with the given name. 
