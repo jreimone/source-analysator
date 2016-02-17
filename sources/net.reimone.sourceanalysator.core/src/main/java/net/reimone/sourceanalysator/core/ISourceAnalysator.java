@@ -2,6 +2,7 @@ package net.reimone.sourceanalysator.core;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import net.reimone.sourceanalysator.Article;
 import net.reimone.sourceanalysator.GeneralSource;
@@ -59,5 +60,12 @@ public interface ISourceAnalysator {
 	 * Links the given source with the given general source.
 	 */
 	public void linkSourceWithGeneralSource(Source source, GeneralSource generalSource);
+
+	/**
+	 * Extracts all hyperlinks contained in the file being resolved from {@link Article#getLocalFile()}.
+	 * @param article
+	 * @return
+	 */
+	public Set<String> retrieveHyperlinksFromLocalFile(Article article);
 
 }

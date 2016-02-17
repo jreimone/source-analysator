@@ -68,6 +68,7 @@ public class E4LifeCycle {
 		URI uri = URI.createFileURI(libraryPathString);
 		Library library = null;
 		try {
+			// TODO use ILibraryFactory
 			File libraryFile = new File(libraryPathString);
 			if (!libraryFile.exists()) {
 				Resource resource = rs.createResource(uri);

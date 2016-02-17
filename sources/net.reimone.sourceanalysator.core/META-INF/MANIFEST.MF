@@ -8,3 +8,10 @@ Require-Bundle: net.reimone.sourceanalysator.model,
  com.google.guava
 Export-Package: net.reimone.sourceanalysator.core,
  net.reimone.sourceanalysator.core.impl
+Bundle-ClassPath: libs/poi/poi-3.13-20150929.jar,
+ libs/poi/poi-excelant-3.13-20150929.jar,
+ libs/poi/poi-ooxml-3.13-20150929.jar,
+ libs/poi/poi-ooxml-schemas-3.13-20150929.jar,
+ libs/poi/poi-scratchpad-3.13-20150929.jar,
+ libs/poi/xmlbeans-2.6.0.jar,
+ .

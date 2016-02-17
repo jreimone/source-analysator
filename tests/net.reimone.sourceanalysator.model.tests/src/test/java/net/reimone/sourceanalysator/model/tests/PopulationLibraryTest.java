@@ -176,4 +176,5 @@ public class PopulationLibraryTest extends AbstractSourceAnalysatorTest {
 		analysator.initialize(libraryFactory);
 		return analysator;
 	}
+	
 }
