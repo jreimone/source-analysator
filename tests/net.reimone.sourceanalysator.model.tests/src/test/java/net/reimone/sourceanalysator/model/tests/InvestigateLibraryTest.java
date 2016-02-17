@@ -21,14 +21,10 @@ import net.reimone.sourceanalysator.Library;
 import net.reimone.sourceanalysator.Source;
 import net.reimone.sourceanalysator.SourceanalysatorFactory;
 import net.reimone.sourceanalysator.core.ISourceAnalysator;
-import net.reimone.sourceanalysator.core.impl.SourceAnalysator;
 import net.reimone.sourceanalysator.model.tests.util.AbstractSourceAnalysatorTest;
-import net.reimone.sourceanalysator.model.tests.util.TestLibraryFactory;
 
 public class InvestigateLibraryTest extends AbstractSourceAnalysatorTest {
 
-	private static final String ARTICLE_TITLE = "Refugees welcome";
-	
 	private GeneralSource spiegel;
 	private GeneralSource guardian;
 	
@@ -36,7 +32,7 @@ public class InvestigateLibraryTest extends AbstractSourceAnalysatorTest {
 	public void analyseNullArticleTest() {
 		Article article = null;
 		Library library = createSimpleLibrary();
-		ISourceAnalysator analysator = getSourceAnalysator(library);
+		ISourceAnalysator analysator = createSourceAnalysator(library);
 		Map<GeneralSource, List<Source>> generalSources = analysator.getGeneralSourcesOfArticle(article);
 		
 		assertThat("general sources of null article", generalSources, is(notNullValue()));
@@ -49,7 +45,7 @@ public class InvestigateLibraryTest extends AbstractSourceAnalysatorTest {
 		Article article = library.getArticles().get(0);
 		assertThat("name of article", article.getTitle(), is(equalTo("Fuck the system")));
 		
-		ISourceAnalysator analysator = getSourceAnalysator(library);
+		ISourceAnalysator analysator = createSourceAnalysator(library);
 		Map<GeneralSource, List<Source>> generalSources = analysator.getGeneralSourcesOfArticle(article);
 		assertThat("general sopurces count", generalSources.size(), is(equalTo(2)));
 		
@@ -80,7 +76,7 @@ public class InvestigateLibraryTest extends AbstractSourceAnalysatorTest {
 		Article article2 = library.getArticles().get(1);
 		assertThat("name of article", article2.getTitle(), is(equalTo("Refugees welcome")));
 		
-		ISourceAnalysator analysator = getSourceAnalysator(library);
+		ISourceAnalysator analysator = createSourceAnalysator(library);
 		List<Article> articles = Lists.newArrayList(article1, article2);
 		Map<GeneralSource, List<Source>> generalSources = analysator.getGeneralSourcesOfArticles(articles);
 		assertThat("general sopurces count", generalSources.size(), is(equalTo(2)));
@@ -102,14 +98,6 @@ public class InvestigateLibraryTest extends AbstractSourceAnalysatorTest {
 		printSourcesOfArticles(Lists.newArrayList(article1, article2), generalSources);
 	}
 	
-	private ISourceAnalysator getSourceAnalysator(Library library) {
-		TestLibraryFactory libraryFactory = new TestLibraryFactory();
-		libraryFactory.setLibrary(library);
-		ISourceAnalysator analysator = new SourceAnalysator();
-		analysator.initialize(libraryFactory);
-		return analysator;
-	}
-
 	private void printSourcesOfArticles(List<Article> articles, Map<GeneralSource, List<Source>> generalSources) {
 		System.out.println("Selected articles: " + Iterators.toString(articles.stream().map(article -> article.getTitle()).iterator()));
 		for (GeneralSource generalSource : generalSources.keySet()) {

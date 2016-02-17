@@ -6,9 +6,7 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.hamcrest.CoreMatchers.nullValue;
 import static org.junit.Assert.assertThat;
-import static org.junit.Assert.fail;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
@@ -19,27 +17,15 @@ import net.reimone.sourceanalysator.Article;
 import net.reimone.sourceanalysator.GeneralSource;
 import net.reimone.sourceanalysator.Library;
 import net.reimone.sourceanalysator.Source;
-import net.reimone.sourceanalysator.core.ILibraryFactory;
 import net.reimone.sourceanalysator.core.ISourceAnalysator;
-import net.reimone.sourceanalysator.core.impl.SourceAnalysator;
 import net.reimone.sourceanalysator.model.tests.util.AbstractSourceAnalysatorTest;
-import net.reimone.sourceanalysator.model.tests.util.TestLibraryFactory;
 
 public class PopulationLibraryTest extends AbstractSourceAnalysatorTest {
 
-	private static final String ARTICLE_REFUGEES = "src/test/resources/refugees.docx";
-	private static final String ARTICLE_TITLE = "Refugees welcome";
-	private static final String ARTICLE_LOCAL_FILE = "src/test/resources/refugees_small.docx";
-	private static final String[] ARTICLE_HYPERLINKS = new String[]{
-			"http://www.morgenweb.de/nachrichten/politik/sie-konnen-es-nicht-lassen-1.2620328",
-			"https://yougov.de/news/2016/02/09/schiessbefehl-und-verfassungstreue-der-afd-informa/",
-			"http://www.wahlrecht.de/umfragen/insa.htm"
-	};
-	
 	@Test
 	public void retrieveHyperlinksFromLocalFileTest() {
 		ISourceAnalysator sourceAnalysator = createSourceAnalysator();
-		Article article = sourceAnalysator.createOrGetArticle(ARTICLE_TITLE, getAbsolutePathOfFile(ARTICLE_LOCAL_FILE));
+		Article article = sourceAnalysator.createOrGetArticle(ARTICLE_TITLE, getAbsolutePathOfFile(ARTICLE_FILE_REFUGEES_SMALL));
 		Set<String> hyperlinks = sourceAnalysator.retrieveHyperlinksFromLocalFile(article);
 		System.out.println(hyperlinks);
 		assertThat("hyperlinks", hyperlinks, is(notNullValue()));
@@ -164,23 +150,23 @@ public class PopulationLibraryTest extends AbstractSourceAnalysatorTest {
 
 		// create new article
 		String articleTitle = "Refugees welcome";
-		Article newArticle = sourceAnalysator.createOrGetArticle(articleTitle, ARTICLE_REFUGEES);
+		Article newArticle = sourceAnalysator.createOrGetArticle(articleTitle, ARTICLE_FILE_REFUGEES);
 		assertThat("article", newArticle, is(notNullValue()));
 		assertThat("article counts in library", articles.size(), is(equalTo(1)));
 		assertThat("title of the new article", newArticle.getTitle(), is(equalTo(articles.get(0).getTitle())));
 		assertThat("localFile of the new article", newArticle.getLocalFile(), is(equalTo(articles.get(0).getLocalFile())));
 		
 		// retrieve existing article
-		Article existingArticle = sourceAnalysator.createOrGetArticle(articleTitle, ARTICLE_REFUGEES);
+		Article existingArticle = sourceAnalysator.createOrGetArticle(articleTitle, ARTICLE_FILE_REFUGEES);
 		assertThat("article counts in library", articles.size(), is(equalTo(1)));
 		assertThat("articles are equal", existingArticle, is(equalTo(newArticle)));
 		
 		// create article with different localFile property
-		newArticle = sourceAnalysator.createOrGetArticle(articleTitle, ARTICLE_REFUGEES + ".different");
+		newArticle = sourceAnalysator.createOrGetArticle(articleTitle, ARTICLE_FILE_REFUGEES + ".different");
 		assertThat("article", newArticle, is(notNullValue()));
 		assertThat("article counts in library", articles.size(), is(equalTo(2)));
 		assertThat("title of the new article", newArticle.getTitle(), is(equalTo(articles.get(0).getTitle())));
-		assertThat("localFile of the new article", newArticle.getLocalFile(), is(equalTo(ARTICLE_REFUGEES + ".different")));
+		assertThat("localFile of the new article", newArticle.getLocalFile(), is(equalTo(ARTICLE_FILE_REFUGEES + ".different")));
 	}
 
 	@Test
@@ -193,19 +179,4 @@ public class PopulationLibraryTest extends AbstractSourceAnalysatorTest {
 		assertThat(library1, is(equalTo(library2)));
 	}
 
-	private ISourceAnalysator createSourceAnalysator() {
-		ILibraryFactory libraryFactory = new TestLibraryFactory();
-		ISourceAnalysator analysator = new SourceAnalysator();
-		analysator.initialize(libraryFactory);
-		return analysator;
-	}
-	
-	private static String getAbsolutePathOfFile(String localFile) {
-		File file = new File(localFile);
-		if (!file.exists()) {
-			fail("file " + localFile + " must exist");
-		}
-		
-		return file.getAbsolutePath();
-	}
 }
