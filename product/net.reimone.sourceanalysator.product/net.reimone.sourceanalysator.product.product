@@ -108,6 +108,8 @@
    <features>
       <feature id="net.reimone.sourceanalysator.core.feature"/>
       <feature id="net.reimone.sourceanalysator.ui.feature"/>
+      <feature id="org.eclipse.equinox.p2.extras.feature"/>
+      <feature id="org.eclipse.e4.rcp"/>
    </features>
 
    <configurations>

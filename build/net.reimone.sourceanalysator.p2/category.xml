@@ -3,5 +3,8 @@
    <feature url="features/net.reimone.sourceanalysator.core.feature_0.0.1.qualifier.jar" id="net.reimone.sourceanalysator.core.feature" version="0.0.1.qualifier">
       <category name="net.reimone.sourceanalysator.core.category"/>
    </feature>
-   <category-def name="net.reimone.sourceanalysator.core.category" label="SourceAnalysator Core"/>
+   <feature url="features/net.reimone.sourceanalysator.ui.feature_0.0.1.qualifier.jar" id="net.reimone.sourceanalysator.ui.feature" version="0.0.1.qualifier">
+      <category name="net.reimone.sourceanalysator.core.category"/>
+   </feature>
+   <category-def name="net.reimone.sourceanalysator.core.category" label="SourceAnalysator"/>
 </site>
