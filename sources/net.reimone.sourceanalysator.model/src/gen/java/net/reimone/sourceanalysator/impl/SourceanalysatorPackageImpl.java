@@ -252,6 +252,15 @@ public class SourceanalysatorPackageImpl extends EPackageImpl implements Sourcea
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getArticle_LocalFile() {
+		return (EAttribute)articleEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public SourceanalysatorFactory getSourceanalysatorFactory() {
 		return (SourceanalysatorFactory)getEFactoryInstance();
 	}
@@ -293,6 +302,7 @@ public class SourceanalysatorPackageImpl extends EPackageImpl implements Sourcea
 		articleEClass = createEClass(ARTICLE);
 		createEReference(articleEClass, ARTICLE__SOURCES);
 		createEAttribute(articleEClass, ARTICLE__TITLE);
+		createEAttribute(articleEClass, ARTICLE__LOCAL_FILE);
 	}
 
 	/**
@@ -343,6 +353,7 @@ public class SourceanalysatorPackageImpl extends EPackageImpl implements Sourcea
 		initEClass(articleEClass, Article.class, "Article", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getArticle_Sources(), this.getSource(), this.getSource_Articles(), "sources", null, 0, -1, Article.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getArticle_Title(), ecorePackage.getEString(), "title", null, 1, 1, Article.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getArticle_LocalFile(), ecorePackage.getEString(), "localFile", null, 1, 1, Article.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Create resource
 		createResource(eNS_URI);
@@ -452,6 +463,12 @@ public class SourceanalysatorPackageImpl extends EPackageImpl implements Sourcea
 		   });	
 		addAnnotation
 		  (getArticle_Title(), 
+		   source, 
+		   new String[] {
+			 "WARNING", "This element was generated from an .mecore file. Removing this annotation will signal the MinimalEcore builder to keep this element."
+		   });	
+		addAnnotation
+		  (getArticle_LocalFile(), 
 		   source, 
 		   new String[] {
 			 "WARNING", "This element was generated from an .mecore file. Removing this annotation will signal the MinimalEcore builder to keep this element."

@@ -32,6 +32,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * <ul>
  *   <li>{@link net.reimone.sourceanalysator.impl.ArticleImpl#getSources <em>Sources</em>}</li>
  *   <li>{@link net.reimone.sourceanalysator.impl.ArticleImpl#getTitle <em>Title</em>}</li>
+ *   <li>{@link net.reimone.sourceanalysator.impl.ArticleImpl#getLocalFile <em>Local File</em>}</li>
  * </ul>
  *
  * @generated
@@ -66,6 +67,26 @@ public class ArticleImpl extends MinimalEObjectImpl.Container implements Article
 	 * @ordered
 	 */
 	protected String title = TITLE_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getLocalFile() <em>Local File</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getLocalFile()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String LOCAL_FILE_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getLocalFile() <em>Local File</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getLocalFile()
+	 * @generated
+	 * @ordered
+	 */
+	protected String localFile = LOCAL_FILE_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -124,6 +145,27 @@ public class ArticleImpl extends MinimalEObjectImpl.Container implements Article
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public String getLocalFile() {
+		return localFile;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setLocalFile(String newLocalFile) {
+		String oldLocalFile = localFile;
+		localFile = newLocalFile;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, SourceanalysatorPackage.ARTICLE__LOCAL_FILE, oldLocalFile, localFile));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
@@ -160,6 +202,8 @@ public class ArticleImpl extends MinimalEObjectImpl.Container implements Article
 				return getSources();
 			case SourceanalysatorPackage.ARTICLE__TITLE:
 				return getTitle();
+			case SourceanalysatorPackage.ARTICLE__LOCAL_FILE:
+				return getLocalFile();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -180,6 +224,9 @@ public class ArticleImpl extends MinimalEObjectImpl.Container implements Article
 			case SourceanalysatorPackage.ARTICLE__TITLE:
 				setTitle((String)newValue);
 				return;
+			case SourceanalysatorPackage.ARTICLE__LOCAL_FILE:
+				setLocalFile((String)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -198,6 +245,9 @@ public class ArticleImpl extends MinimalEObjectImpl.Container implements Article
 			case SourceanalysatorPackage.ARTICLE__TITLE:
 				setTitle(TITLE_EDEFAULT);
 				return;
+			case SourceanalysatorPackage.ARTICLE__LOCAL_FILE:
+				setLocalFile(LOCAL_FILE_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -214,6 +264,8 @@ public class ArticleImpl extends MinimalEObjectImpl.Container implements Article
 				return sources != null && !sources.isEmpty();
 			case SourceanalysatorPackage.ARTICLE__TITLE:
 				return TITLE_EDEFAULT == null ? title != null : !TITLE_EDEFAULT.equals(title);
+			case SourceanalysatorPackage.ARTICLE__LOCAL_FILE:
+				return LOCAL_FILE_EDEFAULT == null ? localFile != null : !LOCAL_FILE_EDEFAULT.equals(localFile);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -230,6 +282,8 @@ public class ArticleImpl extends MinimalEObjectImpl.Container implements Article
 		StringBuffer result = new StringBuffer(super.toString());
 		result.append(" (title: ");
 		result.append(title);
+		result.append(", localFile: ");
+		result.append(localFile);
 		result.append(')');
 		return result.toString();
 	}

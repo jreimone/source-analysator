@@ -251,13 +251,22 @@ public interface SourceanalysatorPackage extends EPackage {
 	int ARTICLE__TITLE = 1;
 
 	/**
+	 * The feature id for the '<em><b>Local File</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ARTICLE__LOCAL_FILE = 2;
+
+	/**
 	 * The number of structural features of the '<em>Article</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ARTICLE_FEATURE_COUNT = 2;
+	int ARTICLE_FEATURE_COUNT = 3;
 
 	/**
 	 * The number of operations of the '<em>Article</em>' class.
@@ -431,6 +440,17 @@ public interface SourceanalysatorPackage extends EPackage {
 	EAttribute getArticle_Title();
 
 	/**
+	 * Returns the meta object for the attribute '{@link net.reimone.sourceanalysator.Article#getLocalFile <em>Local File</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Local File</em>'.
+	 * @see net.reimone.sourceanalysator.Article#getLocalFile()
+	 * @see #getArticle()
+	 * @generated
+	 */
+	EAttribute getArticle_LocalFile();
+
+	/**
 	 * Returns the factory that creates the instances of the model.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -580,6 +600,14 @@ public interface SourceanalysatorPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute ARTICLE__TITLE = eINSTANCE.getArticle_Title();
+
+		/**
+		 * The meta object literal for the '<em><b>Local File</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute ARTICLE__LOCAL_FILE = eINSTANCE.getArticle_LocalFile();
 
 	}
 

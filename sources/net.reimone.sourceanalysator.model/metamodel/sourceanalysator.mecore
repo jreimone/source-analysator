@@ -21,4 +21,5 @@ Source (
 Article (
 	title EString
 	~sources Source* <> Source.articles
+	localFile EString
 )

@@ -16,6 +16,7 @@ import org.eclipse.emf.ecore.EObject;
  * <ul>
  *   <li>{@link net.reimone.sourceanalysator.Article#getSources <em>Sources</em>}</li>
  *   <li>{@link net.reimone.sourceanalysator.Article#getTitle <em>Title</em>}</li>
+ *   <li>{@link net.reimone.sourceanalysator.Article#getLocalFile <em>Local File</em>}</li>
  * </ul>
  *
  * @see net.reimone.sourceanalysator.SourceanalysatorPackage#getArticle()
@@ -68,5 +69,32 @@ public interface Article extends EObject {
 	 * @generated
 	 */
 	void setTitle(String value);
+
+	/**
+	 * Returns the value of the '<em><b>Local File</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Local File</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Local File</em>' attribute.
+	 * @see #setLocalFile(String)
+	 * @see net.reimone.sourceanalysator.SourceanalysatorPackage#getArticle_LocalFile()
+	 * @model required="true"
+	 *        annotation="org.emftext.language.mecore.resource.mecore.mopp.MecoreWrapper WARNING='This element was generated from an .mecore file. Removing this annotation will signal the MinimalEcore builder to keep this element.'"
+	 * @generated
+	 */
+	String getLocalFile();
+
+	/**
+	 * Sets the value of the '{@link net.reimone.sourceanalysator.Article#getLocalFile <em>Local File</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Local File</em>' attribute.
+	 * @see #getLocalFile()
+	 * @generated
+	 */
+	void setLocalFile(String value);
 
 } // Article
