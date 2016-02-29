@@ -5,6 +5,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.net.URI;
 import java.util.Collections;
+import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 import java.util.LinkedList;
@@ -16,6 +17,9 @@ import java.util.logging.Logger;
 
 import org.apache.poi.xwpf.usermodel.XWPFDocument;
 import org.apache.poi.xwpf.usermodel.XWPFHyperlink;
+import org.apache.poi.xwpf.usermodel.XWPFHyperlinkRun;
+import org.apache.poi.xwpf.usermodel.XWPFParagraph;
+import org.apache.poi.xwpf.usermodel.XWPFRun;
 
 import com.google.common.collect.Lists;
 import com.google.common.net.InternetDomainName;
@@ -302,13 +306,7 @@ public class SourceAnalysator implements ISourceAnalysator {
 			}
 
 			try (XWPFDocument document = new XWPFDocument(is)) {
-				XWPFHyperlink[] hyperlinksArray = document.getHyperlinks();
-				for (XWPFHyperlink xwpfHyperlink : hyperlinksArray) {
-					String url = xwpfHyperlink.getURL();
-					if (url != null && !url.isEmpty()) {
-						hyperlinks.add(url);
-					}
-				}
+				extractHyperlinks(hyperlinks, document);
 			}
 		} catch (Exception e) {
 			logger.log(Level.SEVERE, "Error while opening the file " + localFile, e);
@@ -316,5 +314,33 @@ public class SourceAnalysator implements ISourceAnalysator {
 		}
 
 		return hyperlinks;
+	}
+
+	// private void extractHyperlinks(Set<String> hyperlinks, XWPFDocument document) {
+	// XWPFHyperlink[] hyperlinksArray = document.getHyperlinks();
+	// for (XWPFHyperlink xwpfHyperlink : hyperlinksArray) {
+	// String url = xwpfHyperlink.getURL();
+	// if (url != null && !url.isEmpty()) {
+	// hyperlinks.add(url);
+	// }
+	// }
+	// }
+
+	private void extractHyperlinks(Set<String> hyperlinks, XWPFDocument document) {
+		Iterator<XWPFParagraph> it = document.getParagraphsIterator();
+		while (it.hasNext()) {
+			XWPFParagraph paragraph = it.next();
+
+			// Do the paragraph text
+			for (XWPFRun run : paragraph.getRuns()) {
+				if (run instanceof XWPFHyperlinkRun) {
+					XWPFHyperlinkRun xwpfHyperlinkRun = (XWPFHyperlinkRun) run;
+					XWPFHyperlink hyperlink = xwpfHyperlinkRun.getHyperlink(document);
+					if (hyperlink != null) {
+						hyperlinks.add(hyperlink.getURL());
+					}
+				}
+			}
+		}
 	}
 }
