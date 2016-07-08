@@ -16,7 +16,20 @@
                name="appName"
                value="net.reimone.sourceanalysator.product">
          </property>
+         <property
+               name="lifeCycleURI"
+               value="bundleclass://net.reimone.sourceanalysator.product/net.reimone.sourceanalysator.product.E4LifeCycle">
+         </property>
       </product>
    </extension>
-
+   <!--
+   <extension
+         id="SourcaAnalysatorProduct"
+         point="org.eclipse.core.runtime.products">
+      <product
+            application="org.eclipse.e4.ui.workbench.swt.E4Application"
+            name="Source Analysator Product">
+      </product>
+   </extension>
+-->
 </plugin>

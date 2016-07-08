@@ -16,6 +16,28 @@
       [Enter License Description here.]
    </license>
 
+   <includes
+         id="net.reimone.sourceanalysator.core.feature"
+         version="0.0.0"/>
+
+   <requires>
+      <import plugin="javax.inject"/>
+      <import plugin="org.eclipse.core.runtime"/>
+      <import plugin="org.eclipse.swt"/>
+      <import plugin="org.eclipse.e4.ui.model.workbench"/>
+      <import plugin="org.eclipse.jface"/>
+      <import plugin="org.eclipse.e4.ui.services"/>
+      <import plugin="org.eclipse.e4.ui.workbench"/>
+      <import plugin="org.eclipse.e4.core.di"/>
+      <import plugin="org.eclipse.e4.ui.di"/>
+      <import plugin="org.eclipse.e4.core.contexts"/>
+      <import plugin="org.eclipse.core.resources"/>
+      <import plugin="org.eclipse.emf.ecore"/>
+      <import plugin="org.eclipse.emf.ecore.xmi"/>
+      <import plugin="org.eclipse.osgi"/>
+      <import feature="net.reimone.sourceanalysator.core.feature" version="0.0.1.qualifier"/>
+   </requires>
+
    <plugin
          id="net.reimone.sourceanalysator.ui"
          download-size="0"

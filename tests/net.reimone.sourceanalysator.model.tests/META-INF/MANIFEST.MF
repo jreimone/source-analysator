@@ -3,6 +3,7 @@ Bundle-ManifestVersion: 2
 Bundle-Name: %pluginName
 Bundle-SymbolicName: net.reimone.sourceanalysator.model.tests;singleton:=true
 Bundle-Version: 0.0.1.qualifier
+Fragment-Host: net.reimone.sourceanalysator.core
 Bundle-ClassPath: .
 Bundle-Vendor: %providerName
 Bundle-Localization: plugin
@@ -12,6 +13,5 @@ Require-Bundle: org.eclipse.core.runtime,
  net.reimone.sourceanalysator.model;visibility:=reexport,
  org.eclipse.emf.ecore.xmi;visibility:=reexport,
  org.junit;visibility:=reexport,
- net.reimone.sourceanalysator.core,
  com.google.guava
 Bundle-ActivationPolicy: lazy

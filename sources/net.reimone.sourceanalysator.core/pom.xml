@@ -10,29 +10,4 @@
 		<relativePath>../..</relativePath>
 	</parent>
 
-	<build>
-		<plugins>
-			<plugin>
-				<groupId>org.eclipse.tycho</groupId>
-				<artifactId>tycho-versions-plugin</artifactId>
-				<version>0.24.0</version>
-				<executions>
-					<execution>
-						<id>versions</id>
-						<goals>
-							<goal>update-pom</goal>
-						</goals>
-					</execution>
-				</executions>
-			</plugin>
-		</plugins>
-	</build>
-	<dependencies>
-		<dependency>
-			<groupId>net.reimone.sourceanalysator</groupId>
-			<artifactId>net.reimone.sourceanalysator.model</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
-			<type>eclipse-plugin</type>
-		</dependency>
-	</dependencies>
 </project>

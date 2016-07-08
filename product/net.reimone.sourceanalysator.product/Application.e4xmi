@@ -1,6 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<application:Application xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:application="http://www.eclipse.org/ui/2010/UIModel/application" xmlns:basic="http://www.eclipse.org/ui/2010/UIModel/application/ui/basic" xmi:id="_c3AF0MjYEeSyMNYR5xypkQ" elementId="org.eclipse.e4.application" bindingContexts="_c3AF2cjYEeSyMNYR5xypkQ">
-  <children xsi:type="basic:TrimmedWindow" xmi:id="_c3AF0cjYEeSyMNYR5xypkQ" elementId="org.eclipse.e4.window.main" label="Empty E4 Application" width="500" height="400"/>
+<application:Application xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:advanced="http://www.eclipse.org/ui/2010/UIModel/application/ui/advanced" xmlns:application="http://www.eclipse.org/ui/2010/UIModel/application" xmlns:basic="http://www.eclipse.org/ui/2010/UIModel/application/ui/basic" xmi:id="_c3AF0MjYEeSyMNYR5xypkQ" elementId="org.eclipse.e4.application" bindingContexts="_c3AF2cjYEeSyMNYR5xypkQ">
+  <children xsi:type="basic:TrimmedWindow" xmi:id="_c3AF0cjYEeSyMNYR5xypkQ" elementId="org.eclipse.e4.window.main" label="Quellen-Analysator*in 6000" width="500" height="400">
+    <tags>shellMaximized</tags>
+    <children xsi:type="advanced:PerspectiveStack" xmi:id="_cROvQEUEEeaOgdC5C3wYtw" elementId="net.reimone.sourceanalysator.product.perspectivestack.0">
+      <children xsi:type="advanced:Perspective" xmi:id="_ev1fsEUEEeaOgdC5C3wYtw" elementId="net.reimone.sourceanalysator.product.perspective.dataperspective" label="Data Perspective">
+        <children xsi:type="basic:PartSashContainer" xmi:id="_lrkiwEUEEeaOgdC5C3wYtw" elementId="net.reimone.sourceanalysator.product.partsashcontainer.0" horizontal="true">
+          <children xsi:type="basic:PartStack" xmi:id="_7h-OUEUEEeaOgdC5C3wYtw" elementId="net.reimone.sourceanalysator.product.partstack.0" containerData="300">
+            <children xsi:type="basic:Part" xmi:id="_9Ml9EEUEEeaOgdC5C3wYtw" elementId="net.reimone.sourceanalysator.product.part.library" label="Articles">
+              <toolbar xmi:id="_mGnDgEUFEeaOgdC5C3wYtw" elementId="net.reimone.sourceanalysator.product.toolbar.0"/>
+            </children>
+          </children>
+          <children xsi:type="basic:PartStack" xmi:id="_BNPvEEUFEeaOgdC5C3wYtw" elementId="net.reimone.sourceanalysator.product.partstack.1" containerData="700">
+            <children xsi:type="basic:Part" xmi:id="_Cjbe4EUFEeaOgdC5C3wYtw" elementId="net.reimone.sourceanalysator.product.part.properties" contributionURI="bundleclass://net.reimone.sourceanalysator.product/net.reimone.sourceanalysator.product.views.ArticleView" label="Properties"/>
+          </children>
+        </children>
+      </children>
+      <children xsi:type="advanced:Perspective" xmi:id="_clw_YEUFEeaOgdC5C3wYtw" elementId="net.reimone.sourceanalysator.product.perspective.analysisperspective" label="Analysis Perspective"/>
+    </children>
+    <mainMenu xmi:id="_WPf2UEUEEeaOgdC5C3wYtw" elementId="net.reimone.sourceanalysator.product.menu.0"/>
+  </children>
   <rootContext xmi:id="_c3AF2cjYEeSyMNYR5xypkQ" elementId="org.eclipse.ui.contexts.dialogAndWindow" name="In Dialog and Windows">
     <children xmi:id="_c3AF2sjYEeSyMNYR5xypkQ" elementId="org.eclipse.ui.contexts.window" name="In Windows"/>
     <children xmi:id="_c3AF28jYEeSyMNYR5xypkQ" elementId="org.eclipse.ui.contexts.dialog" name="In Dialogs"/>

@@ -11,21 +11,4 @@
 		<relativePath>../..</relativePath>
 	</parent>
 
-	<build>
-		<plugins>
-			<plugin>
-				<groupId>org.eclipse.tycho</groupId>
-				<artifactId>tycho-versions-plugin</artifactId>
-				<version>0.24.0</version>
-				<executions>
-					<execution>
-						<id>versions</id>
-						<goals>
-							<goal>update-pom</goal>
-						</goals>
-					</execution>
-				</executions>
-			</plugin>
-		</plugins>
-	</build>
 </project>
