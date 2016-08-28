@@ -18,6 +18,8 @@ import org.osgi.framework.FrameworkUtil;
 
 import net.reimone.sourceanalysator.Library;
 import net.reimone.sourceanalysator.core.ILibraryFactory;
+import net.reimone.sourceanalysator.core.ISourceAnalysator;
+import net.reimone.sourceanalysator.core.impl.SourceAnalysator;
 
 /**
  * This is a stub implementation containing e4 LifeCycle annotated methods.<br />
@@ -37,7 +39,8 @@ public class E4LifeCycle {
 
 	@PreSave
 	public void preSave(IEclipseContext workbenchContext) {
-		Library library = workbenchContext.getActive(Library.class);
+		ISourceAnalysator sourceAnalysator = workbenchContext.getActive(ISourceAnalysator.class);
+		Library library = sourceAnalysator.getSingleLibrary();
 		Resource resource = library.eResource();
 		try {
 			resource.save(EclipseLibraryFactory.getProperties());
@@ -48,13 +51,15 @@ public class E4LifeCycle {
 
 	@ProcessAdditions
 	public void processAdditions(IEclipseContext workbenchContext) {
+		// register source analysator
 		thisBundle = FrameworkUtil.getBundle(getClass());
 		log = Platform.getLog(thisBundle);
 		IPath bundleDataArea = Platform.getStateLocation(thisBundle);
 		IPath libraryPath = bundleDataArea.append(LIBRARY_FILE);
 		ILibraryFactory libraryFactory = new EclipseLibraryFactory(libraryPath, log, thisBundle);
-		Library library = libraryFactory.createLibrary();
-		workbenchContext.set(Library.class, library);
+		ISourceAnalysator analysator = new SourceAnalysator();
+		analysator.initialize(libraryFactory);
+		workbenchContext.set(ISourceAnalysator.class, analysator);
 	}
 
 	@ProcessRemovals
