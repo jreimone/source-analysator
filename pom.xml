@@ -112,8 +112,8 @@
 
 	<repositories>
 		<repository>
-			<id>eclipse-mars</id>
-			<url>http://download.eclipse.org/releases/mars</url>
+			<id>eclipse-neon</id>
+			<url>http://download.eclipse.org/releases/neon</url>
 			<layout>p2</layout>
 		</repository>
 	</repositories>
@@ -122,19 +122,11 @@
 		<module>sources/net.reimone.sourceanalysator.core</module>
 		<module>sources/net.reimone.sourceanalysator.model</module>
 		<module>tests/net.reimone.sourceanalysator.model.tests</module>
-
-		<module>
-			features/net.reimone.sourceanalysator.core.feature
-		</module>
+		<module>features/net.reimone.sourceanalysator.core.feature</module>
 		<module>build/net.reimone.sourceanalysator.p2</module>
-<!-- 		<module>product/net.reimone.sourceanalysator.product</module> -->
-<!-- 		<module> -->
-<!-- 			product/net.reimone.sourceanalysator.product.feature -->
-<!-- 		</module> -->
-
+		<module>product/net.reimone.sourceanalysator.product</module>
+		<module>product/net.reimone.sourceanalysator.product.feature</module>
 		<module>sources/net.reimone.sourceanalysator.ui</module>
-		<module>
-			features/net.reimone.sourceanalysator.ui.feature
-		</module>
+		<module>features/net.reimone.sourceanalysator.ui.feature</module>
 	</modules>
 </project>
