@@ -1,0 +1,125 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>net.reimone.sourceanalysator</groupId>
+	<artifactId>net.reimone.sourceanalysator.configuration</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<packaging>pom</packaging>
+
+	<properties>
+		<tycho.version>0.26.0</tycho.version>
+		<maven.compiler.source>1.8</maven.compiler.source>
+		<maven.compiler.target>1.8</maven.compiler.target>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<neon-repo.url>http://download.eclipse.org/releases/neon</neon-repo.url>
+	</properties>
+
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.eclipse.tycho</groupId>
+				<artifactId>tycho-maven-plugin</artifactId>
+				<version>${tycho.version}</version>
+				<extensions>true</extensions>
+			</plugin>
+
+			<plugin>
+				<groupId>org.jacoco</groupId>
+				<artifactId>jacoco-maven-plugin</artifactId>
+				<version>0.7.5.201505241946</version>
+				<configuration>
+					<excludes>
+						<!-- Exclude generated classes -->
+						<!-- <exclude>net/reimone/sourceanalysator/tests</exclude> -->
+						<!-- Exclude helper classes -->
+						<!-- <exclude>net/reimone/sourceanalysator/model/tests/util</exclude> -->
+					</excludes>
+					<destFile>${project.build.directory}/coverage-reports/jacoco.exec</destFile>
+					<dataFile>${project.build.directory}/coverage-reports/jacoco.exec</dataFile>
+				</configuration>
+				<executions>
+					<execution>
+						<id>pre-unit-test</id>
+						<goals>
+							<goal>prepare-agent</goal>
+						</goals>
+					</execution>
+					<execution>
+						<id>report</id>
+						<!-- Has to be done in this phase since Tycho Surefire executes tests 
+							in integration-test phase, because plugins must be packaged as OSGi container 
+							already. -->
+						<phase>post-integration-test</phase>
+						<goals>
+							<goal>report</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.eclipse.tycho</groupId>
+				<artifactId>tycho-surefire-plugin</artifactId>
+				<version>${tycho.version}</version>
+				<configuration>
+					<argLine>${tycho.testArgLine}</argLine>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.eluder.coveralls</groupId>
+				<artifactId>coveralls-maven-plugin</artifactId>
+				<version>4.1.0</version>
+			</plugin>
+			<!-- <plugin> -->
+			<!-- <groupId>org.eclipse.tycho</groupId> -->
+			<!-- <artifactId>tycho-versions-plugin</artifactId> -->
+			<!-- <version>${tycho.version}</version> -->
+			<!-- <executions> -->
+			<!-- <execution> -->
+			<!-- <id>versions</id> -->
+			<!-- <goals> -->
+			<!-- <goal>update-pom</goal> -->
+			<!-- </goals> -->
+			<!-- </execution> -->
+			<!-- </executions> -->
+			<!-- </plugin> -->
+			<plugin>
+				<groupId>org.eclipse.tycho</groupId>
+				<artifactId>target-platform-configuration</artifactId>
+				<version>${tycho.version}</version>
+				<configuration>
+					<target>
+						<artifact>
+							<groupId>net.reimone.sourceanalysator</groupId>
+							<artifactId>net.reimone.sourceanalysator.target</artifactId>
+							<version>0.0.1-SNAPSHOT</version>
+						</artifact>
+					</target>
+					<environments>
+						<environment>
+							<os>win32</os>
+							<ws>win32</ws>
+							<arch>x86_64</arch>
+						</environment>
+						<environment>
+							<os>linux</os>
+							<ws>gtk</ws>
+							<arch>x86_64</arch>
+						</environment>
+					</environments>
+				</configuration>
+			</plugin>
+		</plugins>
+
+	</build>
+
+	<!-- Commented out because we use a target -->
+	<!-- <repositories> -->
+	<!-- <repository> -->
+	<!-- <id>eclipse-neon</id> -->
+	<!-- <url>${neon-repo.url}</url> -->
+	<!-- <layout>p2</layout> -->
+	<!-- </repository> -->
+	<!-- </repositories> -->
+
+</project>

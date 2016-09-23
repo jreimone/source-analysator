@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?pde version="3.5"?>
+
+<product name="net.reimone.sourceanalysator.rcp" uid="SourceAnalysator Product" id="net.reimone.sourceanalysator.rcp.product" application="org.eclipse.e4.ui.workbench.swt.E4Application" version="0.0.1.qualifier" useFeatures="true" includeLaunchers="true">
+
+   <configIni use="default">
+   </configIni>
+
+   <launcherArgs>
+      <programArgs>-clearPersistedState
+      </programArgs>
+      <vmArgsMac>-XstartOnFirstThread -Dorg.eclipse.swt.internal.carbon.smallFonts
+      </vmArgsMac>
+   </launcherArgs>
+
+   <windowImages/>
+
+   <launcher name="SourceAnalysator">
+      <solaris/>
+      <win useIco="false">
+         <bmp/>
+      </win>
+   </launcher>
+
+   <vm>
+   </vm>
+
+   <plugins>
+   </plugins>
+
+   <features>
+      <feature id="org.eclipse.e4.rcp" installMode="root"/>
+      <feature id="net.reimone.sourceanalysator.core.feature" version="0.0.1.qualifier"/>
+      <feature id="net.reimone.sourceanalysator.ui.feature" version="0.0.1.qualifier"/>
+      <feature id="org.eclipse.emf.ecore"/>
+      <feature id="org.eclipse.emf.common"/>
+   </features>
+
+   <configurations>
+      <plugin id="org.eclipse.core.runtime" autoStart="false" startLevel="2" />
+      <plugin id="org.eclipse.equinox.ds" autoStart="false" startLevel="3" />
+      <plugin id="org.eclipse.equinox.event" autoStart="false" startLevel="3" />
+   </configurations>
+
+</product>

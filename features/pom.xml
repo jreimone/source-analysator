@@ -1,20 +1,17 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<artifactId>net.reimone.sourceanalysator.root</artifactId>
+	<artifactId>net.reimone.sourceanalysator.features</artifactId>
 	<packaging>pom</packaging>
 
 	<parent>
 		<groupId>net.reimone.sourceanalysator</groupId>
-		<artifactId>net.reimone.sourceanalysator.configuration</artifactId>
+		<artifactId>net.reimone.sourceanalysator.root</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
-		<relativePath>./releng/net.reimone.sourceanalysator.configuration</relativePath>
 	</parent>
 
 	<modules>
-		<module>bundles</module>
-		<module>features</module>
-		<module>releng</module>
-		<module>tests</module>
+		<module>net.reimone.sourceanalysator.core.feature</module>
+		<module>net.reimone.sourceanalysator.ui.feature</module>
 	</modules>
 </project>
