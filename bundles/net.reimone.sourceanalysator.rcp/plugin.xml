@@ -6,7 +6,7 @@
          id="product"
          point="org.eclipse.core.runtime.products">
       <product
-            name="SourceAnalysator RCP Product"
+            name="net.reimone.sourceanalysator.rcp"
             application="org.eclipse.e4.ui.workbench.swt.E4Application">
          <property
                name="applicationCSS"
@@ -14,11 +14,11 @@
          </property>
          <property
                name="appName"
-               value="net.reimone.sourceanalysator.product">
+               value="net.reimone.sourceanalysator.rcp">
          </property>
          <property
                name="lifeCycleURI"
-               value="bundleclass://net.reimone.sourceanalysator.rcp/net.reimone.sourceanalysator.product.E4LifeCycle">
+               value="bundleclass://net.reimone.sourceanalysator.rcp/net.reimone.sourceanalysator.rcp.E4LifeCycle">
          </property>
       </product>
    </extension>

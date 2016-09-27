@@ -1,4 +1,4 @@
-package net.reimone.sourceanalysator.product.views;
+package net.reimone.sourceanalysator.rcp.views;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
@@ -19,9 +19,9 @@ import net.reimone.sourceanalysator.Article;
 import net.reimone.sourceanalysator.Library;
 import net.reimone.sourceanalysator.SourceanalysatorPackage.Literals;
 import net.reimone.sourceanalysator.core.ISourceAnalysator;
-import net.reimone.sourceanalysator.product.databinding.EMFBeansListObservableFactory;
-import net.reimone.sourceanalysator.product.databinding.EMFTreeBeanAdvisor;
-import net.reimone.sourceanalysator.product.databinding.EMFTreeObservableLabelProvider;
+import net.reimone.sourceanalysator.rcp.databinding.EMFBeansListObservableFactory;
+import net.reimone.sourceanalysator.rcp.databinding.EMFTreeBeanAdvisor;
+import net.reimone.sourceanalysator.rcp.databinding.EMFTreeObservableLabelProvider;
 
 public class ArticlesTreeView {
 	

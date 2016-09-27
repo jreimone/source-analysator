@@ -8,7 +8,7 @@
  * Contributors:
  *    Google, Inc. - initial API and implementation
  *******************************************************************************/
-package net.reimone.sourceanalysator.product.databinding;
+package net.reimone.sourceanalysator.rcp.databinding;
 
 /**
  * Used for wrapping objects that define their own implementations of <code>equals()</code> and

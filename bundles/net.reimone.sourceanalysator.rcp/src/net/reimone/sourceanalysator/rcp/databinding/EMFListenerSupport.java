@@ -8,39 +8,34 @@
  * Contributors:
  *    Google, Inc. - initial API and implementation
  *******************************************************************************/
-package net.reimone.sourceanalysator.product.databinding;
+package net.reimone.sourceanalysator.rcp.databinding;
 
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
-import java.lang.reflect.Method;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+
+import org.eclipse.emf.common.notify.Adapter;
+import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.notify.impl.AdapterImpl;
+import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EStructuralFeature;
 
 /**
  * This class may be freely distributed as part of any application or plugin.
  * 
  * @author lobas_av
  */
-/*package*/final class ListenerSupport {
-	private final PropertyChangeListener m_listener;
-	private final List<String> m_properties;
+/*package*/abstract class EMFListenerSupport {
+	private final List<EStructuralFeature> m_properties;
 	private final Set<IdentityWrapper> m_elementsListenedTo = new HashSet<IdentityWrapper>();
 	////////////////////////////////////////////////////////////////////////////
 	//
 	// Constructor
 	//
 	////////////////////////////////////////////////////////////////////////////
-	public ListenerSupport(final PropertyChangeListener listener, List<String> properties) {
+	public EMFListenerSupport(List<EStructuralFeature> properties) {
 		m_properties = properties;
-		m_listener = new PropertyChangeListener() {
-			@Override
-			public void propertyChange(PropertyChangeEvent event) {
-				if (m_properties.contains(event.getPropertyName())) {
-					listener.propertyChange(event);
-				}
-			}
-		};
 	}
 	////////////////////////////////////////////////////////////////////////////
 	//
@@ -48,7 +43,7 @@ import java.util.Set;
 	//
 	////////////////////////////////////////////////////////////////////////////
 	public void hookListener(Object addedElement) {
-		if (processListener("addPropertyChangeListener", addedElement)) {
+		if (processListener(true, addedElement)) {
 			m_elementsListenedTo.add(new IdentityWrapper(addedElement));
 		}
 	}
@@ -57,13 +52,13 @@ import java.util.Set;
 			IdentityWrapper wrapper = (IdentityWrapper) removedElement;
 			removedElement = wrapper.unwrap();
 		}
-		if (processListener("removePropertyChangeListener", removedElement)) {
+		if (processListener(false, removedElement)) {
 			m_elementsListenedTo.remove(new IdentityWrapper(removedElement));
 		}
 	}
 	public void dispose() {
 		for (IdentityWrapper wrapper : m_elementsListenedTo) {
-			if (processListener("removePropertyChangeListener", wrapper.unwrap())) {
+			if (processListener(false, wrapper.unwrap())) {
 				m_elementsListenedTo.remove(wrapper);
 			}
 		}
@@ -74,39 +69,32 @@ import java.util.Set;
 	// Listener
 	//
 	////////////////////////////////////////////////////////////////////////////
-	private boolean processListener(String methodName, Object target) {
-		Method method = null;
-		int parameters = 0;
-		try {
-			try {
-				method =
-						target.getClass().getMethod(
-							methodName,
-							new Class[]{String.class, PropertyChangeListener.class});
-				parameters = 2;
-			} catch (NoSuchMethodException e) {
-				method = target.getClass().getMethod(methodName, new Class[]{PropertyChangeListener.class});
-				parameters = 1;
+	private boolean processListener(boolean add, Object target) {
+		if (target instanceof EObject) {
+			EObject eObject = (EObject) target;
+			EList<Adapter> eAdapters = eObject.eAdapters();
+			if (add) {
+				eAdapters.add(m_propertyChangeAdapter);
+			} else {
+				eAdapters.remove(m_propertyChangeAdapter);
 			}
-		} catch (SecurityException e) {
-		} catch (NoSuchMethodException e) {
-		}
-		if (method != null && parameters != 0) {
-			if (!method.isAccessible()) {
-				method.setAccessible(true);
-			}
-			try {
-				if (parameters == 1) {
-					method.invoke(target, new Object[]{m_listener});
-				} else {
-					for (String propertyName : m_properties) {
-						method.invoke(target, new Object[]{propertyName, m_listener});
-					}
-				}
-				return true;
-			} catch (Exception e) {
-			}
+			return true;
 		}
 		return false;
 	}
+	////////////////////////////////////////////////////////////////////////////
+	//
+	// Properties
+	//
+	////////////////////////////////////////////////////////////////////////////
+	private Adapter m_propertyChangeAdapter = new AdapterImpl() {
+		@Override
+		public void notifyChanged(Notification notification) {
+			if (notification.getEventType() == Notification.SET
+				&& m_properties.contains(notification.getFeature())) {
+				fireLabelPropertyChanged(notification.getNotifier());
+			}
+		}
+	};
+	protected abstract void fireLabelPropertyChanged(Object element);
 }

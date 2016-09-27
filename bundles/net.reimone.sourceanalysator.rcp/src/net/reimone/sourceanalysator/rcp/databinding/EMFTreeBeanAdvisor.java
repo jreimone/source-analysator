@@ -8,7 +8,7 @@
  * Contributors:
  *    Google, Inc. - initial API and implementation
  *******************************************************************************/
-package net.reimone.sourceanalysator.product.databinding;
+package net.reimone.sourceanalysator.rcp.databinding;
 
 import java.lang.reflect.Array;
 import java.util.Collection;

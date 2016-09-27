@@ -1,4 +1,4 @@
-package net.reimone.sourceanalysator.product.dialog;
+package net.reimone.sourceanalysator.rcp.dialog;
 
 import org.eclipse.jface.dialogs.IDialogConstants;
 import org.eclipse.jface.dialogs.TitleAreaDialog;

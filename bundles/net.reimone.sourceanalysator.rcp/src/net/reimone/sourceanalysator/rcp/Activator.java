@@ -1,4 +1,4 @@
-package net.reimone.sourceanalysator.product;
+package net.reimone.sourceanalysator.rcp;
 
 import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;

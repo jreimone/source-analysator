@@ -1,11 +1,11 @@
-package net.reimone.sourceanalysator.product.handler;
+package net.reimone.sourceanalysator.rcp.handler;
 
 import org.eclipse.e4.core.di.annotations.Execute;
 import org.eclipse.swt.widgets.FileDialog;
 import org.eclipse.swt.widgets.Shell;
 
 import net.reimone.sourceanalysator.core.ISourceAnalysator;
-import net.reimone.sourceanalysator.product.dialog.ArticleNameDialog;
+import net.reimone.sourceanalysator.rcp.dialog.ArticleNameDialog;
 
 public class NewArticleHandler {
 

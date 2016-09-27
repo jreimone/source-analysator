@@ -1,4 +1,4 @@
-package net.reimone.sourceanalysator.product.views;
+package net.reimone.sourceanalysator.rcp.views;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;

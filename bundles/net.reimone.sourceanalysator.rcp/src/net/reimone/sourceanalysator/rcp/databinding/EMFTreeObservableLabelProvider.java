@@ -8,17 +8,16 @@
  * Contributors:
  *    Google, Inc. - initial API and implementation
  *******************************************************************************/
-package net.reimone.sourceanalysator.product.databinding;
+package net.reimone.sourceanalysator.rcp.databinding;
 
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
-import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.core.databinding.observable.set.IObservableSet;
 import org.eclipse.core.databinding.observable.set.ISetChangeListener;
 import org.eclipse.core.databinding.observable.set.SetChangeEvent;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.jface.viewers.LabelProvider;
 import org.eclipse.jface.viewers.LabelProviderChangedEvent;
 import org.eclipse.swt.graphics.Image;
@@ -28,46 +27,56 @@ import org.eclipse.swt.graphics.Image;
  * 
  * @author lobas_av
  */
-public class TreeObservableLabelProvider extends LabelProvider {
-	private final Class<?> m_beanClass;
-	private final Method m_getTextMethod;
-	private final Method m_getImageMethod;
+public class EMFTreeObservableLabelProvider extends LabelProvider {
+	private final EStructuralFeature m_textProperty;
+	private final EStructuralFeature m_imageProperty;
 	////////////////////////////////////////////////////////////////////////////
 	//
 	// Constructor
 	//
 	////////////////////////////////////////////////////////////////////////////
-	public TreeObservableLabelProvider(IObservableSet allElementsObservable,
-			Class<?> beanClass,
-			String textProperty,
-			String imageProperty) {
+	public EMFTreeObservableLabelProvider(IObservableSet allElementsObservable,
+			EStructuralFeature textProperty,
+			EStructuralFeature imageProperty) {
 		m_observable = allElementsObservable;
-		m_beanClass = beanClass;
-		m_getTextMethod = Utils.getMethod(m_beanClass, textProperty);
-		m_getImageMethod = Utils.getMethod(m_beanClass, imageProperty);
-		List<String> properties = new ArrayList<String>();
-		if (m_getTextMethod != null) {
-			properties.add(textProperty);
+		m_textProperty = textProperty;
+		m_imageProperty = imageProperty;
+		List<EStructuralFeature> properties = new ArrayList<EStructuralFeature>();
+		if (m_textProperty != null) {
+			properties.add(m_textProperty);
 		}
-		if (m_getImageMethod != null) {
-			properties.add(imageProperty);
+		if (m_imageProperty != null) {
+			properties.add(m_imageProperty);
 		}
-		m_listenerSupport = new ListenerSupport(m_propertiesListener, properties);
+		m_listenerSupport = new EMFListenerSupport(properties) {
+			@Override
+			protected void fireLabelPropertyChanged(Object element) {
+				fireLabelProviderChanged(new LabelProviderChangedEvent(EMFTreeObservableLabelProvider.this,
+					element));
+			}
+		};
 		m_observable.addSetChangeListener(m_setListener);
 	}
 	////////////////////////////////////////////////////////////////////////////
 	//
 	// LabelProvider
 	//
-	////////////////////////////////////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////////////////
 	@Override
 	public String getText(Object element) {
-		Object text = Utils.invokeMethod(m_getTextMethod, m_beanClass, element);
-		return text == null ? null : text.toString();
+		if (m_textProperty == null) {
+			return null;
+		}
+		EObject eObject = (EObject) element;
+		return (String) eObject.eGet(m_textProperty);
 	}
 	@Override
 	public Image getImage(Object element) {
-		return (Image) Utils.invokeMethod(m_getImageMethod, m_beanClass, element);
+		if (m_imageProperty == null) {
+			return null;
+		}
+		EObject eObject = (EObject) element;
+		return (Image) eObject.eGet(m_imageProperty);
 	}
 	////////////////////////////////////////////////////////////////////////////
 	//
@@ -75,27 +84,15 @@ public class TreeObservableLabelProvider extends LabelProvider {
 	//
 	////////////////////////////////////////////////////////////////////////////
 	private final IObservableSet m_observable;
-	private final ListenerSupport m_listenerSupport;
-	private final PropertyChangeListener m_propertiesListener = new PropertyChangeListener() {
-		@Override
-		public void propertyChange(PropertyChangeEvent event) {
-			LabelProviderChangedEvent newEvent =
-					new LabelProviderChangedEvent(TreeObservableLabelProvider.this, event.getSource());
-			fireLabelProviderChanged(newEvent);
-		}
-	};
+	private final EMFListenerSupport m_listenerSupport;
 	private final ISetChangeListener m_setListener = new ISetChangeListener() {
 		@Override
 		public void handleSetChange(SetChangeEvent event) {
 			for (Object removedElement : event.diff.getRemovals()) {
-				if (Utils.instanceOf(m_beanClass, removedElement)) {
-					m_listenerSupport.unhookListener(removedElement);
-				}
+				m_listenerSupport.unhookListener(removedElement);
 			}
 			for (Object addedElement : event.diff.getAdditions()) {
-				if (Utils.instanceOf(m_beanClass, addedElement)) {
-					m_listenerSupport.hookListener(addedElement);
-				}
+				m_listenerSupport.hookListener(addedElement);
 			}
 		}
 	};

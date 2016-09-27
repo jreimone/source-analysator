@@ -8,35 +8,43 @@
  * Contributors:
  *    Google, Inc. - initial API and implementation
  *******************************************************************************/
-package net.reimone.sourceanalysator.product.databinding;
+package net.reimone.sourceanalysator.rcp.databinding;
 
-import org.eclipse.core.databinding.beans.BeansObservables;
 import org.eclipse.core.databinding.observable.IObservable;
-import org.eclipse.core.databinding.observable.Realm;
+import org.eclipse.core.databinding.observable.masterdetail.IObservableFactory;
 
 /**
  * This class may be freely distributed as part of any application or plugin.
  * 
  * @author lobas_av
  */
-public class BeansListObservableFactory extends BeansObservableFactory {
-	private final String m_propertyName;
+/*package*/abstract class BeansObservableFactory implements IObservableFactory {
+	private final Class<?> m_beanClass;
 	////////////////////////////////////////////////////////////////////////////
 	//
 	// Constructor
 	//
 	////////////////////////////////////////////////////////////////////////////
-	public BeansListObservableFactory(Class<?> beanClass, String propertyName) {
-		super(beanClass);
-		m_propertyName = propertyName;
+	public BeansObservableFactory(Class<?> beanClass) {
+		m_beanClass = beanClass;
 	}
 	////////////////////////////////////////////////////////////////////////////
 	//
-	// BeansObservableFactory
+	// IObservableFactory
 	//
 	////////////////////////////////////////////////////////////////////////////
 	@Override
-	protected IObservable createBeanObservable(Object target) {
-		return BeansObservables.observeList(Realm.getDefault(), target, m_propertyName);
+	public IObservable createObservable(Object target) {
+		if (target instanceof IObservable) {
+			return (IObservable) target;
+		}
+		if (Utils.instanceOf(m_beanClass, target)) {
+			return createBeanObservable(target);
+		}
+		return null;
 	}
+	/**
+	 * Creates an observable for the given target object.
+	 */
+	protected abstract IObservable createBeanObservable(Object target);
 }

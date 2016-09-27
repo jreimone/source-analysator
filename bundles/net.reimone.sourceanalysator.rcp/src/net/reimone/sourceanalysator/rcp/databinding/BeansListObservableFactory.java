@@ -8,29 +8,27 @@
  * Contributors:
  *    Google, Inc. - initial API and implementation
  *******************************************************************************/
-package net.reimone.sourceanalysator.product.databinding;
+package net.reimone.sourceanalysator.rcp.databinding;
 
+import org.eclipse.core.databinding.beans.BeansObservables;
 import org.eclipse.core.databinding.observable.IObservable;
 import org.eclipse.core.databinding.observable.Realm;
-import org.eclipse.emf.databinding.EMFObservables;
-import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.EStructuralFeature;
 
 /**
  * This class may be freely distributed as part of any application or plugin.
  * 
  * @author lobas_av
  */
-public class EMFBeansListObservableFactory extends BeansObservableFactory {
-	private final EStructuralFeature m_eStructuralFeature;
+public class BeansListObservableFactory extends BeansObservableFactory {
+	private final String m_propertyName;
 	////////////////////////////////////////////////////////////////////////////
 	//
 	// Constructor
 	//
 	////////////////////////////////////////////////////////////////////////////
-	public EMFBeansListObservableFactory(Class<?> beanClass, EStructuralFeature eStructuralFeature) {
+	public BeansListObservableFactory(Class<?> beanClass, String propertyName) {
 		super(beanClass);
-		m_eStructuralFeature = eStructuralFeature;
+		m_propertyName = propertyName;
 	}
 	////////////////////////////////////////////////////////////////////////////
 	//
@@ -39,9 +37,6 @@ public class EMFBeansListObservableFactory extends BeansObservableFactory {
 	////////////////////////////////////////////////////////////////////////////
 	@Override
 	protected IObservable createBeanObservable(Object target) {
-		if (target instanceof EObject) {
-			return EMFObservables.observeList(Realm.getDefault(), (EObject) target, m_eStructuralFeature);
-		}
-		return null;
+		return BeansObservables.observeList(Realm.getDefault(), target, m_propertyName);
 	}
 }

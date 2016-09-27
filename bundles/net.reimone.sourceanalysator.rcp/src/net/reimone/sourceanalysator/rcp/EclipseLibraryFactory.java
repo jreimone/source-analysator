@@ -1,4 +1,4 @@
-package net.reimone.sourceanalysator.product;
+package net.reimone.sourceanalysator.rcp;
 
 import java.io.File;
 import java.io.IOException;

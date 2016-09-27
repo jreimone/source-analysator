@@ -8,43 +8,40 @@
  * Contributors:
  *    Google, Inc. - initial API and implementation
  *******************************************************************************/
-package net.reimone.sourceanalysator.product.databinding;
+package net.reimone.sourceanalysator.rcp.databinding;
 
 import org.eclipse.core.databinding.observable.IObservable;
-import org.eclipse.core.databinding.observable.masterdetail.IObservableFactory;
+import org.eclipse.core.databinding.observable.Realm;
+import org.eclipse.emf.databinding.EMFObservables;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EStructuralFeature;
 
 /**
  * This class may be freely distributed as part of any application or plugin.
  * 
  * @author lobas_av
  */
-/*package*/abstract class BeansObservableFactory implements IObservableFactory {
-	private final Class<?> m_beanClass;
+public class EMFBeansListObservableFactory extends BeansObservableFactory {
+	private final EStructuralFeature m_eStructuralFeature;
 	////////////////////////////////////////////////////////////////////////////
 	//
 	// Constructor
 	//
 	////////////////////////////////////////////////////////////////////////////
-	public BeansObservableFactory(Class<?> beanClass) {
-		m_beanClass = beanClass;
+	public EMFBeansListObservableFactory(Class<?> beanClass, EStructuralFeature eStructuralFeature) {
+		super(beanClass);
+		m_eStructuralFeature = eStructuralFeature;
 	}
 	////////////////////////////////////////////////////////////////////////////
 	//
-	// IObservableFactory
+	// BeansObservableFactory
 	//
 	////////////////////////////////////////////////////////////////////////////
 	@Override
-	public IObservable createObservable(Object target) {
-		if (target instanceof IObservable) {
-			return (IObservable) target;
-		}
-		if (Utils.instanceOf(m_beanClass, target)) {
-			return createBeanObservable(target);
+	protected IObservable createBeanObservable(Object target) {
+		if (target instanceof EObject) {
+			return EMFObservables.observeList(Realm.getDefault(), (EObject) target, m_eStructuralFeature);
 		}
 		return null;
 	}
-	/**
-	 * Creates an observable for the given target object.
-	 */
-	protected abstract IObservable createBeanObservable(Object target);
 }

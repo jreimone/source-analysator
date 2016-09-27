@@ -13,7 +13,7 @@
 	<modules>
 		<module>net.reimone.sourceanalysator.model</module>
 		<module>net.reimone.sourceanalysator.core</module>
-		<module>net.reimone.sourceanalysator.ui</module>
+<!-- 		<module>net.reimone.sourceanalysator.ui</module> -->
 		<module>net.reimone.sourceanalysator.rcp</module>
 	</modules>
 </project>

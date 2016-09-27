@@ -3,7 +3,7 @@ Bundle-ManifestVersion: 2
 Bundle-Name: SourceAnalysator RCP
 Bundle-SymbolicName: net.reimone.sourceanalysator.rcp;singleton:=true
 Bundle-Version: 0.0.1.qualifier
-Bundle-Activator: net.reimone.sourceanalysator.product.Activator
+Bundle-Activator: net.reimone.sourceanalysator.rcp.Activator
 Require-Bundle: javax.inject,
  org.eclipse.core.runtime,
  org.eclipse.swt,
@@ -19,7 +19,6 @@ Require-Bundle: javax.inject,
  org.eclipse.emf.ecore,
  net.reimone.sourceanalysator.model,
  org.eclipse.emf.ecore.xmi,
- net.reimone.sourceanalysator.ui,
  org.eclipse.e4.core.services,
  org.eclipse.osgi.services,
  org.eclipse.core.databinding,
