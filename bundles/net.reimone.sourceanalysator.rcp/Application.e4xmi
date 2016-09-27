@@ -11,6 +11,11 @@
                 <children xsi:type="menu:HandledToolItem" xmi:id="_sNswIG0eEeavUeuGqf7yvw" elementId="net.reimone.sourceanalysator.rcp.handledtoolitem.neuerartikel" label="Neuer Artikel" command="_x8zoAG0eEeavUeuGqf7yvw"/>
               </toolbar>
             </children>
+            <children xsi:type="basic:Part" xmi:id="_4i2RgITQEeaircKqMehxiQ" elementId="net.reimone.sourceanalysator.rcp.part.list" contributionURI="bundleclass://net.reimone.sourceanalysator.rcp/net.reimone.sourceanalysator.rcp.views.ArticlesListView" label="List">
+              <toolbar xmi:id="_9O6_EITQEeaircKqMehxiQ" elementId="net.reimone.sourceanalysator.rcp.toolbar.1">
+                <children xsi:type="menu:HandledToolItem" xmi:id="__FF2gITQEeaircKqMehxiQ" elementId="net.reimone.sourceanalysator.rcp.handledtoolitem.neu" label="Neu" command="_x8zoAG0eEeavUeuGqf7yvw"/>
+              </toolbar>
+            </children>
           </children>
           <children xsi:type="basic:PartStack" xmi:id="_BNPvEEUFEeaOgdC5C3wYtw" elementId="net.reimone.sourceanalysator.rcp.partstack.1" containerData="700">
             <children xsi:type="basic:Part" xmi:id="_Cjbe4EUFEeaOgdC5C3wYtw" elementId="net.reimone.sourceanalysator.rcp.part.properties" contributionURI="bundleclass://net.reimone.sourceanalysator.rcp/net.reimone.sourceanalysator.rcp.views.ArticleView" label="Properties"/>
