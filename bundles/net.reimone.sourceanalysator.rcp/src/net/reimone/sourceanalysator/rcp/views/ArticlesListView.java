@@ -13,10 +13,13 @@ import org.eclipse.emf.databinding.EMFObservables;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.jface.databinding.viewers.ObservableListContentProvider;
 import org.eclipse.jface.databinding.viewers.ObservableMapLabelProvider;
+import org.eclipse.jface.layout.TableColumnLayout;
 import org.eclipse.jface.viewers.CheckboxTableViewer;
+import org.eclipse.jface.viewers.ColumnWeightData;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Table;
+import org.eclipse.swt.widgets.TableColumn;
 
 import net.reimone.sourceanalysator.Library;
 import net.reimone.sourceanalysator.SourceanalysatorPackage.Literals;
@@ -44,7 +47,6 @@ public class ArticlesListView {
 		checkboxTableViewer = CheckboxTableViewer.newCheckList(parent, SWT.BORDER | SWT.FULL_SELECTION);
 		table = checkboxTableViewer.getTable();
 		table.setLinesVisible(true);
-		table.setHeaderVisible(true);
 		library = sourceAnalysator.getSingleLibrary();
 		m_bindingContext = initDataBindings();
 	}

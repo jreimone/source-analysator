@@ -6,7 +6,7 @@
       <children xsi:type="advanced:Perspective" xmi:id="_ev1fsEUEEeaOgdC5C3wYtw" elementId="net.reimone.sourceanalysator.rcp.perspective.dataperspective" label="Data Perspective">
         <children xsi:type="basic:PartSashContainer" xmi:id="_lrkiwEUEEeaOgdC5C3wYtw" elementId="net.reimone.sourceanalysator.rcp.partsashcontainer.0" horizontal="true">
           <children xsi:type="basic:PartStack" xmi:id="_7h-OUEUEEeaOgdC5C3wYtw" elementId="net.reimone.sourceanalysator.rcp.partstack.0" containerData="300">
-            <children xsi:type="basic:Part" xmi:id="_9Ml9EEUEEeaOgdC5C3wYtw" elementId="net.reimone.sourceanalysator.rcp.part.library" contributionURI="bundleclass://net.reimone.sourceanalysator.rcp/net.reimone.sourceanalysator.rcp.views.ArticlesTreeView" label="Articles">
+            <children xsi:type="basic:Part" xmi:id="_9Ml9EEUEEeaOgdC5C3wYtw" elementId="net.reimone.sourceanalysator.rcp.part.library" contributionURI="bundleclass://net.reimone.sourceanalysator.rcp/net.reimone.sourceanalysator.rcp.views.ArticlesTreeView" label="Bibliothek">
               <toolbar xmi:id="_mGnDgEUFEeaOgdC5C3wYtw" elementId="net.reimone.sourceanalysator.rcp.toolbar.0">
                 <children xsi:type="menu:HandledToolItem" xmi:id="_sNswIG0eEeavUeuGqf7yvw" elementId="net.reimone.sourceanalysator.rcp.handledtoolitem.neuerartikel" label="Neuer Artikel" command="_x8zoAG0eEeavUeuGqf7yvw"/>
               </toolbar>
@@ -18,7 +18,7 @@
             </children>
           </children>
           <children xsi:type="basic:PartStack" xmi:id="_BNPvEEUFEeaOgdC5C3wYtw" elementId="net.reimone.sourceanalysator.rcp.partstack.1" containerData="700">
-            <children xsi:type="basic:Part" xmi:id="_Cjbe4EUFEeaOgdC5C3wYtw" elementId="net.reimone.sourceanalysator.rcp.part.properties" contributionURI="bundleclass://net.reimone.sourceanalysator.rcp/net.reimone.sourceanalysator.rcp.views.ArticleView" label="Properties"/>
+            <children xsi:type="basic:Part" xmi:id="_Cjbe4EUFEeaOgdC5C3wYtw" elementId="net.reimone.sourceanalysator.rcp.part.properties" contributionURI="bundleclass://net.reimone.sourceanalysator.rcp/net.reimone.sourceanalysator.rcp.views.ArticleView" label="Artikel"/>
           </children>
         </children>
       </children>

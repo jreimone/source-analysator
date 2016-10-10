@@ -5,6 +5,7 @@ import org.eclipse.swt.widgets.FileDialog;
 import org.eclipse.swt.widgets.Shell;
 
 import net.reimone.sourceanalysator.core.ISourceAnalysator;
+import net.reimone.sourceanalysator.rcp.Util;
 import net.reimone.sourceanalysator.rcp.dialog.ArticleNameDialog;
 
 public class NewArticleHandler {
@@ -16,12 +17,10 @@ public class NewArticleHandler {
 		articleNameDialog.open();
 		String articleTitle = articleNameDialog.getArticleTitle();
 		// get local word file
-		FileDialog fileDialog = new FileDialog(currentShell);
-		fileDialog.setText("Wähle die Word-Datei aus Junge...");
-		fileDialog.setFilterExtensions(new String[] { "*.docx" });
-		fileDialog.setFilterNames(new String[] { "Word-Dateien(*.docx)" });
+		FileDialog fileDialog = Util.INSTANCE.createFileDialog(currentShell);
 		String selectedLocalFile = fileDialog.open();
 		// and finally create the new article
 		sourceAnalysator.createOrGetArticle(articleTitle, selectedLocalFile);
 	}
+
 }
