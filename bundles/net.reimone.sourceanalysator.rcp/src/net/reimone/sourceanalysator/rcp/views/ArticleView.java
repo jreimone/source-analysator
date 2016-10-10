@@ -8,48 +8,40 @@ import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 import javax.inject.Inject;
 
+import org.eclipse.core.databinding.DataBindingContext;
+import org.eclipse.core.databinding.observable.Realm;
+import org.eclipse.core.databinding.observable.list.IObservableList;
+import org.eclipse.core.databinding.observable.map.IObservableMap;
+import org.eclipse.core.databinding.observable.value.IObservableValue;
 import org.eclipse.e4.core.di.annotations.Optional;
 import org.eclipse.e4.ui.di.Focus;
 import org.eclipse.e4.ui.di.UIEventTopic;
+import org.eclipse.emf.databinding.EMFObservables;
+import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.jface.databinding.swt.WidgetProperties;
+import org.eclipse.jface.databinding.viewers.ObservableListContentProvider;
+import org.eclipse.jface.databinding.viewers.ObservableMapLabelProvider;
+import org.eclipse.jface.dialogs.MessageDialog;
+import org.eclipse.jface.layout.TableColumnLayout;
+import org.eclipse.jface.viewers.TableViewer;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.events.SelectionAdapter;
+import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
+import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
-import org.eclipse.swt.widgets.FileDialog;
 import org.eclipse.swt.widgets.Label;
-import org.eclipse.swt.widgets.Shell;
+import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.Text;
 
 import net.reimone.sourceanalysator.Article;
 import net.reimone.sourceanalysator.GeneralSource;
 import net.reimone.sourceanalysator.Source;
-import net.reimone.sourceanalysator.rcp.Events;
-import net.reimone.sourceanalysator.rcp.Util;
-
-import org.eclipse.core.databinding.DataBindingContext;
-import org.eclipse.core.databinding.observable.Realm;
-import org.eclipse.core.databinding.observable.value.IObservableValue;
-import org.eclipse.jface.databinding.swt.WidgetProperties;
-import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.databinding.EMFObservables;
 import net.reimone.sourceanalysator.SourceanalysatorPackage.Literals;
 import net.reimone.sourceanalysator.core.ISourceAnalysator;
-
-import org.eclipse.swt.widgets.Button;
-import org.eclipse.swt.events.SelectionAdapter;
-import org.eclipse.swt.events.SelectionEvent;
-import org.eclipse.swt.layout.RowLayout;
-import org.eclipse.swt.layout.FillLayout;
-import org.eclipse.swt.widgets.Table;
-import org.eclipse.jface.viewers.TableViewer;
-import org.eclipse.jface.layout.TableColumnLayout;
-import org.eclipse.jface.databinding.viewers.ObservableListContentProvider;
-import org.eclipse.core.databinding.observable.map.IObservableMap;
-import org.eclipse.emf.ecore.EStructuralFeature;
-import org.eclipse.jface.databinding.viewers.ObservableMapLabelProvider;
-import org.eclipse.jface.dialogs.MessageDialog;
-import org.eclipse.core.databinding.observable.list.IObservableList;
+import net.reimone.sourceanalysator.rcp.Events;
 
 public class ArticleView {
 
@@ -110,7 +102,8 @@ public class ArticleView {
 		
 		Composite composite_2 = new Composite(parent, SWT.NONE);
 		composite_2.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1));
-		composite_2.setLayout(new TableColumnLayout());
+		TableColumnLayout tcl_composite_2 = new TableColumnLayout();
+		composite_2.setLayout(tcl_composite_2);
 		
 		tableViewer = new TableViewer(composite_2, SWT.BORDER | SWT.FULL_SELECTION);
 		table = tableViewer.getTable();
