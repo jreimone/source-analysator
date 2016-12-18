@@ -7,6 +7,8 @@ import org.eclipse.jface.viewers.CellEditor;
 import org.eclipse.jface.viewers.ComboBoxCellEditor;
 import org.eclipse.jface.viewers.EditingSupport;
 import org.eclipse.jface.viewers.TableViewer;
+import org.eclipse.swt.custom.CCombo;
+import org.eclipse.swt.widgets.Control;
 
 import com.google.common.collect.Lists;
 
@@ -81,10 +83,19 @@ public class GeneralSourceEditingSupport extends EditingSupport {
 		GeneralSource generalSource = getGeneralSourceFromSource(element);
 		List<String> aliasesList = getAliasesList(generalSource);
 		int index = (Integer) value;
-		String generalSourceName = aliasesList.get(index);
+		String generalSourceName = null;
+		if (index == -1) {
+			// new alias name entered
+			Control control = comboBoxCellEditor.getControl();
+			CCombo combo = (CCombo) control;
+			generalSourceName = combo.getText();
+		} else {
+			generalSourceName = aliasesList.get(index);
+		}
 		sourceAnalysator.setGeneralSourceOfSource(source, generalSourceName);
 		String[] aliases = getAliases(generalSource);
 		comboBoxCellEditor.setItems(aliases);
+		viewer.refresh();
 	}
 
 }

@@ -120,7 +120,7 @@ public class ArticleView {
 		
 		TableViewerColumn tableViewerColumnGeneralSource = new TableViewerColumn(tableViewer, SWT.NONE);
 		tableColumnGeneralSource = tableViewerColumnGeneralSource.getColumn();
-		tcl_compositeSourcesTable.setColumnData(tableColumnGeneralSource, new ColumnPixelData(150, true, true));
+		tcl_compositeSourcesTable.setColumnData(tableColumnGeneralSource, new ColumnPixelData(200, true, true));
 		tableColumnGeneralSource.setText("Kategorie");
 		tableViewerColumnGeneralSource.setEditingSupport(new GeneralSourceEditingSupport(tableViewer, sourceAnalysator));
 //		m_bindingContext = initDataBindings();
