@@ -122,7 +122,7 @@ public class ArticleView {
 		tableColumnGeneralSource = tableViewerColumnGeneralSource.getColumn();
 		tcl_compositeSourcesTable.setColumnData(tableColumnGeneralSource, new ColumnPixelData(150, true, true));
 		tableColumnGeneralSource.setText("Kategorie");
-		tableViewerColumnGeneralSource.setEditingSupport(new GeneralSourceEditingSupport(tableViewer));
+		tableViewerColumnGeneralSource.setEditingSupport(new GeneralSourceEditingSupport(tableViewer, sourceAnalysator));
 //		m_bindingContext = initDataBindings();
 	}
 

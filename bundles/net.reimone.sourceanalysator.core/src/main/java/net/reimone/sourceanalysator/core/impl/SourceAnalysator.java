@@ -124,10 +124,6 @@ public class SourceAnalysator implements ISourceAnalysator {
 
 	@Override
 	public GeneralSource createOrGetGeneralSource(String generalSourceName) {
-		if (generalSourceName == null || generalSourceName.isEmpty()) {
-			return null;
-		}
-
 		GeneralSource generalSource = getGeneralSourceByName(generalSourceName);
 		if (generalSource != null) {
 			return generalSource;
@@ -274,6 +270,11 @@ public class SourceAnalysator implements ISourceAnalysator {
 			return;
 		}
 
+		GeneralSource oldGeneralSource = source.getGeneralSource();
+		if (oldGeneralSource.equals(generalSource)) {
+			return;
+		}
+		
 		source.setGeneralSource(generalSource);
 		String url = source.getUrl();
 		InternetDomainName domainName = getPrivateDomainNameForURL(url);

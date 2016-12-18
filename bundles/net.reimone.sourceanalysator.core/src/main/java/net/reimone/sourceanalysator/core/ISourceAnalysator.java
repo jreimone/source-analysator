@@ -39,6 +39,11 @@ public interface ISourceAnalysator {
 	 */
 	public Article createOrGetArticle(String articleTitle, String localFile);
 
+//	/**
+//	 * Retrieves the {@link GeneralSource} with the given name or <code>null</code>. 
+//	 */
+//	public GeneralSource getGeneralSourceByName(String generalSourceName);
+	
 	/**
 	 * Creates a new {@link GeneralSource} or retrieves the existing one with the given name. 
 	 */
