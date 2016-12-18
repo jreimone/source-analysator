@@ -1,7 +1,16 @@
 package net.reimone.sourceanalysator.rcp;
 
+import java.util.HashMap;
+
+import org.eclipse.e4.core.services.events.IEventBroker;
+import org.eclipse.jface.viewers.IStructuredSelection;
+import org.eclipse.jface.viewers.SelectionChangedEvent;
 import org.eclipse.swt.widgets.FileDialog;
 import org.eclipse.swt.widgets.Shell;
+
+import com.google.common.collect.Maps;
+
+import net.reimone.sourceanalysator.Article;
 
 public class Util {
 
@@ -17,5 +26,16 @@ public class Util {
 		fileDialog.setFilterExtensions(new String[] { "*.docx" });
 		fileDialog.setFilterNames(new String[] { "Word-Dateien(*.docx)" });
 		return fileDialog;
+	}
+	
+	public void handleArticleSelectionChanged(SelectionChangedEvent event, IEventBroker eventBroker) {
+		IStructuredSelection selection = (IStructuredSelection) event.getSelection();
+		Object firstElement = selection.getFirstElement();
+		if (firstElement instanceof Article) {
+			Article selectedArticle = (Article) firstElement;
+			HashMap<String, Object> data = Maps.newHashMap();
+			data.put(Events.ARTICLE_SELECTION_CHANGED_ARTICLE, selectedArticle);
+			eventBroker.post(Events.ARTICLE_SELECTION_CHANGED, data);
+		}
 	}
 }

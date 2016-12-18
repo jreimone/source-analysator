@@ -8,6 +8,7 @@ import org.eclipse.core.databinding.DataBindingContext;
 import org.eclipse.core.databinding.observable.Realm;
 import org.eclipse.core.databinding.observable.list.IObservableList;
 import org.eclipse.core.databinding.observable.map.IObservableMap;
+import org.eclipse.e4.core.services.events.IEventBroker;
 import org.eclipse.e4.ui.di.Focus;
 import org.eclipse.emf.databinding.EMFObservables;
 import org.eclipse.emf.ecore.EStructuralFeature;
@@ -24,14 +25,22 @@ import org.eclipse.swt.widgets.TableColumn;
 import net.reimone.sourceanalysator.Library;
 import net.reimone.sourceanalysator.SourceanalysatorPackage.Literals;
 import net.reimone.sourceanalysator.core.ISourceAnalysator;
+import net.reimone.sourceanalysator.rcp.Util;
+
+import org.eclipse.jface.viewers.ISelectionChangedListener;
+import org.eclipse.jface.viewers.SelectionChangedEvent;
 
 public class ArticlesListView {
 	
 	private DataBindingContext m_bindingContext;
 
 	@Inject
+	private IEventBroker eventBroker;
+	
+	@Inject
 	private ISourceAnalysator sourceAnalysator;
 	private Library library;
+	
 	private Table table;
 	private CheckboxTableViewer checkboxTableViewer;
 	
@@ -45,6 +54,12 @@ public class ArticlesListView {
 	public void createControls(Composite parent) {
 		
 		checkboxTableViewer = CheckboxTableViewer.newCheckList(parent, SWT.BORDER | SWT.FULL_SELECTION);
+		checkboxTableViewer.addSelectionChangedListener(new ISelectionChangedListener() {
+			
+			public void selectionChanged(SelectionChangedEvent event) {
+				Util.INSTANCE.handleArticleSelectionChanged(event, eventBroker);
+			}
+		});
 		table = checkboxTableViewer.getTable();
 		table.setLinesVisible(true);
 		library = sourceAnalysator.getSingleLibrary();

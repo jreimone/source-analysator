@@ -1,6 +1,7 @@
 package net.reimone.sourceanalysator.rcp.handler;
 
 import org.eclipse.e4.core.di.annotations.Execute;
+import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.FileDialog;
 import org.eclipse.swt.widgets.Shell;
 
@@ -14,7 +15,11 @@ public class NewArticleHandler {
 	public void handle(ISourceAnalysator sourceAnalysator, Shell currentShell) {
 		// ask for article title
 		ArticleNameDialog articleNameDialog = new ArticleNameDialog(currentShell);
-		articleNameDialog.open();
+		int dialogResult = articleNameDialog.open();
+		if (dialogResult == SWT.CANCEL) {
+			return;
+		}
+		
 		String articleTitle = articleNameDialog.getArticleTitle();
 		// get local word file
 		FileDialog fileDialog = Util.INSTANCE.createFileDialog(currentShell);

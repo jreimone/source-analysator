@@ -122,19 +122,7 @@ public class ArticleView {
 		}
 		
 		if (generateSources) {
-			generateSources();
-		}
-	}
-
-	private void generateSources() {
-		// TODO move this to explicit method in ISourceAnalysator
-		Set<String> hyperlinks = sourceAnalysator.retrieveHyperlinksFromLocalFile(selectedArticle);
-		for (String url : hyperlinks) {
-			String recommendedGeneralSourceName = sourceAnalysator.recommendGeneralSourceName(url);
-			GeneralSource generalSource = sourceAnalysator.createOrGetGeneralSource(recommendedGeneralSourceName);
-			Source source = sourceAnalysator.createOrGetSource(url);
-			sourceAnalysator.linkSourceWithGeneralSource(source, generalSource);
-			selectedArticle.getSources().add(source);
+			sourceAnalysator.generateSourcesForArticle(selectedArticle);
 		}
 	}
 

@@ -28,6 +28,7 @@ import net.reimone.sourceanalysator.Library;
 import net.reimone.sourceanalysator.SourceanalysatorPackage.Literals;
 import net.reimone.sourceanalysator.core.ISourceAnalysator;
 import net.reimone.sourceanalysator.rcp.Events;
+import net.reimone.sourceanalysator.rcp.Util;
 import net.reimone.sourceanalysator.rcp.databinding.EMFBeansListObservableFactory;
 import net.reimone.sourceanalysator.rcp.databinding.EMFTreeBeanAdvisor;
 import net.reimone.sourceanalysator.rcp.databinding.EMFTreeObservableLabelProvider;
@@ -59,7 +60,7 @@ public class ArticlesTreeView {
 			
 			@Override
 			public void selectionChanged(SelectionChangedEvent event) {
-				handleSelectionChanged(event);
+				Util.INSTANCE.handleArticleSelectionChanged(event, eventBroker);
 			}
 		});
 		m_bindingContext = initDataBindings();
@@ -89,14 +90,4 @@ public class ArticlesTreeView {
 		return bindingContext;
 	}
 
-	private void handleSelectionChanged(SelectionChangedEvent event) {
-		ITreeSelection selection = (ITreeSelection) event.getSelection();
-		Object firstElement = selection.getFirstElement();
-		if (firstElement instanceof Article) {
-			Article selectedArticle = (Article) firstElement;
-			HashMap<String, Object> data = Maps.newHashMap();
-			data.put(Events.ARTICLE_SELECTION_CHANGED_ARTICLE, selectedArticle);
-			eventBroker.post(Events.ARTICLE_SELECTION_CHANGED, data);
-		}
-	}
 }
