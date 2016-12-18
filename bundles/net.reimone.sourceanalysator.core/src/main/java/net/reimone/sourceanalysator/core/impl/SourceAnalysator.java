@@ -271,7 +271,7 @@ public class SourceAnalysator implements ISourceAnalysator {
 		}
 
 		GeneralSource oldGeneralSource = source.getGeneralSource();
-		if (oldGeneralSource.equals(generalSource)) {
+		if (generalSource.equals(oldGeneralSource)) {
 			return;
 		}
 		
@@ -355,5 +355,42 @@ public class SourceAnalysator implements ISourceAnalysator {
 			linkSourceWithGeneralSource(source, generalSource);
 			article.getSources().add(source);
 		}
+	}
+	
+	@Override
+	public GeneralSource setGeneralSourceOfSource(Source source, String newName) {
+		if (source == null) {
+			return null;
+		}
+		
+		if (newName == null) {
+			return null;
+		}
+		
+		GeneralSource generalSource = source.getGeneralSource();
+		if (generalSource == null) {
+			// if not exists then return null because it has to be linked first with general source
+//			String recommendedGeneralSourceName = recommendGeneralSourceName(newName);
+//			generalSource = createOrGetGeneralSource(recommendedGeneralSourceName);
+//			linkSourceWithGeneralSource(source, generalSource);
+			return null;
+		}
+		
+		// if new name equals old name then do nothing
+		String oldName = generalSource.getName();
+		if (newName.equals(oldName)) {
+			return generalSource;
+		}
+		
+		// rename general source and rotate alias
+		List<String> aliases = generalSource.getAliases();
+		if (aliases.contains(newName)) {
+			aliases.remove(newName);
+		}
+		if (!aliases.contains(oldName)) {
+			aliases.add(oldName);
+		}
+		generalSource.setName(newName);
+		return generalSource;
 	}
 }

@@ -10,8 +10,8 @@ import static org.junit.Assert.assertThat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 import java.util.Map.Entry;
+import java.util.Set;
 
 import org.junit.Test;
 
@@ -70,6 +70,42 @@ public class PopulationLibraryTest extends AbstractSourceAnalysatorTest {
 	}
 
 	@Test
+	public void modifyAliasTest() {
+		ISourceAnalysator sourceAnalysator = createSourceAnalysator();
+
+		// use default general source name
+		String urlReference = "http://www.spiegel.de/123";
+		Source source = sourceAnalysator.createOrGetSource(urlReference);
+		String recommendGeneralSourceName = sourceAnalysator.recommendGeneralSourceName(urlReference);
+		GeneralSource generalSource = sourceAnalysator.createOrGetGeneralSource(recommendGeneralSourceName);
+		sourceAnalysator.linkSourceWithGeneralSource(source, generalSource);
+		assertThat(generalSource.getName(), is(equalTo("spiegel")));
+		List<String> aliases = generalSource.getAliases();
+		assertThat(aliases.size(), is(equalTo(1)));
+		assertThat(aliases.contains("spiegel.de"), is(true));
+		
+		// check if recommendation for different URL results in same general source
+		String newURL = "spiegel.de/nö";
+		source = sourceAnalysator.createOrGetSource(newURL);
+		recommendGeneralSourceName = sourceAnalysator.recommendGeneralSourceName(newURL);
+		GeneralSource newGeneralSource = sourceAnalysator.createOrGetGeneralSource(recommendGeneralSourceName);
+		sourceAnalysator.linkSourceWithGeneralSource(source, generalSource);
+		assertThat(newGeneralSource.getName(), is(equalTo("spiegel")));
+		assertThat(newGeneralSource, is(equalTo(generalSource)));
+		assertThat(aliases.size(), is(equalTo(1)));
+		assertThat(aliases.contains("spiegel.de"), is(true));
+		
+		// set general source name to another new alias
+		String newGeneralSourceName = "WTF";
+		newGeneralSource = sourceAnalysator.setGeneralSourceOfSource(source, newGeneralSourceName);
+		assertThat(newGeneralSource.getName(), is(equalTo("WTF")));
+		assertThat(newGeneralSource, is(equalTo(generalSource)));
+		assertThat(aliases.size(), is(equalTo(2)));
+		assertThat(aliases.contains("spiegel"), is(true));
+		assertThat(aliases.contains("spiegel.de"), is(true));
+	}
+	
+	@Test
 	public void recommendGeneralSourceForSourceWithExistingGeneralSourceTest() {
 		ISourceAnalysator sourceAnalysator = createSourceAnalysator();
 
@@ -100,18 +136,21 @@ public class PopulationLibraryTest extends AbstractSourceAnalysatorTest {
 	public void linkSourceAndGeneralSourceTest() {
 		ISourceAnalysator sourceAnalysator = createSourceAnalysator();
 
-		String generalSourceName = "WTF";
-		GeneralSource generalSource = sourceAnalysator.createOrGetGeneralSource(generalSourceName);
-		List<Source> sources = generalSource.getSources();
-		assertThat("count of linked sources", sources.size(), is(equalTo(0)));
+//		String generalSourceName = "WTF";
+//		GeneralSource generalSource = sourceAnalysator.createOrGetGeneralSource(generalSourceName);
+//		List<Source> sources = generalSource.getSources();
+//		assertThat("count of linked sources", sources.size(), is(equalTo(0)));
 
 		String url = "http://www.abc.co.uk/123";
 		Source source = sourceAnalysator.createOrGetSource(url);
 		GeneralSource generalSourceOfArticle = source.getGeneralSource();
 		assertThat("general Source Of Article", generalSourceOfArticle, is(nullValue()));
 
+		String recommendedGeneralSourceName = sourceAnalysator.recommendGeneralSourceName(url);
+		GeneralSource generalSource = sourceAnalysator.createOrGetGeneralSource(recommendedGeneralSourceName);
 		sourceAnalysator.linkSourceWithGeneralSource(source, generalSource);
 		generalSourceOfArticle = source.getGeneralSource();
+		List<Source> sources = generalSource.getSources();
 		assertThat("general Source Of Article", generalSourceOfArticle, is(notNullValue()));
 		assertThat("count of linked sources", sources.size(), is(equalTo(1)));
 		assertThat("general source of article", generalSourceOfArticle, is(equalTo(generalSource)));

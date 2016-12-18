@@ -82,9 +82,8 @@ public class GeneralSourceEditingSupport extends EditingSupport {
 		List<String> aliasesList = getAliasesList(generalSource);
 		int index = (Integer) value;
 		String generalSourceName = aliasesList.get(index);
-		GeneralSource newGeneralSource = sourceAnalysator.createOrGetGeneralSource(generalSourceName);
-		sourceAnalysator.linkSourceWithGeneralSource(source, newGeneralSource);
-		String[] aliases = getAliases(newGeneralSource);
+		sourceAnalysator.setGeneralSourceOfSource(source, generalSourceName);
+		String[] aliases = getAliases(generalSource);
 		comboBoxCellEditor.setItems(aliases);
 	}
 

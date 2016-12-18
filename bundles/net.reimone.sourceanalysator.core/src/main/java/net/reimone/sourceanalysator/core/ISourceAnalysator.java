@@ -61,6 +61,8 @@ public interface ISourceAnalysator {
 	 */
 	public Source createOrGetSource(String url);
 
+	public GeneralSource setGeneralSourceOfSource(Source source, String newName);
+	
 	/**
 	 * Links the given source with the given general source.
 	 */
