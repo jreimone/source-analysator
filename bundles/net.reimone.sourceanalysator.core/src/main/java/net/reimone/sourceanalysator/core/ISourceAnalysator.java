@@ -68,4 +68,9 @@ public interface ISourceAnalysator {
 	 */
 	public Set<String> retrieveHyperlinksFromLocalFile(Article article);
 
+	/**
+	 * Generates the {@link Source}s for the given {@link Article} and adds them to the {@link Library}.
+	 */
+	public void generateSourcesForArticle(Article article);
+
 }

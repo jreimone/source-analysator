@@ -9,7 +9,9 @@ import static org.junit.Assert.assertThat;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
+import java.util.Map.Entry;
 
 import org.junit.Test;
 
@@ -32,6 +34,39 @@ public class PopulationLibraryTest extends AbstractSourceAnalysatorTest {
 		assertThat("hyperlinks", hyperlinks, is(notNullValue()));
 		assertThat("hyperlinks in localFile", new ArrayList<>(hyperlinks), hasItems(ARTICLE_HYPERLINKS));
 		assertThat("hyperlink count in localFile", hyperlinks.size(), is(equalTo(ARTICLE_HYPERLINKS.length)));
+	}
+
+	@Test
+	public void generateSourcesForArticleTest() {
+		ISourceAnalysator sourceAnalysator = createSourceAnalysator();
+		Article article = sourceAnalysator.createOrGetArticle(ARTICLE_TITLE,
+				getAbsolutePathOfFile(ARTICLE_FILE_REFUGEES_SMALL));
+		assertThat("article", article, is(notNullValue()));
+
+		Map<GeneralSource, List<Source>> generalSourcesOfArticle = sourceAnalysator.getGeneralSourcesOfArticle(article);
+		assertThat(generalSourcesOfArticle.isEmpty(), is(true));
+
+		sourceAnalysator.generateSourcesForArticle(article);
+		// assertions
+		generalSourcesOfArticle = sourceAnalysator.getGeneralSourcesOfArticle(article);
+		assertThat("generalSourcesOfArticle", generalSourcesOfArticle, is(notNullValue()));
+		assertThat("generalSourcesOfArticle count", generalSourcesOfArticle.size(), is(equalTo(3)));
+		for (Entry<GeneralSource, List<Source>> entry : generalSourcesOfArticle.entrySet()) {
+			List<Source> sources = entry.getValue();
+			assertThat("sourcesOfArticle count", sources.size(), is(equalTo(1)));
+			Source source = sources.get(0);
+			String url = source.getUrl();
+			String recommendGeneralSourceName = sourceAnalysator.recommendGeneralSourceName(url);
+			GeneralSource generalSourceOfSource = source.getGeneralSource();
+
+			GeneralSource generalSource = entry.getKey();
+			assertThat("returned and linked general source of source", generalSource,
+					is(equalTo(generalSourceOfSource)));
+			String generalSourceName = generalSource.getName();
+			assertThat("name of general source", generalSourceName, is(equalTo(recommendGeneralSourceName)));
+			List<String> aliases = generalSource.getAliases();
+			System.out.println("aliases of '" + generalSourceName + "': " + aliases);
+		}
 	}
 
 	@Test

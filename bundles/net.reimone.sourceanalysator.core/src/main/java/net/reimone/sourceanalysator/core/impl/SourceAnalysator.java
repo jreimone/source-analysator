@@ -343,4 +343,16 @@ public class SourceAnalysator implements ISourceAnalysator {
 			}
 		}
 	}
+
+	@Override
+	public void generateSourcesForArticle(Article article) {
+		Set<String> hyperlinks = retrieveHyperlinksFromLocalFile(article);
+		for (String url : hyperlinks) {
+			String recommendedGeneralSourceName = recommendGeneralSourceName(url);
+			GeneralSource generalSource = createOrGetGeneralSource(recommendedGeneralSourceName);
+			Source source = createOrGetSource(url);
+			linkSourceWithGeneralSource(source, generalSource);
+			article.getSources().add(source);
+		}
+	}
 }
