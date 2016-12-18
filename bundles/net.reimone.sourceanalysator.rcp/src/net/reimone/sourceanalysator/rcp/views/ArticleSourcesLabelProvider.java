@@ -42,7 +42,6 @@ public class ArticleSourcesLabelProvider extends ObservableMapLabelProvider {
 	@Override
 	public Image getColumnImage(Object element, int columnIndex) {
 		return getTextOrImage(element, columnIndex, () -> {
-//			return super.getColumnImage(element, columnIndex);
 			return labelProvider.getImage(element);
 		}, (generalSource) -> {
 			return labelProvider.getImage(generalSource);
