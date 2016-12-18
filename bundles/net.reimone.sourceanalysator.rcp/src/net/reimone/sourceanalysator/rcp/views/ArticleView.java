@@ -2,7 +2,6 @@ package net.reimone.sourceanalysator.rcp.views;
 
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
@@ -20,10 +19,11 @@ import org.eclipse.emf.databinding.EMFObservables;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.jface.databinding.swt.WidgetProperties;
 import org.eclipse.jface.databinding.viewers.ObservableListContentProvider;
-import org.eclipse.jface.databinding.viewers.ObservableMapLabelProvider;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.layout.TableColumnLayout;
+import org.eclipse.jface.viewers.ColumnPixelData;
 import org.eclipse.jface.viewers.TableViewer;
+import org.eclipse.jface.viewers.TableViewerColumn;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
@@ -34,19 +34,14 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Table;
+import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.swt.widgets.Text;
 
 import net.reimone.sourceanalysator.Article;
-import net.reimone.sourceanalysator.GeneralSource;
 import net.reimone.sourceanalysator.Source;
 import net.reimone.sourceanalysator.SourceanalysatorPackage.Literals;
 import net.reimone.sourceanalysator.core.ISourceAnalysator;
 import net.reimone.sourceanalysator.rcp.Events;
-import org.eclipse.swt.widgets.TableColumn;
-import org.eclipse.jface.viewers.TableViewerColumn;
-import org.eclipse.jface.viewers.ColumnPixelData;
-import org.eclipse.jface.viewers.ColumnLabelProvider;
-import org.eclipse.swt.graphics.Image;
 
 public class ArticleView {
 
@@ -61,6 +56,9 @@ public class ArticleView {
 	private Text txtWordfile;
 	private Table table;
 	private TableViewer tableViewer;
+
+	private TableColumn tableColumnURL;
+	private TableColumn tableColumnGeneralSource;
 
 	public ArticleView() {
 	}
@@ -116,14 +114,14 @@ public class ArticleView {
 		table.setLinesVisible(true);
 		
 		TableViewerColumn tableViewerColumnURL = new TableViewerColumn(tableViewer, SWT.NONE);
-		TableColumn tblclmnUrl = tableViewerColumnURL.getColumn();
-		tcl_compositeSourcesTable.setColumnData(tblclmnUrl, new ColumnPixelData(500, true, true));
-		tblclmnUrl.setText("URL");
+		tableColumnURL = tableViewerColumnURL.getColumn();
+		tcl_compositeSourcesTable.setColumnData(tableColumnURL, new ColumnPixelData(500, true, true));
+		tableColumnURL.setText("URL");
 		
 		TableViewerColumn tableViewerColumnGeneralSource = new TableViewerColumn(tableViewer, SWT.NONE);
-		TableColumn tblclmnGeneralSource = tableViewerColumnGeneralSource.getColumn();
-		tcl_compositeSourcesTable.setColumnData(tblclmnGeneralSource, new ColumnPixelData(150, true, true));
-		tblclmnGeneralSource.setText("Kategorie");
+		tableColumnGeneralSource = tableViewerColumnGeneralSource.getColumn();
+		tcl_compositeSourcesTable.setColumnData(tableColumnGeneralSource, new ColumnPixelData(150, true, true));
+		tableColumnGeneralSource.setText("Kategorie");
 //		m_bindingContext = initDataBindings();
 	}
 
@@ -184,8 +182,8 @@ public class ArticleView {
 		bindingContext.bindValue(observeTextTxtWordfileObserveWidget, selectedArticleLocalFileObserveValue, null, null);
 		//
 		ObservableListContentProvider listContentProvider = new ObservableListContentProvider();
-		IObservableMap[] observeMaps = EMFObservables.observeMaps(listContentProvider.getKnownElements(), new EStructuralFeature[]{Literals.SOURCE__URL});
-		tableViewer.setLabelProvider(new ObservableMapLabelProvider(observeMaps));
+		IObservableMap[] observeMaps = EMFObservables.observeMaps(listContentProvider.getKnownElements(), new EStructuralFeature[]{Literals.SOURCE__URL, Literals.SOURCE__GENERAL_SOURCE});
+		tableViewer.setLabelProvider(new ArticleSourcesLabelProvider(observeMaps, tableColumnGeneralSource));
 		tableViewer.setContentProvider(listContentProvider);
 		//
 		IObservableList selectedArticleSourcesObserveList = EMFObservables.observeList(Realm.getDefault(), selectedArticle, Literals.ARTICLE__SOURCES);
