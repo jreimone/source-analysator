@@ -42,6 +42,11 @@ import net.reimone.sourceanalysator.Source;
 import net.reimone.sourceanalysator.SourceanalysatorPackage.Literals;
 import net.reimone.sourceanalysator.core.ISourceAnalysator;
 import net.reimone.sourceanalysator.rcp.Events;
+import org.eclipse.swt.widgets.TableColumn;
+import org.eclipse.jface.viewers.TableViewerColumn;
+import org.eclipse.jface.viewers.ColumnPixelData;
+import org.eclipse.jface.viewers.ColumnLabelProvider;
+import org.eclipse.swt.graphics.Image;
 
 public class ArticleView {
 
@@ -67,30 +72,30 @@ public class ArticleView {
 	public void createControls(Composite parent) {
 		GridLayout gl_parent = new GridLayout(1, false);
 		parent.setLayout(gl_parent);
-		Composite composite = new Composite(parent, SWT.NONE);
-		composite.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
-		GridLayout gl_composite = new GridLayout(2, false);
-		composite.setLayout(gl_composite);
-		Label lblArtikelTitel = new Label(composite, SWT.LEFT);
+		Composite compositeMetaInformation = new Composite(parent, SWT.NONE);
+		compositeMetaInformation.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
+		GridLayout gl_compositeMetaInformation = new GridLayout(2, false);
+		compositeMetaInformation.setLayout(gl_compositeMetaInformation);
+		Label lblArtikelTitel = new Label(compositeMetaInformation, SWT.LEFT);
 		lblArtikelTitel.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false, 1, 1));
 		lblArtikelTitel.setText("Titel:");
 
-		textArticleTitle = new Text(composite, SWT.BORDER);
+		textArticleTitle = new Text(compositeMetaInformation, SWT.BORDER);
 		textArticleTitle.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
 
-		Label lblWorddatei = new Label(composite, SWT.NONE);
+		Label lblWorddatei = new Label(compositeMetaInformation, SWT.NONE);
 		lblWorddatei.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false, 1, 1));
 		lblWorddatei.setText("Word-Datei:");
 
-		txtWordfile = new Text(composite, SWT.BORDER);
+		txtWordfile = new Text(compositeMetaInformation, SWT.BORDER);
 		txtWordfile.setEditable(false);
 		txtWordfile.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
 
-		Composite composite_1 = new Composite(parent, SWT.NONE);
-		composite_1.setLayout(new GridLayout(1, false));
-		composite_1.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
+		Composite compositeButtons = new Composite(parent, SWT.NONE);
+		compositeButtons.setLayout(new GridLayout(1, false));
+		compositeButtons.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
 
-		Button btnAnalyze = new Button(composite_1, SWT.NONE);
+		Button btnAnalyze = new Button(compositeButtons, SWT.NONE);
 		btnAnalyze.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
@@ -100,15 +105,26 @@ public class ArticleView {
 		btnAnalyze.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, true, false, 1, 1));
 		btnAnalyze.setText("Analysieren");
 		
-		Composite composite_2 = new Composite(parent, SWT.NONE);
-		composite_2.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1));
-		TableColumnLayout tcl_composite_2 = new TableColumnLayout();
-		composite_2.setLayout(tcl_composite_2);
+		Composite compositeSourcesTable = new Composite(parent, SWT.NONE);
+		compositeSourcesTable.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1));
+		TableColumnLayout tcl_compositeSourcesTable = new TableColumnLayout();
+		compositeSourcesTable.setLayout(tcl_compositeSourcesTable);
 		
-		tableViewer = new TableViewer(composite_2, SWT.BORDER | SWT.FULL_SELECTION);
+		tableViewer = new TableViewer(compositeSourcesTable, SWT.BORDER | SWT.FULL_SELECTION);
 		table = tableViewer.getTable();
 		table.setHeaderVisible(true);
 		table.setLinesVisible(true);
+		
+		TableViewerColumn tableViewerColumnURL = new TableViewerColumn(tableViewer, SWT.NONE);
+		TableColumn tblclmnUrl = tableViewerColumnURL.getColumn();
+		tcl_compositeSourcesTable.setColumnData(tblclmnUrl, new ColumnPixelData(500, true, true));
+		tblclmnUrl.setText("URL");
+		
+		TableViewerColumn tableViewerColumnGeneralSource = new TableViewerColumn(tableViewer, SWT.NONE);
+		TableColumn tblclmnGeneralSource = tableViewerColumnGeneralSource.getColumn();
+		tcl_compositeSourcesTable.setColumnData(tblclmnGeneralSource, new ColumnPixelData(150, true, true));
+		tblclmnGeneralSource.setText("Kategorie");
+//		m_bindingContext = initDataBindings();
 	}
 
 	protected void handleAnalyzeButton(Display display) {
