@@ -31,12 +31,11 @@
       <import plugin="org.eclipse.e4.core.di"/>
       <import plugin="org.eclipse.e4.ui.di"/>
       <import plugin="org.eclipse.e4.core.contexts"/>
+      <import plugin="net.reimone.sourceanalysator.core"/>
       <import plugin="org.eclipse.core.resources"/>
       <import plugin="org.eclipse.emf.ecore"/>
-      <import plugin="org.eclipse.emf.ecore.xmi"/>
-      <import plugin="org.eclipse.osgi"/>
-      <import plugin="net.reimone.sourceanalysator.core"/>
       <import plugin="net.reimone.sourceanalysator.model"/>
+      <import plugin="org.eclipse.emf.ecore.xmi"/>
       <import plugin="org.eclipse.e4.core.services"/>
       <import plugin="org.eclipse.osgi.services"/>
       <import plugin="org.eclipse.core.databinding"/>
@@ -46,6 +45,10 @@
       <import plugin="org.eclipse.jface.databinding"/>
       <import plugin="com.ibm.icu"/>
       <import plugin="org.eclipse.emf.databinding"/>
+      <import plugin="org.eclipse.osgi"/>
+      <import plugin="org.eclipse.emf.edit"/>
+      <import plugin="org.eclipse.emf.edit.ui"/>
+      <import plugin="org.eclipse.emf.ecore.edit"/>
    </requires>
 
    <plugin
