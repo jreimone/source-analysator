@@ -29,6 +29,8 @@ import net.reimone.sourceanalysator.rcp.Util;
 
 import org.eclipse.jface.viewers.ISelectionChangedListener;
 import org.eclipse.jface.viewers.SelectionChangedEvent;
+import org.eclipse.jface.viewers.ICheckStateListener;
+import org.eclipse.jface.viewers.CheckStateChangedEvent;
 
 public class ArticlesListView {
 	
@@ -54,6 +56,11 @@ public class ArticlesListView {
 	public void createControls(Composite parent) {
 		
 		checkboxTableViewer = CheckboxTableViewer.newCheckList(parent, SWT.BORDER | SWT.FULL_SELECTION);
+		checkboxTableViewer.addCheckStateListener(new ICheckStateListener() {
+			public void checkStateChanged(CheckStateChangedEvent event) {
+				Util.INSTANCE.handleArticleCheckedStateChanged(checkboxTableViewer.getCheckedElements(), eventBroker);
+			}
+		});
 		checkboxTableViewer.addSelectionChangedListener(new ISelectionChangedListener() {
 			
 			public void selectionChanged(SelectionChangedEvent event) {

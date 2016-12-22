@@ -128,7 +128,7 @@ public class ArticleView {
 
 	protected void handleAnalyzeButton(Display display) {
 		List<Source> sources = selectedArticle.getSources();
-		boolean generateSources = true;
+		boolean generateSources = false;
 		if (!sources.isEmpty()) {
 			String title = "Quellen überschreiben?";
 			String message = "Diese Aktion überschreibt die existierenden Quellen und analysiert das Word-Dokument erneut.\n"
