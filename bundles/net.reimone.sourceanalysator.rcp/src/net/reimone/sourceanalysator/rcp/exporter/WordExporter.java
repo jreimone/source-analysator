@@ -125,6 +125,7 @@ public class WordExporter implements IExporter {
 			runCopy.setItalic(detectedRun.isItalic());
 			runCopy.setStrikeThrough(detectedRun.isStrikeThrough());
 			runCopy.setColor(detectedRun.getColor());
+			runCopy.addCarriageReturn();
 		} else {
 			// otherwise just set the text
 			detectedRun.setText(replacement, 0);

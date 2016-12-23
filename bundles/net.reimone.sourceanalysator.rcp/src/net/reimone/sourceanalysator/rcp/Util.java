@@ -3,7 +3,6 @@ package net.reimone.sourceanalysator.rcp;
 import java.io.File;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.eclipse.e4.core.services.events.IEventBroker;
 import org.eclipse.jface.viewers.IStructuredSelection;
@@ -16,8 +15,6 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 
 import net.reimone.sourceanalysator.Article;
-import net.reimone.sourceanalysator.GeneralSource;
-import net.reimone.sourceanalysator.Source;
 import net.reimone.sourceanalysator.core.IExporter;
 import net.reimone.sourceanalysator.core.ISourceAnalysator;
 import net.reimone.sourceanalysator.rcp.exporter.WordExporter;
