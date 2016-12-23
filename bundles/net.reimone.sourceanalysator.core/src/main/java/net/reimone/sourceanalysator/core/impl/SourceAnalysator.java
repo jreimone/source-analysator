@@ -31,6 +31,7 @@ import net.reimone.sourceanalysator.Hyperlink;
 import net.reimone.sourceanalysator.Library;
 import net.reimone.sourceanalysator.Source;
 import net.reimone.sourceanalysator.SourceanalysatorFactory;
+import net.reimone.sourceanalysator.core.IExporter;
 import net.reimone.sourceanalysator.core.ILibraryFactory;
 import net.reimone.sourceanalysator.core.ISourceAnalysator;
 
@@ -408,5 +409,16 @@ public class SourceAnalysator implements ISourceAnalysator {
 		}
 		generalSource.setName(newName);
 		return generalSource;
+	}
+
+	@Override
+	public File exportStatisticsOfArticlesToFile(List<Article> articles, IExporter exporter) {
+		if (exporter == null) {
+			return null;
+		}
+		
+		Map<GeneralSource, List<Source>> generalSourcesOfArticles = getGeneralSourcesOfArticles(articles);
+		File file = exporter.export(articles, generalSourcesOfArticles);
+		return file;
 	}
 }

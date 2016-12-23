@@ -1,5 +1,6 @@
 package net.reimone.sourceanalysator.core;
 
+import java.io.File;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -40,11 +41,6 @@ public interface ISourceAnalysator {
 	 */
 	public Article createOrGetArticle(String articleTitle, String localFile);
 
-//	/**
-//	 * Retrieves the {@link GeneralSource} with the given name or <code>null</code>. 
-//	 */
-//	public GeneralSource getGeneralSourceByName(String generalSourceName);
-	
 	/**
 	 * Creates a new {@link GeneralSource} or retrieves the existing one with the given name. 
 	 */
@@ -81,4 +77,8 @@ public interface ISourceAnalysator {
 	 */
 	public void generateSourcesForArticle(Article article);
 
+	/**
+	 * Uses the given <code>exporter</code> to generate the returned file for the given <code>articles</code>. 
+	 */
+	public File exportStatisticsOfArticlesToFile(List<Article> articles, IExporter exporter);
 }

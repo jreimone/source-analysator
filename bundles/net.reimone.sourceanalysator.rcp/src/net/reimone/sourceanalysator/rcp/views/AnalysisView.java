@@ -26,6 +26,10 @@ import net.reimone.sourceanalysator.GeneralSource;
 import net.reimone.sourceanalysator.Source;
 import net.reimone.sourceanalysator.core.ISourceAnalysator;
 import net.reimone.sourceanalysator.rcp.Events;
+import net.reimone.sourceanalysator.rcp.Util;
+
+import org.eclipse.swt.events.SelectionAdapter;
+import org.eclipse.swt.events.SelectionEvent;
 
 public class AnalysisView {
 
@@ -35,6 +39,8 @@ public class AnalysisView {
 	private Label lblCheckedArticles;
 	private Composite statisticsComposite;
 	private List<Label> currentStatisticsLabels = Lists.newArrayList();
+
+	private List<Article> checkedArticles;
 	
 	public AnalysisView() {
 	}
@@ -67,16 +73,22 @@ public class AnalysisView {
 		Composite buttonComposite = new Composite(parent, SWT.NONE);
 		buttonComposite.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, true, false, 1, 1));
 		
-		Button btnPdfexport = new Button(buttonComposite, SWT.NONE);
-		btnPdfexport.setBounds(0, 0, 75, 25);
-		btnPdfexport.setText("PDF-Export");
+		Button btnWordExport = new Button(buttonComposite, SWT.NONE);
+		btnWordExport.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				Util.INSTANCE.writeAndOpenStatistics(sourceAnalysator, checkedArticles);
+			}
+		});
+		btnWordExport.setBounds(0, 0, 75, 25);
+		btnWordExport.setText("Word-Export");
 	}
 
 	@Optional
 	@Inject
 	private void subscribeArticleCheckedStateChanged(
 			@UIEventTopic(Events.ARTICLE_CHECKED_STATE_CHANGED) Map<String, List<Article>> data) {
-		List<Article> checkedArticles = data.get(Events.ARTICLE_CHECKED_STATE_CHANGED_ARTICLES);
+		checkedArticles = data.get(Events.ARTICLE_CHECKED_STATE_CHANGED_ARTICLES);
 		String checkedArticlesString = checkedArticles.stream().map(article -> article.getTitle()).collect(Collectors.joining(", "));
 		lblCheckedArticles.setText(checkedArticlesString);
 		

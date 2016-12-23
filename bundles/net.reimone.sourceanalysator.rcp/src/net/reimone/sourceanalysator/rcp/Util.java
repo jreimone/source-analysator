@@ -1,11 +1,14 @@
 package net.reimone.sourceanalysator.rcp;
 
+import java.io.File;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.eclipse.e4.core.services.events.IEventBroker;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.SelectionChangedEvent;
+import org.eclipse.swt.program.Program;
 import org.eclipse.swt.widgets.FileDialog;
 import org.eclipse.swt.widgets.Shell;
 
@@ -13,6 +16,11 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 
 import net.reimone.sourceanalysator.Article;
+import net.reimone.sourceanalysator.GeneralSource;
+import net.reimone.sourceanalysator.Source;
+import net.reimone.sourceanalysator.core.IExporter;
+import net.reimone.sourceanalysator.core.ISourceAnalysator;
+import net.reimone.sourceanalysator.rcp.exporter.WordExporter;
 
 public class Util {
 
@@ -54,5 +62,11 @@ public class Util {
 		HashMap<String, Object> data = Maps.newHashMap();
 		data.put(Events.ARTICLE_CHECKED_STATE_CHANGED_ARTICLES, checkedArticles);
 		eventBroker.post(Events.ARTICLE_CHECKED_STATE_CHANGED, data);
+	}
+	
+	public void writeAndOpenStatistics(ISourceAnalysator sourceAnalysator, List<Article> checkedArticles) {
+		IExporter exporter = new WordExporter();
+		File file = sourceAnalysator.exportStatisticsOfArticlesToFile(checkedArticles, exporter);
+		Program.launch(file.getAbsolutePath());
 	}
 }

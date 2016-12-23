@@ -45,14 +45,25 @@
       <import plugin="org.eclipse.jface.databinding"/>
       <import plugin="com.ibm.icu"/>
       <import plugin="org.eclipse.emf.databinding"/>
-      <import plugin="org.eclipse.osgi"/>
       <import plugin="org.eclipse.emf.edit"/>
       <import plugin="org.eclipse.emf.edit.ui"/>
       <import plugin="org.eclipse.emf.ecore.edit"/>
+      <import plugin="org.apache.poi"/>
+      <import plugin="org.apache.poi.ooxml"/>
+      <import plugin="org.apache.poi.ooxml.schemas"/>
+      <import plugin="org.eclipse.osgi"/>
+      <import plugin="org.apache.xmlbeans"/>
    </requires>
 
    <plugin
          id="net.reimone.sourceanalysator.rcp"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="net.reimone.sourceanalysator.model.edit"
          download-size="0"
          install-size="0"
          version="0.0.0"
