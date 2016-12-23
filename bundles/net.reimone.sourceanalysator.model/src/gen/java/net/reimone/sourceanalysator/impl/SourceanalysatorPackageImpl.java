@@ -4,6 +4,7 @@ package net.reimone.sourceanalysator.impl;
 
 import net.reimone.sourceanalysator.Article;
 import net.reimone.sourceanalysator.GeneralSource;
+import net.reimone.sourceanalysator.Hyperlink;
 import net.reimone.sourceanalysator.Library;
 import net.reimone.sourceanalysator.Source;
 import net.reimone.sourceanalysator.SourceanalysatorFactory;
@@ -50,6 +51,13 @@ public class SourceanalysatorPackageImpl extends EPackageImpl implements Sourcea
 	 * @generated
 	 */
 	private EClass articleEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass hyperlinkEClass = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -162,8 +170,8 @@ public class SourceanalysatorPackageImpl extends EPackageImpl implements Sourcea
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getSource_Url() {
-		return (EAttribute)sourceEClass.getEStructuralFeatures().get(0);
+	public EReference getSource_GeneralSource() {
+		return (EReference)sourceEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -171,7 +179,7 @@ public class SourceanalysatorPackageImpl extends EPackageImpl implements Sourcea
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getSource_GeneralSource() {
+	public EReference getSource_Article() {
 		return (EReference)sourceEClass.getEStructuralFeatures().get(1);
 	}
 
@@ -180,7 +188,7 @@ public class SourceanalysatorPackageImpl extends EPackageImpl implements Sourcea
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getSource_Articles() {
+	public EReference getSource_Hyperlink() {
 		return (EReference)sourceEClass.getEStructuralFeatures().get(2);
 	}
 
@@ -207,7 +215,7 @@ public class SourceanalysatorPackageImpl extends EPackageImpl implements Sourcea
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getLibrary_Sources() {
+	public EReference getLibrary_Articles() {
 		return (EReference)libraryEClass.getEStructuralFeatures().get(1);
 	}
 
@@ -216,7 +224,7 @@ public class SourceanalysatorPackageImpl extends EPackageImpl implements Sourcea
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getLibrary_Articles() {
+	public EReference getLibrary_Hyperlinks() {
 		return (EReference)libraryEClass.getEStructuralFeatures().get(2);
 	}
 
@@ -261,6 +269,33 @@ public class SourceanalysatorPackageImpl extends EPackageImpl implements Sourcea
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getHyperlink() {
+		return hyperlinkEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getHyperlink_Url() {
+		return (EAttribute)hyperlinkEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getHyperlink_Sources() {
+		return (EReference)hyperlinkEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public SourceanalysatorFactory getSourceanalysatorFactory() {
 		return (SourceanalysatorFactory)getEFactoryInstance();
 	}
@@ -290,19 +325,23 @@ public class SourceanalysatorPackageImpl extends EPackageImpl implements Sourcea
 		createEAttribute(generalSourceEClass, GENERAL_SOURCE__ALIASES);
 
 		sourceEClass = createEClass(SOURCE);
-		createEAttribute(sourceEClass, SOURCE__URL);
 		createEReference(sourceEClass, SOURCE__GENERAL_SOURCE);
-		createEReference(sourceEClass, SOURCE__ARTICLES);
+		createEReference(sourceEClass, SOURCE__ARTICLE);
+		createEReference(sourceEClass, SOURCE__HYPERLINK);
 
 		libraryEClass = createEClass(LIBRARY);
 		createEReference(libraryEClass, LIBRARY__GENERAL_SOURCES);
-		createEReference(libraryEClass, LIBRARY__SOURCES);
 		createEReference(libraryEClass, LIBRARY__ARTICLES);
+		createEReference(libraryEClass, LIBRARY__HYPERLINKS);
 
 		articleEClass = createEClass(ARTICLE);
 		createEReference(articleEClass, ARTICLE__SOURCES);
 		createEAttribute(articleEClass, ARTICLE__TITLE);
 		createEAttribute(articleEClass, ARTICLE__LOCAL_FILE);
+
+		hyperlinkEClass = createEClass(HYPERLINK);
+		createEAttribute(hyperlinkEClass, HYPERLINK__URL);
+		createEReference(hyperlinkEClass, HYPERLINK__SOURCES);
 	}
 
 	/**
@@ -341,19 +380,23 @@ public class SourceanalysatorPackageImpl extends EPackageImpl implements Sourcea
 		initEAttribute(getGeneralSource_Aliases(), ecorePackage.getEString(), "aliases", null, 0, -1, GeneralSource.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(sourceEClass, Source.class, "Source", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getSource_Url(), ecorePackage.getEString(), "url", null, 1, 1, Source.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getSource_GeneralSource(), this.getGeneralSource(), this.getGeneralSource_Sources(), "generalSource", null, 1, 1, Source.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getSource_Articles(), this.getArticle(), this.getArticle_Sources(), "articles", null, 0, -1, Source.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getSource_Article(), this.getArticle(), this.getArticle_Sources(), "article", null, 1, 1, Source.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getSource_Hyperlink(), this.getHyperlink(), this.getHyperlink_Sources(), "hyperlink", null, 1, 1, Source.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(libraryEClass, Library.class, "Library", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getLibrary_GeneralSources(), this.getGeneralSource(), null, "generalSources", null, 0, -1, Library.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getLibrary_Sources(), this.getSource(), null, "sources", null, 0, -1, Library.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getLibrary_Articles(), this.getArticle(), null, "articles", null, 0, -1, Library.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getLibrary_Hyperlinks(), this.getHyperlink(), null, "hyperlinks", null, 0, -1, Library.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(articleEClass, Article.class, "Article", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getArticle_Sources(), this.getSource(), this.getSource_Articles(), "sources", null, 0, -1, Article.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getArticle_Sources(), this.getSource(), this.getSource_Article(), "sources", null, 0, -1, Article.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getArticle_Title(), ecorePackage.getEString(), "title", null, 1, 1, Article.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getArticle_LocalFile(), ecorePackage.getEString(), "localFile", null, 1, 1, Article.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(hyperlinkEClass, Hyperlink.class, "Hyperlink", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getHyperlink_Url(), ecorePackage.getEString(), "url", null, 1, 1, Hyperlink.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getHyperlink_Sources(), this.getSource(), this.getSource_Hyperlink(), "sources", null, 0, -1, Hyperlink.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Create resource
 		createResource(eNS_URI);
@@ -408,19 +451,13 @@ public class SourceanalysatorPackageImpl extends EPackageImpl implements Sourcea
 			 "WARNING", "This element was generated from an .mecore file. Removing this annotation will signal the MinimalEcore builder to keep this element."
 		   });	
 		addAnnotation
-		  (getSource_Url(), 
-		   source, 
-		   new String[] {
-			 "WARNING", "This element was generated from an .mecore file. Removing this annotation will signal the MinimalEcore builder to keep this element."
-		   });	
-		addAnnotation
 		  (getSource_GeneralSource(), 
 		   source, 
 		   new String[] {
 			 "WARNING", "This element was generated from an .mecore file. Removing this annotation will signal the MinimalEcore builder to keep this element."
 		   });	
 		addAnnotation
-		  (getSource_Articles(), 
+		  (getSource_Article(), 
 		   source, 
 		   new String[] {
 			 "WARNING", "This element was generated from an .mecore file. Removing this annotation will signal the MinimalEcore builder to keep this element."
@@ -433,12 +470,6 @@ public class SourceanalysatorPackageImpl extends EPackageImpl implements Sourcea
 		   });	
 		addAnnotation
 		  (getLibrary_GeneralSources(), 
-		   source, 
-		   new String[] {
-			 "WARNING", "This element was generated from an .mecore file. Removing this annotation will signal the MinimalEcore builder to keep this element."
-		   });	
-		addAnnotation
-		  (getLibrary_Sources(), 
 		   source, 
 		   new String[] {
 			 "WARNING", "This element was generated from an .mecore file. Removing this annotation will signal the MinimalEcore builder to keep this element."

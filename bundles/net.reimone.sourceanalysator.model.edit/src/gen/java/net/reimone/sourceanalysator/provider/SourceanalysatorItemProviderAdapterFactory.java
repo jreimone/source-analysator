@@ -164,6 +164,29 @@ public class SourceanalysatorItemProviderAdapterFactory extends Sourceanalysator
 	}
 
 	/**
+	 * This keeps track of the one adapter used for all {@link net.reimone.sourceanalysator.Hyperlink} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected HyperlinkItemProvider hyperlinkItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link net.reimone.sourceanalysator.Hyperlink}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createHyperlinkAdapter() {
+		if (hyperlinkItemProvider == null) {
+			hyperlinkItemProvider = new HyperlinkItemProvider(this);
+		}
+
+		return hyperlinkItemProvider;
+	}
+
+	/**
 	 * This returns the root adapter factory that contains this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -266,6 +289,7 @@ public class SourceanalysatorItemProviderAdapterFactory extends Sourceanalysator
 		if (sourceItemProvider != null) sourceItemProvider.dispose();
 		if (libraryItemProvider != null) libraryItemProvider.dispose();
 		if (articleItemProvider != null) articleItemProvider.dispose();
+		if (hyperlinkItemProvider != null) hyperlinkItemProvider.dispose();
 	}
 
 }

@@ -58,6 +58,15 @@ public interface SourceanalysatorFactory extends EFactory {
 	Article createArticle();
 
 	/**
+	 * Returns a new object of class '<em>Hyperlink</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Hyperlink</em>'.
+	 * @generated
+	 */
+	Hyperlink createHyperlink();
+
+	/**
 	 * Returns the package supported by this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

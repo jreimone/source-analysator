@@ -6,8 +6,8 @@ import java.util.Collection;
 
 import net.reimone.sourceanalysator.Article;
 import net.reimone.sourceanalysator.GeneralSource;
+import net.reimone.sourceanalysator.Hyperlink;
 import net.reimone.sourceanalysator.Library;
-import net.reimone.sourceanalysator.Source;
 import net.reimone.sourceanalysator.SourceanalysatorPackage;
 
 import org.eclipse.emf.common.notify.NotificationChain;
@@ -31,8 +31,8 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * </p>
  * <ul>
  *   <li>{@link net.reimone.sourceanalysator.impl.LibraryImpl#getGeneralSources <em>General Sources</em>}</li>
- *   <li>{@link net.reimone.sourceanalysator.impl.LibraryImpl#getSources <em>Sources</em>}</li>
  *   <li>{@link net.reimone.sourceanalysator.impl.LibraryImpl#getArticles <em>Articles</em>}</li>
+ *   <li>{@link net.reimone.sourceanalysator.impl.LibraryImpl#getHyperlinks <em>Hyperlinks</em>}</li>
  * </ul>
  *
  * @generated
@@ -49,16 +49,6 @@ public class LibraryImpl extends MinimalEObjectImpl.Container implements Library
 	protected EList<GeneralSource> generalSources;
 
 	/**
-	 * The cached value of the '{@link #getSources() <em>Sources</em>}' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getSources()
-	 * @generated
-	 * @ordered
-	 */
-	protected EList<Source> sources;
-
-	/**
 	 * The cached value of the '{@link #getArticles() <em>Articles</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -67,6 +57,16 @@ public class LibraryImpl extends MinimalEObjectImpl.Container implements Library
 	 * @ordered
 	 */
 	protected EList<Article> articles;
+
+	/**
+	 * The cached value of the '{@link #getHyperlinks() <em>Hyperlinks</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getHyperlinks()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<Hyperlink> hyperlinks;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -104,18 +104,6 @@ public class LibraryImpl extends MinimalEObjectImpl.Container implements Library
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<Source> getSources() {
-		if (sources == null) {
-			sources = new EObjectContainmentEList<Source>(Source.class, this, SourceanalysatorPackage.LIBRARY__SOURCES);
-		}
-		return sources;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EList<Article> getArticles() {
 		if (articles == null) {
 			articles = new EObjectContainmentEList<Article>(Article.class, this, SourceanalysatorPackage.LIBRARY__ARTICLES);
@@ -128,15 +116,27 @@ public class LibraryImpl extends MinimalEObjectImpl.Container implements Library
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EList<Hyperlink> getHyperlinks() {
+		if (hyperlinks == null) {
+			hyperlinks = new EObjectContainmentEList<Hyperlink>(Hyperlink.class, this, SourceanalysatorPackage.LIBRARY__HYPERLINKS);
+		}
+		return hyperlinks;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 			case SourceanalysatorPackage.LIBRARY__GENERAL_SOURCES:
 				return ((InternalEList<?>)getGeneralSources()).basicRemove(otherEnd, msgs);
-			case SourceanalysatorPackage.LIBRARY__SOURCES:
-				return ((InternalEList<?>)getSources()).basicRemove(otherEnd, msgs);
 			case SourceanalysatorPackage.LIBRARY__ARTICLES:
 				return ((InternalEList<?>)getArticles()).basicRemove(otherEnd, msgs);
+			case SourceanalysatorPackage.LIBRARY__HYPERLINKS:
+				return ((InternalEList<?>)getHyperlinks()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -151,10 +151,10 @@ public class LibraryImpl extends MinimalEObjectImpl.Container implements Library
 		switch (featureID) {
 			case SourceanalysatorPackage.LIBRARY__GENERAL_SOURCES:
 				return getGeneralSources();
-			case SourceanalysatorPackage.LIBRARY__SOURCES:
-				return getSources();
 			case SourceanalysatorPackage.LIBRARY__ARTICLES:
 				return getArticles();
+			case SourceanalysatorPackage.LIBRARY__HYPERLINKS:
+				return getHyperlinks();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -172,13 +172,13 @@ public class LibraryImpl extends MinimalEObjectImpl.Container implements Library
 				getGeneralSources().clear();
 				getGeneralSources().addAll((Collection<? extends GeneralSource>)newValue);
 				return;
-			case SourceanalysatorPackage.LIBRARY__SOURCES:
-				getSources().clear();
-				getSources().addAll((Collection<? extends Source>)newValue);
-				return;
 			case SourceanalysatorPackage.LIBRARY__ARTICLES:
 				getArticles().clear();
 				getArticles().addAll((Collection<? extends Article>)newValue);
+				return;
+			case SourceanalysatorPackage.LIBRARY__HYPERLINKS:
+				getHyperlinks().clear();
+				getHyperlinks().addAll((Collection<? extends Hyperlink>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -195,11 +195,11 @@ public class LibraryImpl extends MinimalEObjectImpl.Container implements Library
 			case SourceanalysatorPackage.LIBRARY__GENERAL_SOURCES:
 				getGeneralSources().clear();
 				return;
-			case SourceanalysatorPackage.LIBRARY__SOURCES:
-				getSources().clear();
-				return;
 			case SourceanalysatorPackage.LIBRARY__ARTICLES:
 				getArticles().clear();
+				return;
+			case SourceanalysatorPackage.LIBRARY__HYPERLINKS:
+				getHyperlinks().clear();
 				return;
 		}
 		super.eUnset(featureID);
@@ -215,10 +215,10 @@ public class LibraryImpl extends MinimalEObjectImpl.Container implements Library
 		switch (featureID) {
 			case SourceanalysatorPackage.LIBRARY__GENERAL_SOURCES:
 				return generalSources != null && !generalSources.isEmpty();
-			case SourceanalysatorPackage.LIBRARY__SOURCES:
-				return sources != null && !sources.isEmpty();
 			case SourceanalysatorPackage.LIBRARY__ARTICLES:
 				return articles != null && !articles.isEmpty();
+			case SourceanalysatorPackage.LIBRARY__HYPERLINKS:
+				return hyperlinks != null && !hyperlinks.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

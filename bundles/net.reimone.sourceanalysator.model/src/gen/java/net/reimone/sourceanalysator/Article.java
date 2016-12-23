@@ -25,19 +25,19 @@ import org.eclipse.emf.ecore.EObject;
  */
 public interface Article extends EObject {
 	/**
-	 * Returns the value of the '<em><b>Sources</b></em>' reference list.
+	 * Returns the value of the '<em><b>Sources</b></em>' containment reference list.
 	 * The list contents are of type {@link net.reimone.sourceanalysator.Source}.
-	 * It is bidirectional and its opposite is '{@link net.reimone.sourceanalysator.Source#getArticles <em>Articles</em>}'.
+	 * It is bidirectional and its opposite is '{@link net.reimone.sourceanalysator.Source#getArticle <em>Article</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Sources</em>' reference list isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Sources</em>' reference list.
+	 * @return the value of the '<em>Sources</em>' containment reference list.
 	 * @see net.reimone.sourceanalysator.SourceanalysatorPackage#getArticle_Sources()
-	 * @see net.reimone.sourceanalysator.Source#getArticles
-	 * @model opposite="articles"
+	 * @see net.reimone.sourceanalysator.Source#getArticle
+	 * @model opposite="article" containment="true"
 	 *        annotation="org.emftext.language.mecore.resource.mecore.mopp.MecoreWrapper WARNING='This element was generated from an .mecore file. Removing this annotation will signal the MinimalEcore builder to keep this element.'"
 	 * @generated
 	 */

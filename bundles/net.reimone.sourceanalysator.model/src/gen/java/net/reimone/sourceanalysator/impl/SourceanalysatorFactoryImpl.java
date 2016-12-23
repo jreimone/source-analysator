@@ -60,6 +60,7 @@ public class SourceanalysatorFactoryImpl extends EFactoryImpl implements Sourcea
 			case SourceanalysatorPackage.SOURCE: return createSource();
 			case SourceanalysatorPackage.LIBRARY: return createLibrary();
 			case SourceanalysatorPackage.ARTICLE: return createArticle();
+			case SourceanalysatorPackage.HYPERLINK: return createHyperlink();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -103,6 +104,16 @@ public class SourceanalysatorFactoryImpl extends EFactoryImpl implements Sourcea
 	public Article createArticle() {
 		ArticleImpl article = new ArticleImpl();
 		return article;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Hyperlink createHyperlink() {
+		HyperlinkImpl hyperlink = new HyperlinkImpl();
+		return hyperlink;
 	}
 
 	/**

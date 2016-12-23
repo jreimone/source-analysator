@@ -19,7 +19,7 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
-import org.eclipse.emf.ecore.util.EObjectWithInverseResolvingEList;
+import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
 /**
@@ -39,7 +39,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
  */
 public class ArticleImpl extends MinimalEObjectImpl.Container implements Article {
 	/**
-	 * The cached value of the '{@link #getSources() <em>Sources</em>}' reference list.
+	 * The cached value of the '{@link #getSources() <em>Sources</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getSources()
@@ -114,7 +114,7 @@ public class ArticleImpl extends MinimalEObjectImpl.Container implements Article
 	 */
 	public EList<Source> getSources() {
 		if (sources == null) {
-			sources = new EObjectWithInverseResolvingEList.ManyInverse<Source>(Source.class, this, SourceanalysatorPackage.ARTICLE__SOURCES, SourceanalysatorPackage.SOURCE__ARTICLES);
+			sources = new EObjectContainmentWithInverseEList<Source>(Source.class, this, SourceanalysatorPackage.ARTICLE__SOURCES, SourceanalysatorPackage.SOURCE__ARTICLE);
 		}
 		return sources;
 	}

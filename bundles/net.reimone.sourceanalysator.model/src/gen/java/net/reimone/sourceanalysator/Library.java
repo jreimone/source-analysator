@@ -15,8 +15,8 @@ import org.eclipse.emf.ecore.EObject;
  * </p>
  * <ul>
  *   <li>{@link net.reimone.sourceanalysator.Library#getGeneralSources <em>General Sources</em>}</li>
- *   <li>{@link net.reimone.sourceanalysator.Library#getSources <em>Sources</em>}</li>
  *   <li>{@link net.reimone.sourceanalysator.Library#getArticles <em>Articles</em>}</li>
+ *   <li>{@link net.reimone.sourceanalysator.Library#getHyperlinks <em>Hyperlinks</em>}</li>
  * </ul>
  *
  * @see net.reimone.sourceanalysator.SourceanalysatorPackage#getLibrary()
@@ -42,23 +42,6 @@ public interface Library extends EObject {
 	EList<GeneralSource> getGeneralSources();
 
 	/**
-	 * Returns the value of the '<em><b>Sources</b></em>' containment reference list.
-	 * The list contents are of type {@link net.reimone.sourceanalysator.Source}.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Sources</em>' containment reference list isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Sources</em>' containment reference list.
-	 * @see net.reimone.sourceanalysator.SourceanalysatorPackage#getLibrary_Sources()
-	 * @model containment="true"
-	 *        annotation="org.emftext.language.mecore.resource.mecore.mopp.MecoreWrapper WARNING='This element was generated from an .mecore file. Removing this annotation will signal the MinimalEcore builder to keep this element.'"
-	 * @generated
-	 */
-	EList<Source> getSources();
-
-	/**
 	 * Returns the value of the '<em><b>Articles</b></em>' containment reference list.
 	 * The list contents are of type {@link net.reimone.sourceanalysator.Article}.
 	 * <!-- begin-user-doc -->
@@ -74,5 +57,21 @@ public interface Library extends EObject {
 	 * @generated
 	 */
 	EList<Article> getArticles();
+
+	/**
+	 * Returns the value of the '<em><b>Hyperlinks</b></em>' containment reference list.
+	 * The list contents are of type {@link net.reimone.sourceanalysator.Hyperlink}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Hyperlinks</em>' containment reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Hyperlinks</em>' containment reference list.
+	 * @see net.reimone.sourceanalysator.SourceanalysatorPackage#getLibrary_Hyperlinks()
+	 * @model containment="true"
+	 * @generated
+	 */
+	EList<Hyperlink> getHyperlinks();
 
 } // Library

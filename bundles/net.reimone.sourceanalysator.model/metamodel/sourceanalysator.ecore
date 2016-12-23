@@ -31,23 +31,20 @@
     <eAnnotations source="org.emftext.language.mecore.resource.mecore.mopp.MecoreWrapper">
       <details key="WARNING" value="This element was generated from an .mecore file. Removing this annotation will signal the MinimalEcore builder to keep this element."/>
     </eAnnotations>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="url" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
-      <eAnnotations source="org.emftext.language.mecore.resource.mecore.mopp.MecoreWrapper">
-        <details key="WARNING" value="This element was generated from an .mecore file. Removing this annotation will signal the MinimalEcore builder to keep this element."/>
-      </eAnnotations>
-    </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" name="generalSource" lowerBound="1"
         eType="#//GeneralSource" eOpposite="#//GeneralSource/sources">
       <eAnnotations source="org.emftext.language.mecore.resource.mecore.mopp.MecoreWrapper">
         <details key="WARNING" value="This element was generated from an .mecore file. Removing this annotation will signal the MinimalEcore builder to keep this element."/>
       </eAnnotations>
     </eStructuralFeatures>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="articles" upperBound="-1"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="article" lowerBound="1"
         eType="#//Article" eOpposite="#//Article/sources">
       <eAnnotations source="org.emftext.language.mecore.resource.mecore.mopp.MecoreWrapper">
         <details key="WARNING" value="This element was generated from an .mecore file. Removing this annotation will signal the MinimalEcore builder to keep this element."/>
       </eAnnotations>
     </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="hyperlink" lowerBound="1"
+        eType="#//Hyperlink" eOpposite="#//Hyperlink/sources"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Library">
     <eAnnotations source="org.emftext.language.mecore.resource.mecore.mopp.MecoreWrapper">
@@ -59,25 +56,21 @@
         <details key="WARNING" value="This element was generated from an .mecore file. Removing this annotation will signal the MinimalEcore builder to keep this element."/>
       </eAnnotations>
     </eStructuralFeatures>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="sources" upperBound="-1"
-        eType="#//Source" containment="true">
-      <eAnnotations source="org.emftext.language.mecore.resource.mecore.mopp.MecoreWrapper">
-        <details key="WARNING" value="This element was generated from an .mecore file. Removing this annotation will signal the MinimalEcore builder to keep this element."/>
-      </eAnnotations>
-    </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" name="articles" upperBound="-1"
         eType="#//Article" containment="true">
       <eAnnotations source="org.emftext.language.mecore.resource.mecore.mopp.MecoreWrapper">
         <details key="WARNING" value="This element was generated from an .mecore file. Removing this annotation will signal the MinimalEcore builder to keep this element."/>
       </eAnnotations>
     </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="hyperlinks" upperBound="-1"
+        eType="#//Hyperlink" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Article">
     <eAnnotations source="org.emftext.language.mecore.resource.mecore.mopp.MecoreWrapper">
       <details key="WARNING" value="This element was generated from an .mecore file. Removing this annotation will signal the MinimalEcore builder to keep this element."/>
     </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="sources" upperBound="-1"
-        eType="#//Source" eOpposite="#//Source/articles">
+        eType="#//Source" containment="true" eOpposite="#//Source/article">
       <eAnnotations source="org.emftext.language.mecore.resource.mecore.mopp.MecoreWrapper">
         <details key="WARNING" value="This element was generated from an .mecore file. Removing this annotation will signal the MinimalEcore builder to keep this element."/>
       </eAnnotations>
@@ -93,5 +86,10 @@
         <details key="WARNING" value="This element was generated from an .mecore file. Removing this annotation will signal the MinimalEcore builder to keep this element."/>
       </eAnnotations>
     </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Hyperlink">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="url" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="sources" upperBound="-1"
+        eType="#//Source" eOpposite="#//Source/hyperlink"/>
   </eClassifiers>
 </ecore:EPackage>

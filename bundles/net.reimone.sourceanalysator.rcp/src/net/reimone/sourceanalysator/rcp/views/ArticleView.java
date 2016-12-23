@@ -128,7 +128,7 @@ public class ArticleView {
 
 	protected void handleAnalyzeButton(Display display) {
 		List<Source> sources = selectedArticle.getSources();
-		boolean generateSources = false;
+		boolean generateSources = true;
 		if (!sources.isEmpty()) {
 			String title = "Quellen überschreiben?";
 			String message = "Diese Aktion überschreibt die existierenden Quellen und analysiert das Word-Dokument erneut.\n"
@@ -183,7 +183,7 @@ public class ArticleView {
 		bindingContext.bindValue(observeTextTxtWordfileObserveWidget, selectedArticleLocalFileObserveValue, null, null);
 		//
 		ObservableListContentProvider listContentProvider = new ObservableListContentProvider();
-		IObservableMap[] observeMaps = EMFObservables.observeMaps(listContentProvider.getKnownElements(), new EStructuralFeature[]{Literals.SOURCE__URL, Literals.SOURCE__GENERAL_SOURCE});
+		IObservableMap[] observeMaps = EMFObservables.observeMaps(listContentProvider.getKnownElements(), new EStructuralFeature[]{Literals.SOURCE__HYPERLINK, Literals.SOURCE__GENERAL_SOURCE});
 		tableViewer.setLabelProvider(new ArticleSourcesLabelProvider(observeMaps, tableColumnGeneralSource));
 		tableViewer.setContentProvider(listContentProvider);
 		//

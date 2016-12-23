@@ -2,7 +2,6 @@
  */
 package net.reimone.sourceanalysator;
 
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 
 /**
@@ -14,9 +13,9 @@ import org.eclipse.emf.ecore.EObject;
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link net.reimone.sourceanalysator.Source#getUrl <em>Url</em>}</li>
  *   <li>{@link net.reimone.sourceanalysator.Source#getGeneralSource <em>General Source</em>}</li>
- *   <li>{@link net.reimone.sourceanalysator.Source#getArticles <em>Articles</em>}</li>
+ *   <li>{@link net.reimone.sourceanalysator.Source#getArticle <em>Article</em>}</li>
+ *   <li>{@link net.reimone.sourceanalysator.Source#getHyperlink <em>Hyperlink</em>}</li>
  * </ul>
  *
  * @see net.reimone.sourceanalysator.SourceanalysatorPackage#getSource()
@@ -24,33 +23,6 @@ import org.eclipse.emf.ecore.EObject;
  * @generated
  */
 public interface Source extends EObject {
-	/**
-	 * Returns the value of the '<em><b>Url</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Url</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Url</em>' attribute.
-	 * @see #setUrl(String)
-	 * @see net.reimone.sourceanalysator.SourceanalysatorPackage#getSource_Url()
-	 * @model required="true"
-	 *        annotation="org.emftext.language.mecore.resource.mecore.mopp.MecoreWrapper WARNING='This element was generated from an .mecore file. Removing this annotation will signal the MinimalEcore builder to keep this element.'"
-	 * @generated
-	 */
-	String getUrl();
-
-	/**
-	 * Sets the value of the '{@link net.reimone.sourceanalysator.Source#getUrl <em>Url</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Url</em>' attribute.
-	 * @see #getUrl()
-	 * @generated
-	 */
-	void setUrl(String value);
-
 	/**
 	 * Returns the value of the '<em><b>General Source</b></em>' reference.
 	 * It is bidirectional and its opposite is '{@link net.reimone.sourceanalysator.GeneralSource#getSources <em>Sources</em>}'.
@@ -81,22 +53,60 @@ public interface Source extends EObject {
 	void setGeneralSource(GeneralSource value);
 
 	/**
-	 * Returns the value of the '<em><b>Articles</b></em>' reference list.
-	 * The list contents are of type {@link net.reimone.sourceanalysator.Article}.
+	 * Returns the value of the '<em><b>Article</b></em>' container reference.
 	 * It is bidirectional and its opposite is '{@link net.reimone.sourceanalysator.Article#getSources <em>Sources</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Articles</em>' reference list isn't clear,
+	 * If the meaning of the '<em>Article</em>' container reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Articles</em>' reference list.
-	 * @see net.reimone.sourceanalysator.SourceanalysatorPackage#getSource_Articles()
+	 * @return the value of the '<em>Article</em>' container reference.
+	 * @see #setArticle(Article)
+	 * @see net.reimone.sourceanalysator.SourceanalysatorPackage#getSource_Article()
 	 * @see net.reimone.sourceanalysator.Article#getSources
-	 * @model opposite="sources"
+	 * @model opposite="sources" required="true" transient="false"
 	 *        annotation="org.emftext.language.mecore.resource.mecore.mopp.MecoreWrapper WARNING='This element was generated from an .mecore file. Removing this annotation will signal the MinimalEcore builder to keep this element.'"
 	 * @generated
 	 */
-	EList<Article> getArticles();
+	Article getArticle();
+
+	/**
+	 * Sets the value of the '{@link net.reimone.sourceanalysator.Source#getArticle <em>Article</em>}' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Article</em>' container reference.
+	 * @see #getArticle()
+	 * @generated
+	 */
+	void setArticle(Article value);
+
+	/**
+	 * Returns the value of the '<em><b>Hyperlink</b></em>' reference.
+	 * It is bidirectional and its opposite is '{@link net.reimone.sourceanalysator.Hyperlink#getSources <em>Sources</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Hyperlink</em>' reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Hyperlink</em>' reference.
+	 * @see #setHyperlink(Hyperlink)
+	 * @see net.reimone.sourceanalysator.SourceanalysatorPackage#getSource_Hyperlink()
+	 * @see net.reimone.sourceanalysator.Hyperlink#getSources
+	 * @model opposite="sources" required="true"
+	 * @generated
+	 */
+	Hyperlink getHyperlink();
+
+	/**
+	 * Sets the value of the '{@link net.reimone.sourceanalysator.Source#getHyperlink <em>Hyperlink</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Hyperlink</em>' reference.
+	 * @see #getHyperlink()
+	 * @generated
+	 */
+	void setHyperlink(Hyperlink value);
 
 } // Source

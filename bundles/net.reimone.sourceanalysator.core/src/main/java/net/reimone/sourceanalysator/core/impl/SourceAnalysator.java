@@ -20,12 +20,14 @@ import org.apache.poi.xwpf.usermodel.XWPFHyperlink;
 import org.apache.poi.xwpf.usermodel.XWPFHyperlinkRun;
 import org.apache.poi.xwpf.usermodel.XWPFParagraph;
 import org.apache.poi.xwpf.usermodel.XWPFRun;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 
 import com.google.common.collect.Lists;
 import com.google.common.net.InternetDomainName;
 
 import net.reimone.sourceanalysator.Article;
 import net.reimone.sourceanalysator.GeneralSource;
+import net.reimone.sourceanalysator.Hyperlink;
 import net.reimone.sourceanalysator.Library;
 import net.reimone.sourceanalysator.Source;
 import net.reimone.sourceanalysator.SourceanalysatorFactory;
@@ -172,7 +174,12 @@ public class SourceAnalysator implements ISourceAnalysator {
 	}
 
 	@Override
-	public String recommendGeneralSourceName(String url) {
+	public String recommendGeneralSourceName(Hyperlink hyperlink) {
+		if (hyperlink == null) {
+			return null;
+		}
+		
+		String url = hyperlink.getUrl();
 		InternetDomainName topPrivateDomain = getPrivateDomainNameForURL(url);
 		String privateDomainName = topPrivateDomain.toString();
 
@@ -229,31 +236,31 @@ public class SourceAnalysator implements ISourceAnalysator {
 	}
 
 	@Override
-	public Source createOrGetSource(String url) {
+	public Hyperlink createOrGetHyperlink(String url) {
 		if (url == null || url.isEmpty()) {
 			return null;
 		}
 
-		Source source = getSourceByURL(url);
-		if (source != null) {
-			return source;
+		Hyperlink hyperlink = getHyperlinkByURL(url);
+		if (hyperlink != null) {
+			return hyperlink;
 		}
 
-		source = SourceanalysatorFactory.eINSTANCE.createSource();
-		source.setUrl(url);
-		library.getSources().add(source);
-		return source;
+		hyperlink = SourceanalysatorFactory.eINSTANCE.createHyperlink();
+		hyperlink.setUrl(url);
+		library.getHyperlinks().add(hyperlink);
+		return hyperlink;
 	}
 
-	private Source getSourceByURL(String sourceURL) {
+	private Hyperlink getHyperlinkByURL(String sourceURL) {
 		if (sourceURL == null || sourceURL.isEmpty()) {
 			return null;
 		}
 
-		List<Source> sources = library.getSources();
-		for (Source source : sources) {
-			if (source.getUrl().equals(sourceURL)) {
-				return source;
+		List<Hyperlink> hyperlinks = library.getHyperlinks();
+		for (Hyperlink hyperlink : hyperlinks) {
+			if (hyperlink.getUrl().equals(sourceURL)) {
+				return hyperlink;
 			}
 		}
 
@@ -276,7 +283,8 @@ public class SourceAnalysator implements ISourceAnalysator {
 		}
 		
 		source.setGeneralSource(generalSource);
-		String url = source.getUrl();
+		Hyperlink hyperlink = source.getHyperlink();
+		String url = hyperlink.getUrl();
 		InternetDomainName domainName = getPrivateDomainNameForURL(url);
 		List<String> aliases = generalSource.getAliases();
 		String alias = domainName.toString();
@@ -299,7 +307,7 @@ public class SourceAnalysator implements ISourceAnalysator {
 			return null;
 		}
 
-		Set<String> hyperlinks = new LinkedHashSet<>();
+		Set<String> hyperlinkStrings = new LinkedHashSet<>();
 		try (BufferedInputStream is = new BufferedInputStream(new FileInputStream(file))) {
 			if (!localFile.endsWith(".docx")) {
 				logger.severe("File " + localFile + " is not supported");
@@ -307,14 +315,14 @@ public class SourceAnalysator implements ISourceAnalysator {
 			}
 
 			try (XWPFDocument document = new XWPFDocument(is)) {
-				extractHyperlinks(hyperlinks, document);
+				extractHyperlinks(hyperlinkStrings, document);
 			}
 		} catch (Exception e) {
 			logger.log(Level.SEVERE, "Error while opening the file " + localFile, e);
 			return null;
 		}
 
-		return hyperlinks;
+		return hyperlinkStrings;
 	}
 
 	// private void extractHyperlinks(Set<String> hyperlinks, XWPFDocument document) {
@@ -347,11 +355,19 @@ public class SourceAnalysator implements ISourceAnalysator {
 
 	@Override
 	public void generateSourcesForArticle(Article article) {
-		Set<String> hyperlinks = retrieveHyperlinksFromLocalFile(article);
-		for (String url : hyperlinks) {
-			String recommendedGeneralSourceName = recommendGeneralSourceName(url);
+		List<Source> sources = Lists.newArrayList(article.getSources());
+		for (Source source : sources) {
+			EcoreUtil.delete(source, true);
+		}
+		
+		Set<String> urls = retrieveHyperlinksFromLocalFile(article);
+		for (String url : urls) {
+			Hyperlink hyperlink = createOrGetHyperlink(url);
+			
+			String recommendedGeneralSourceName = recommendGeneralSourceName(hyperlink);
 			GeneralSource generalSource = createOrGetGeneralSource(recommendedGeneralSourceName);
-			Source source = createOrGetSource(url);
+			Source source = SourceanalysatorFactory.eINSTANCE.createSource();
+			source.setHyperlink(hyperlink);
 			linkSourceWithGeneralSource(source, generalSource);
 			article.getSources().add(source);
 		}

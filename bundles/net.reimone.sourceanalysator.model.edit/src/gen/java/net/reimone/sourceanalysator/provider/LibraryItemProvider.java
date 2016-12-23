@@ -78,8 +78,8 @@ public class LibraryItemProvider
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
 			childrenFeatures.add(SourceanalysatorPackage.Literals.LIBRARY__GENERAL_SOURCES);
-			childrenFeatures.add(SourceanalysatorPackage.Literals.LIBRARY__SOURCES);
 			childrenFeatures.add(SourceanalysatorPackage.Literals.LIBRARY__ARTICLES);
+			childrenFeatures.add(SourceanalysatorPackage.Literals.LIBRARY__HYPERLINKS);
 		}
 		return childrenFeatures;
 	}
@@ -133,8 +133,8 @@ public class LibraryItemProvider
 
 		switch (notification.getFeatureID(Library.class)) {
 			case SourceanalysatorPackage.LIBRARY__GENERAL_SOURCES:
-			case SourceanalysatorPackage.LIBRARY__SOURCES:
 			case SourceanalysatorPackage.LIBRARY__ARTICLES:
+			case SourceanalysatorPackage.LIBRARY__HYPERLINKS:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
 		}
@@ -159,13 +159,13 @@ public class LibraryItemProvider
 
 		newChildDescriptors.add
 			(createChildParameter
-				(SourceanalysatorPackage.Literals.LIBRARY__SOURCES,
-				 SourceanalysatorFactory.eINSTANCE.createSource()));
+				(SourceanalysatorPackage.Literals.LIBRARY__ARTICLES,
+				 SourceanalysatorFactory.eINSTANCE.createArticle()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(SourceanalysatorPackage.Literals.LIBRARY__ARTICLES,
-				 SourceanalysatorFactory.eINSTANCE.createArticle()));
+				(SourceanalysatorPackage.Literals.LIBRARY__HYPERLINKS,
+				 SourceanalysatorFactory.eINSTANCE.createHyperlink()));
 	}
 
 	/**

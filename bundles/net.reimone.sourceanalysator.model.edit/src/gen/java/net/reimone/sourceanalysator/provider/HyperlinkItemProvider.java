@@ -5,6 +5,8 @@ package net.reimone.sourceanalysator.provider;
 
 import java.util.Collection;
 import java.util.List;
+
+import net.reimone.sourceanalysator.Hyperlink;
 import net.reimone.sourceanalysator.SourceanalysatorPackage;
 
 import org.eclipse.emf.common.notify.AdapterFactory;
@@ -19,15 +21,17 @@ import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.IItemPropertySource;
 import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
+import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ItemProviderAdapter;
+import org.eclipse.emf.edit.provider.ViewerNotification;
 
 /**
- * This is the item provider adapter for a {@link net.reimone.sourceanalysator.Source} object.
+ * This is the item provider adapter for a {@link net.reimone.sourceanalysator.Hyperlink} object.
  * <!-- begin-user-doc -->
  * <!-- end-user-doc -->
  * @generated
  */
-public class SourceItemProvider 
+public class HyperlinkItemProvider 
 	extends ItemProviderAdapter
 	implements
 		IEditingDomainItemProvider,
@@ -41,7 +45,7 @@ public class SourceItemProvider
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public SourceItemProvider(AdapterFactory adapterFactory) {
+	public HyperlinkItemProvider(AdapterFactory adapterFactory) {
 		super(adapterFactory);
 	}
 
@@ -56,26 +60,48 @@ public class SourceItemProvider
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
-			addGeneralSourcePropertyDescriptor(object);
-			addHyperlinkPropertyDescriptor(object);
+			addUrlPropertyDescriptor(object);
+			addSourcesPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
 
 	/**
-	 * This adds a property descriptor for the General Source feature.
+	 * This adds a property descriptor for the Url feature.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected void addGeneralSourcePropertyDescriptor(Object object) {
+	protected void addUrlPropertyDescriptor(Object object) {
 		itemPropertyDescriptors.add
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_Source_generalSource_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_Source_generalSource_feature", "_UI_Source_type"),
-				 SourceanalysatorPackage.Literals.SOURCE__GENERAL_SOURCE,
+				 getString("_UI_Hyperlink_url_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_Hyperlink_url_feature", "_UI_Hyperlink_type"),
+				 SourceanalysatorPackage.Literals.HYPERLINK__URL,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 null,
+				 null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Sources feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addSourcesPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_Hyperlink_sources_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_Hyperlink_sources_feature", "_UI_Hyperlink_type"),
+				 SourceanalysatorPackage.Literals.HYPERLINK__SOURCES,
 				 true,
 				 false,
 				 true,
@@ -85,36 +111,14 @@ public class SourceItemProvider
 	}
 
 	/**
-	 * This adds a property descriptor for the Hyperlink feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void addHyperlinkPropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_Source_hyperlink_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_Source_hyperlink_feature", "_UI_Source_type"),
-				 SourceanalysatorPackage.Literals.SOURCE__HYPERLINK,
-				 true,
-				 false,
-				 true,
-				 null,
-				 null,
-				 null));
-	}
-
-	/**
-	 * This returns Source.gif.
+	 * This returns Hyperlink.gif.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
 	public Object getImage(Object object) {
-		return overlayImage(object, getResourceLocator().getImage("full/obj16/Source"));
+		return overlayImage(object, getResourceLocator().getImage("full/obj16/Hyperlink"));
 	}
 
 	/**
@@ -125,7 +129,10 @@ public class SourceItemProvider
 	 */
 	@Override
 	public String getText(Object object) {
-		return getString("_UI_Source_type");
+		String label = ((Hyperlink)object).getUrl();
+		return label == null || label.length() == 0 ?
+			getString("_UI_Hyperlink_type") :
+			label;
 	}
 	
 
@@ -139,6 +146,12 @@ public class SourceItemProvider
 	@Override
 	public void notifyChanged(Notification notification) {
 		updateChildren(notification);
+
+		switch (notification.getFeatureID(Hyperlink.class)) {
+			case SourceanalysatorPackage.HYPERLINK__URL:
+				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
+				return;
+		}
 		super.notifyChanged(notification);
 	}
 

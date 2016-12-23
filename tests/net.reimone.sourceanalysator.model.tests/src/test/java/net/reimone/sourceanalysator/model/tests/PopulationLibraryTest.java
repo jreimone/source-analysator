@@ -17,8 +17,10 @@ import org.junit.Test;
 
 import net.reimone.sourceanalysator.Article;
 import net.reimone.sourceanalysator.GeneralSource;
+import net.reimone.sourceanalysator.Hyperlink;
 import net.reimone.sourceanalysator.Library;
 import net.reimone.sourceanalysator.Source;
+import net.reimone.sourceanalysator.SourceanalysatorFactory;
 import net.reimone.sourceanalysator.core.ISourceAnalysator;
 import net.reimone.sourceanalysator.model.tests.util.AbstractSourceAnalysatorTest;
 
@@ -55,8 +57,8 @@ public class PopulationLibraryTest extends AbstractSourceAnalysatorTest {
 			List<Source> sources = entry.getValue();
 			assertThat("sourcesOfArticle count", sources.size(), is(equalTo(1)));
 			Source source = sources.get(0);
-			String url = source.getUrl();
-			String recommendGeneralSourceName = sourceAnalysator.recommendGeneralSourceName(url);
+			Hyperlink hyperlink = source.getHyperlink();
+			String recommendGeneralSourceName = sourceAnalysator.recommendGeneralSourceName(hyperlink);
 			GeneralSource generalSourceOfSource = source.getGeneralSource();
 
 			GeneralSource generalSource = entry.getKey();
@@ -75,26 +77,30 @@ public class PopulationLibraryTest extends AbstractSourceAnalysatorTest {
 
 		// use default general source name
 		String urlReference = "http://www.spiegel.de/123";
-		Source source = sourceAnalysator.createOrGetSource(urlReference);
-		String recommendGeneralSourceName = sourceAnalysator.recommendGeneralSourceName(urlReference);
+		Hyperlink hyperlink = sourceAnalysator.createOrGetHyperlink(urlReference);
+		String recommendGeneralSourceName = sourceAnalysator.recommendGeneralSourceName(hyperlink);
 		GeneralSource generalSource = sourceAnalysator.createOrGetGeneralSource(recommendGeneralSourceName);
+		Source source = SourceanalysatorFactory.eINSTANCE.createSource();
+		source.setHyperlink(hyperlink);
 		sourceAnalysator.linkSourceWithGeneralSource(source, generalSource);
 		assertThat(generalSource.getName(), is(equalTo("spiegel")));
 		List<String> aliases = generalSource.getAliases();
 		assertThat(aliases.size(), is(equalTo(1)));
 		assertThat(aliases.contains("spiegel.de"), is(true));
-		
+
 		// check if recommendation for different URL results in same general source
 		String newURL = "spiegel.de/nö";
-		source = sourceAnalysator.createOrGetSource(newURL);
-		recommendGeneralSourceName = sourceAnalysator.recommendGeneralSourceName(newURL);
+		hyperlink = sourceAnalysator.createOrGetHyperlink(newURL);
+		recommendGeneralSourceName = sourceAnalysator.recommendGeneralSourceName(hyperlink);
 		GeneralSource newGeneralSource = sourceAnalysator.createOrGetGeneralSource(recommendGeneralSourceName);
+		source = SourceanalysatorFactory.eINSTANCE.createSource();
+		source.setHyperlink(hyperlink);
 		sourceAnalysator.linkSourceWithGeneralSource(source, generalSource);
 		assertThat(newGeneralSource.getName(), is(equalTo("spiegel")));
 		assertThat(newGeneralSource, is(equalTo(generalSource)));
 		assertThat(aliases.size(), is(equalTo(1)));
 		assertThat(aliases.contains("spiegel.de"), is(true));
-		
+
 		// set general source name to another new alias
 		String newGeneralSourceName = "WTF";
 		newGeneralSource = sourceAnalysator.setGeneralSourceOfSource(source, newGeneralSourceName);
@@ -104,7 +110,7 @@ public class PopulationLibraryTest extends AbstractSourceAnalysatorTest {
 		assertThat(aliases.contains("spiegel"), is(true));
 		assertThat(aliases.contains("spiegel.de"), is(true));
 	}
-	
+
 	@Test
 	public void recommendGeneralSourceForSourceWithExistingGeneralSourceTest() {
 		ISourceAnalysator sourceAnalysator = createSourceAnalysator();
@@ -112,23 +118,29 @@ public class PopulationLibraryTest extends AbstractSourceAnalysatorTest {
 		String generalSourceName = "WTF";
 		GeneralSource generalSource = sourceAnalysator.createOrGetGeneralSource(generalSourceName);
 		String urlReference = "http://www.abc.co.uk/123";
-		Source source = sourceAnalysator.createOrGetSource(urlReference);
+		Hyperlink hyperlink = sourceAnalysator.createOrGetHyperlink(urlReference);
+		Source source = SourceanalysatorFactory.eINSTANCE.createSource();
+		source.setHyperlink(hyperlink);
 		sourceAnalysator.linkSourceWithGeneralSource(source, generalSource);
 
 		String url = "http://www.abc.co.uk/5678";
-		String recommendedGeneralSourceName = sourceAnalysator.recommendGeneralSourceName(url);
+		hyperlink = sourceAnalysator.createOrGetHyperlink(url);
+		String recommendedGeneralSourceName = sourceAnalysator.recommendGeneralSourceName(hyperlink);
 		assertThat(recommendedGeneralSourceName, is(equalTo(generalSourceName)));
 
 		url = "http://www.foo.abc.co.uk/5678";
-		recommendedGeneralSourceName = sourceAnalysator.recommendGeneralSourceName(url);
+		hyperlink = sourceAnalysator.createOrGetHyperlink(url);
+		recommendedGeneralSourceName = sourceAnalysator.recommendGeneralSourceName(hyperlink);
 		assertThat(recommendedGeneralSourceName, is(equalTo(generalSourceName)));
 
 		url = "http://foo.abc.co.uk/5678";
-		recommendedGeneralSourceName = sourceAnalysator.recommendGeneralSourceName(url);
+		hyperlink = sourceAnalysator.createOrGetHyperlink(url);
+		recommendedGeneralSourceName = sourceAnalysator.recommendGeneralSourceName(hyperlink);
 		assertThat(recommendedGeneralSourceName, is(equalTo(generalSourceName)));
 
 		url = "foo.abc.co.uk/5678/34/97/?arr";
-		recommendedGeneralSourceName = sourceAnalysator.recommendGeneralSourceName(url);
+		hyperlink = sourceAnalysator.createOrGetHyperlink(url);
+		recommendedGeneralSourceName = sourceAnalysator.recommendGeneralSourceName(hyperlink);
 		assertThat(recommendedGeneralSourceName, is(equalTo(generalSourceName)));
 	}
 
@@ -136,17 +148,14 @@ public class PopulationLibraryTest extends AbstractSourceAnalysatorTest {
 	public void linkSourceAndGeneralSourceTest() {
 		ISourceAnalysator sourceAnalysator = createSourceAnalysator();
 
-//		String generalSourceName = "WTF";
-//		GeneralSource generalSource = sourceAnalysator.createOrGetGeneralSource(generalSourceName);
-//		List<Source> sources = generalSource.getSources();
-//		assertThat("count of linked sources", sources.size(), is(equalTo(0)));
-
 		String url = "http://www.abc.co.uk/123";
-		Source source = sourceAnalysator.createOrGetSource(url);
+		Hyperlink hyperlink = sourceAnalysator.createOrGetHyperlink(url);
+		Source source = SourceanalysatorFactory.eINSTANCE.createSource();
+		source.setHyperlink(hyperlink);
 		GeneralSource generalSourceOfArticle = source.getGeneralSource();
 		assertThat("general Source Of Article", generalSourceOfArticle, is(nullValue()));
 
-		String recommendedGeneralSourceName = sourceAnalysator.recommendGeneralSourceName(url);
+		String recommendedGeneralSourceName = sourceAnalysator.recommendGeneralSourceName(hyperlink);
 		GeneralSource generalSource = sourceAnalysator.createOrGetGeneralSource(recommendedGeneralSourceName);
 		sourceAnalysator.linkSourceWithGeneralSource(source, generalSource);
 		generalSourceOfArticle = source.getGeneralSource();
@@ -162,36 +171,37 @@ public class PopulationLibraryTest extends AbstractSourceAnalysatorTest {
 		ISourceAnalysator sourceAnalysator = createSourceAnalysator();
 
 		Library library = sourceAnalysator.getSingleLibrary();
-		List<Source> sources = library.getSources();
-		assertThat("sources counts in library", sources.size(), is(equalTo(0)));
+		List<Hyperlink> hyperlinks = library.getHyperlinks();
+		assertThat("sources counts in library", hyperlinks.size(), is(equalTo(0)));
 
 		String url = "http://www.abc.co.uk/123";
-		String recommendedGeneralSourceName = sourceAnalysator.recommendGeneralSourceName(url);
+		Hyperlink hyperlink = sourceAnalysator.createOrGetHyperlink(url);
+		String recommendedGeneralSourceName = sourceAnalysator.recommendGeneralSourceName(hyperlink);
 		String expectedGeneralSourceName = "abc";
 		assertThat("recommended general source name", recommendedGeneralSourceName,
 				is(equalTo(expectedGeneralSourceName)));
 	}
 
 	@Test
-	public void createOrGetSourceSourceTest() {
+	public void createOrGetHyperlinkTest() {
 		ISourceAnalysator sourceAnalysator = createSourceAnalysator();
 
 		Library library = sourceAnalysator.getSingleLibrary();
-		List<Source> sources = library.getSources();
-		assertThat("sources counts in library", sources.size(), is(equalTo(0)));
+		List<Hyperlink> hyperlinks = library.getHyperlinks();
+		assertThat("sources counts in library", hyperlinks.size(), is(equalTo(0)));
 
 		// create new source
 		String url = "http://www.abc.co.uk/123";
-		Source source = sourceAnalysator.createOrGetSource(url);
-		assertThat("source", source, is(notNullValue()));
-		assertThat("sources counts in library", sources.size(), is(equalTo(1)));
-		assertThat(source, is(equalTo(sources.get(0))));
+		Hyperlink hyperlink = sourceAnalysator.createOrGetHyperlink(url);
+		assertThat("hyperlink", hyperlink, is(notNullValue()));
+		assertThat("hyperlinks counts in library", hyperlinks.size(), is(equalTo(1)));
+		assertThat(hyperlink, is(equalTo(hyperlinks.get(0))));
 
 		// retrieve existing source
-		Source existingSource = sourceAnalysator.createOrGetSource(url);
-		assertThat("source", source, is(notNullValue()));
-		assertThat("sources counts in library", sources.size(), is(equalTo(1)));
-		assertThat(existingSource, is(equalTo(source)));
+		Hyperlink existingHyperlink = sourceAnalysator.createOrGetHyperlink(url);
+		assertThat("existingHyperlink", existingHyperlink, is(notNullValue()));
+		assertThat("hyperlinks counts in library", hyperlinks.size(), is(equalTo(1)));
+		assertThat(existingHyperlink, is(equalTo(hyperlink)));
 	}
 
 	@Test

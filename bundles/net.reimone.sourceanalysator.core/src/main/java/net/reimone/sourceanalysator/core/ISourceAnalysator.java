@@ -6,6 +6,7 @@ import java.util.Set;
 
 import net.reimone.sourceanalysator.Article;
 import net.reimone.sourceanalysator.GeneralSource;
+import net.reimone.sourceanalysator.Hyperlink;
 import net.reimone.sourceanalysator.Library;
 import net.reimone.sourceanalysator.Source;
 
@@ -54,12 +55,12 @@ public interface ISourceAnalysator {
 	 * If articles from that domain already exist and are linked to another general source,
 	 * the name of the linked general source is returned. Otherwise, the extracted domain.
 	 */
-	public String recommendGeneralSourceName(String url);
+	public String recommendGeneralSourceName(Hyperlink hyperlink);
 
 	/**
 	 * Creates a new {@link Source} or retrieves the existing one with the given url. 
 	 */
-	public Source createOrGetSource(String url);
+	public Hyperlink createOrGetHyperlink(String url);
 
 	public GeneralSource setGeneralSourceOfSource(Source source, String newName);
 	

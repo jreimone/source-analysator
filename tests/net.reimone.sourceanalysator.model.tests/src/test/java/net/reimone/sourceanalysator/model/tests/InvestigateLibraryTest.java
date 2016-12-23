@@ -17,6 +17,7 @@ import com.google.common.collect.Lists;
 
 import net.reimone.sourceanalysator.Article;
 import net.reimone.sourceanalysator.GeneralSource;
+import net.reimone.sourceanalysator.Hyperlink;
 import net.reimone.sourceanalysator.Library;
 import net.reimone.sourceanalysator.Source;
 import net.reimone.sourceanalysator.SourceanalysatorFactory;
@@ -119,33 +120,48 @@ public class InvestigateLibraryTest extends AbstractSourceAnalysatorTest {
 		guardian.setName("Guardian");
 		library.getGeneralSources().add(guardian);
 		
-		Source spiegel1 = factory.createSource();
+		Hyperlink spiegel1 = factory.createHyperlink();
 		spiegel1.setUrl("http://www.spon.de/crap");
-		spiegel1.setGeneralSource(spiegel);
-		library.getSources().add(spiegel1);
+		library.getHyperlinks().add(spiegel1);
 		
-		Source spiegel2 = factory.createSource();
+		Hyperlink spiegel2 = factory.createHyperlink();
 		spiegel2.setUrl("http://www.spiegel.de/trash");
-		spiegel2.setGeneralSource(spiegel);
-		library.getSources().add(spiegel2);
+		library.getHyperlinks().add(spiegel2);
 		
-		Source guardian1 = factory.createSource();
+		Hyperlink guardian1 = factory.createHyperlink();
 		guardian1.setUrl("http://www.guardian.com/article1");
-		guardian1.setGeneralSource(guardian);
-		library.getSources().add(guardian1);
+		library.getHyperlinks().add(guardian1);
 		
 		// create articles
 		Article article1 = factory.createArticle();
 		article1.setTitle("Fuck the system");
-		article1.getSources().add(spiegel1);
-		article1.getSources().add(spiegel2);
-		article1.getSources().add(guardian1);
+		Source source = factory.createSource();
+		source.setHyperlink(spiegel1);
+		source.setGeneralSource(spiegel);
+		article1.getSources().add(source);
+		
+		source = factory.createSource();
+		source.setHyperlink(spiegel2);
+		source.setGeneralSource(spiegel);
+		article1.getSources().add(source);
+		
+		source = factory.createSource();
+		source.setHyperlink(guardian1);
+		source.setGeneralSource(guardian);
+		article1.getSources().add(source);
 		library.getArticles().add(article1);
 		
 		Article article2 = factory.createArticle();
 		article2.setTitle(ARTICLE_TITLE);
-		article2.getSources().add(spiegel2);
-		article2.getSources().add(guardian1);
+		source = factory.createSource();
+		source.setHyperlink(spiegel1);
+		source.setGeneralSource(spiegel);
+		article2.getSources().add(source);
+		
+		source = factory.createSource();
+		source.setHyperlink(guardian1);
+		source.setGeneralSource(guardian);
+		article2.getSources().add(source);
 		library.getArticles().add(article2);
 		
 		return library;

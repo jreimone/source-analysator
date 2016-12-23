@@ -123,31 +123,31 @@ public interface SourceanalysatorPackage extends EPackage {
 	int SOURCE = 1;
 
 	/**
-	 * The feature id for the '<em><b>Url</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SOURCE__URL = 0;
-
-	/**
 	 * The feature id for the '<em><b>General Source</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int SOURCE__GENERAL_SOURCE = 1;
+	int SOURCE__GENERAL_SOURCE = 0;
 
 	/**
-	 * The feature id for the '<em><b>Articles</b></em>' reference list.
+	 * The feature id for the '<em><b>Article</b></em>' container reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int SOURCE__ARTICLES = 2;
+	int SOURCE__ARTICLE = 1;
+
+	/**
+	 * The feature id for the '<em><b>Hyperlink</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SOURCE__HYPERLINK = 2;
 
 	/**
 	 * The number of structural features of the '<em>Source</em>' class.
@@ -187,22 +187,22 @@ public interface SourceanalysatorPackage extends EPackage {
 	int LIBRARY__GENERAL_SOURCES = 0;
 
 	/**
-	 * The feature id for the '<em><b>Sources</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int LIBRARY__SOURCES = 1;
-
-	/**
 	 * The feature id for the '<em><b>Articles</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int LIBRARY__ARTICLES = 2;
+	int LIBRARY__ARTICLES = 1;
+
+	/**
+	 * The feature id for the '<em><b>Hyperlinks</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LIBRARY__HYPERLINKS = 2;
 
 	/**
 	 * The number of structural features of the '<em>Library</em>' class.
@@ -233,7 +233,7 @@ public interface SourceanalysatorPackage extends EPackage {
 	int ARTICLE = 3;
 
 	/**
-	 * The feature id for the '<em><b>Sources</b></em>' reference list.
+	 * The feature id for the '<em><b>Sources</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -276,6 +276,53 @@ public interface SourceanalysatorPackage extends EPackage {
 	 * @ordered
 	 */
 	int ARTICLE_OPERATION_COUNT = 0;
+
+
+	/**
+	 * The meta object id for the '{@link net.reimone.sourceanalysator.impl.HyperlinkImpl <em>Hyperlink</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see net.reimone.sourceanalysator.impl.HyperlinkImpl
+	 * @see net.reimone.sourceanalysator.impl.SourceanalysatorPackageImpl#getHyperlink()
+	 * @generated
+	 */
+	int HYPERLINK = 4;
+
+	/**
+	 * The feature id for the '<em><b>Url</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int HYPERLINK__URL = 0;
+
+	/**
+	 * The feature id for the '<em><b>Sources</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int HYPERLINK__SOURCES = 1;
+
+	/**
+	 * The number of structural features of the '<em>Hyperlink</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int HYPERLINK_FEATURE_COUNT = 2;
+
+	/**
+	 * The number of operations of the '<em>Hyperlink</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int HYPERLINK_OPERATION_COUNT = 0;
 
 
 	/**
@@ -332,17 +379,6 @@ public interface SourceanalysatorPackage extends EPackage {
 	EClass getSource();
 
 	/**
-	 * Returns the meta object for the attribute '{@link net.reimone.sourceanalysator.Source#getUrl <em>Url</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Url</em>'.
-	 * @see net.reimone.sourceanalysator.Source#getUrl()
-	 * @see #getSource()
-	 * @generated
-	 */
-	EAttribute getSource_Url();
-
-	/**
 	 * Returns the meta object for the reference '{@link net.reimone.sourceanalysator.Source#getGeneralSource <em>General Source</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -354,15 +390,26 @@ public interface SourceanalysatorPackage extends EPackage {
 	EReference getSource_GeneralSource();
 
 	/**
-	 * Returns the meta object for the reference list '{@link net.reimone.sourceanalysator.Source#getArticles <em>Articles</em>}'.
+	 * Returns the meta object for the container reference '{@link net.reimone.sourceanalysator.Source#getArticle <em>Article</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference list '<em>Articles</em>'.
-	 * @see net.reimone.sourceanalysator.Source#getArticles()
+	 * @return the meta object for the container reference '<em>Article</em>'.
+	 * @see net.reimone.sourceanalysator.Source#getArticle()
 	 * @see #getSource()
 	 * @generated
 	 */
-	EReference getSource_Articles();
+	EReference getSource_Article();
+
+	/**
+	 * Returns the meta object for the reference '{@link net.reimone.sourceanalysator.Source#getHyperlink <em>Hyperlink</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Hyperlink</em>'.
+	 * @see net.reimone.sourceanalysator.Source#getHyperlink()
+	 * @see #getSource()
+	 * @generated
+	 */
+	EReference getSource_Hyperlink();
 
 	/**
 	 * Returns the meta object for class '{@link net.reimone.sourceanalysator.Library <em>Library</em>}'.
@@ -386,17 +433,6 @@ public interface SourceanalysatorPackage extends EPackage {
 	EReference getLibrary_GeneralSources();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link net.reimone.sourceanalysator.Library#getSources <em>Sources</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Sources</em>'.
-	 * @see net.reimone.sourceanalysator.Library#getSources()
-	 * @see #getLibrary()
-	 * @generated
-	 */
-	EReference getLibrary_Sources();
-
-	/**
 	 * Returns the meta object for the containment reference list '{@link net.reimone.sourceanalysator.Library#getArticles <em>Articles</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -406,6 +442,17 @@ public interface SourceanalysatorPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getLibrary_Articles();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link net.reimone.sourceanalysator.Library#getHyperlinks <em>Hyperlinks</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Hyperlinks</em>'.
+	 * @see net.reimone.sourceanalysator.Library#getHyperlinks()
+	 * @see #getLibrary()
+	 * @generated
+	 */
+	EReference getLibrary_Hyperlinks();
 
 	/**
 	 * Returns the meta object for class '{@link net.reimone.sourceanalysator.Article <em>Article</em>}'.
@@ -418,10 +465,10 @@ public interface SourceanalysatorPackage extends EPackage {
 	EClass getArticle();
 
 	/**
-	 * Returns the meta object for the reference list '{@link net.reimone.sourceanalysator.Article#getSources <em>Sources</em>}'.
+	 * Returns the meta object for the containment reference list '{@link net.reimone.sourceanalysator.Article#getSources <em>Sources</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference list '<em>Sources</em>'.
+	 * @return the meta object for the containment reference list '<em>Sources</em>'.
 	 * @see net.reimone.sourceanalysator.Article#getSources()
 	 * @see #getArticle()
 	 * @generated
@@ -449,6 +496,38 @@ public interface SourceanalysatorPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getArticle_LocalFile();
+
+	/**
+	 * Returns the meta object for class '{@link net.reimone.sourceanalysator.Hyperlink <em>Hyperlink</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Hyperlink</em>'.
+	 * @see net.reimone.sourceanalysator.Hyperlink
+	 * @generated
+	 */
+	EClass getHyperlink();
+
+	/**
+	 * Returns the meta object for the attribute '{@link net.reimone.sourceanalysator.Hyperlink#getUrl <em>Url</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Url</em>'.
+	 * @see net.reimone.sourceanalysator.Hyperlink#getUrl()
+	 * @see #getHyperlink()
+	 * @generated
+	 */
+	EAttribute getHyperlink_Url();
+
+	/**
+	 * Returns the meta object for the reference list '{@link net.reimone.sourceanalysator.Hyperlink#getSources <em>Sources</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference list '<em>Sources</em>'.
+	 * @see net.reimone.sourceanalysator.Hyperlink#getSources()
+	 * @see #getHyperlink()
+	 * @generated
+	 */
+	EReference getHyperlink_Sources();
 
 	/**
 	 * Returns the factory that creates the instances of the model.
@@ -518,14 +597,6 @@ public interface SourceanalysatorPackage extends EPackage {
 		EClass SOURCE = eINSTANCE.getSource();
 
 		/**
-		 * The meta object literal for the '<em><b>Url</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute SOURCE__URL = eINSTANCE.getSource_Url();
-
-		/**
 		 * The meta object literal for the '<em><b>General Source</b></em>' reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -534,12 +605,20 @@ public interface SourceanalysatorPackage extends EPackage {
 		EReference SOURCE__GENERAL_SOURCE = eINSTANCE.getSource_GeneralSource();
 
 		/**
-		 * The meta object literal for the '<em><b>Articles</b></em>' reference list feature.
+		 * The meta object literal for the '<em><b>Article</b></em>' container reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference SOURCE__ARTICLES = eINSTANCE.getSource_Articles();
+		EReference SOURCE__ARTICLE = eINSTANCE.getSource_Article();
+
+		/**
+		 * The meta object literal for the '<em><b>Hyperlink</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference SOURCE__HYPERLINK = eINSTANCE.getSource_Hyperlink();
 
 		/**
 		 * The meta object literal for the '{@link net.reimone.sourceanalysator.impl.LibraryImpl <em>Library</em>}' class.
@@ -560,20 +639,20 @@ public interface SourceanalysatorPackage extends EPackage {
 		EReference LIBRARY__GENERAL_SOURCES = eINSTANCE.getLibrary_GeneralSources();
 
 		/**
-		 * The meta object literal for the '<em><b>Sources</b></em>' containment reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference LIBRARY__SOURCES = eINSTANCE.getLibrary_Sources();
-
-		/**
 		 * The meta object literal for the '<em><b>Articles</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
 		EReference LIBRARY__ARTICLES = eINSTANCE.getLibrary_Articles();
+
+		/**
+		 * The meta object literal for the '<em><b>Hyperlinks</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference LIBRARY__HYPERLINKS = eINSTANCE.getLibrary_Hyperlinks();
 
 		/**
 		 * The meta object literal for the '{@link net.reimone.sourceanalysator.impl.ArticleImpl <em>Article</em>}' class.
@@ -586,7 +665,7 @@ public interface SourceanalysatorPackage extends EPackage {
 		EClass ARTICLE = eINSTANCE.getArticle();
 
 		/**
-		 * The meta object literal for the '<em><b>Sources</b></em>' reference list feature.
+		 * The meta object literal for the '<em><b>Sources</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
@@ -608,6 +687,32 @@ public interface SourceanalysatorPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute ARTICLE__LOCAL_FILE = eINSTANCE.getArticle_LocalFile();
+
+		/**
+		 * The meta object literal for the '{@link net.reimone.sourceanalysator.impl.HyperlinkImpl <em>Hyperlink</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see net.reimone.sourceanalysator.impl.HyperlinkImpl
+		 * @see net.reimone.sourceanalysator.impl.SourceanalysatorPackageImpl#getHyperlink()
+		 * @generated
+		 */
+		EClass HYPERLINK = eINSTANCE.getHyperlink();
+
+		/**
+		 * The meta object literal for the '<em><b>Url</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute HYPERLINK__URL = eINSTANCE.getHyperlink_Url();
+
+		/**
+		 * The meta object literal for the '<em><b>Sources</b></em>' reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference HYPERLINK__SOURCES = eINSTANCE.getHyperlink_Sources();
 
 	}
 
