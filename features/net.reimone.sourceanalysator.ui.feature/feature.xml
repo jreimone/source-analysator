@@ -20,6 +20,10 @@
          id="net.reimone.sourceanalysator.core.feature"
          version="0.0.0"/>
 
+   <includes
+         id="net.reimone.sourceanalysator.jre.feature"
+         version="0.0.0"/>
+
    <requires>
       <import plugin="javax.inject"/>
       <import plugin="org.eclipse.core.runtime"/>
@@ -48,11 +52,7 @@
       <import plugin="org.eclipse.emf.edit"/>
       <import plugin="org.eclipse.emf.edit.ui"/>
       <import plugin="org.eclipse.emf.ecore.edit"/>
-      <import plugin="org.apache.poi"/>
-      <import plugin="org.apache.poi.ooxml"/>
-      <import plugin="org.apache.poi.ooxml.schemas"/>
       <import plugin="org.eclipse.osgi"/>
-      <import plugin="org.apache.xmlbeans"/>
    </requires>
 
    <plugin

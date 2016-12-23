@@ -13,5 +13,6 @@
 	<modules>
 		<module>net.reimone.sourceanalysator.core.feature</module>
 		<module>net.reimone.sourceanalysator.ui.feature</module>
+		<module>net.reimone.sourceanalysator.jre.feature</module>
 	</modules>
 </project>
