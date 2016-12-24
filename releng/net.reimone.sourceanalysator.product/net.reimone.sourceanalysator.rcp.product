@@ -35,12 +35,13 @@
       <feature id="net.reimone.sourceanalysator.ui.feature"/>
       <feature id="org.eclipse.emf.ecore"/>
       <feature id="org.eclipse.emf.common"/>
+      <feature id="net.reimone.sourceanalysator.jre.feature"/>
    </features>
 
    <configurations>
-      <plugin id="org.eclipse.core.runtime" autoStart="false" startLevel="2" />
-      <plugin id="org.eclipse.equinox.ds" autoStart="false" startLevel="3" />
-      <plugin id="org.eclipse.equinox.event" autoStart="false" startLevel="3" />
+      <plugin id="org.eclipse.core.runtime" autoStart="true" startLevel="2" />
+      <plugin id="org.eclipse.equinox.ds" autoStart="true" startLevel="3" />
+      <plugin id="org.eclipse.equinox.event" autoStart="true" startLevel="3" />
    </configurations>
 
 </product>
