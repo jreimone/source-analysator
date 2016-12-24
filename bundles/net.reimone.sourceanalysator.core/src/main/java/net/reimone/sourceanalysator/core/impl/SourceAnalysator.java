@@ -421,4 +421,9 @@ public class SourceAnalysator implements ISourceAnalysator {
 		File file = exporter.export(articles, generalSourcesOfArticles);
 		return file;
 	}
+
+	@Override
+	public void deleteArticle(Article article) {
+		EcoreUtil.delete(article, true);
+	}
 }

@@ -5,8 +5,12 @@ import java.util.HashMap;
 import java.util.List;
 
 import org.eclipse.e4.core.services.events.IEventBroker;
+import org.eclipse.jface.dialogs.MessageDialog;
+import org.eclipse.jface.viewers.CheckboxTableViewer;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.SelectionChangedEvent;
+import org.eclipse.swt.SWT;
+import org.eclipse.swt.events.KeyEvent;
 import org.eclipse.swt.program.Program;
 import org.eclipse.swt.widgets.FileDialog;
 import org.eclipse.swt.widgets.Shell;
@@ -65,5 +69,31 @@ public class Util {
 		IExporter exporter = new WordExporter();
 		File file = sourceAnalysator.exportStatisticsOfArticlesToFile(checkedArticles, exporter);
 		Program.launch(file.getAbsolutePath());
+	}
+
+	public void handleDeleteArticle(ISourceAnalysator sourceAnalysator, CheckboxTableViewer checkboxTableViewer, KeyEvent e) {
+		if (e.keyCode != SWT.DEL) {
+			return;
+		}
+		
+		IStructuredSelection structuredSelection = checkboxTableViewer.getStructuredSelection();
+		if (structuredSelection == null) {
+			return;
+		}
+		
+		Object firstElement = structuredSelection.getFirstElement();
+		if (!(firstElement instanceof Article)) {
+			return;
+		}
+		
+		Article article = (Article) firstElement;
+		
+		String title = "Artikel löschen?";
+		String message = "Diese Aktion löscht den Artikel '" + article.getTitle() + "' vollständig aus deiner Bibliothek.\n\n"
+				+ "Möchtest du wirklich fortfahren?";
+		boolean deleteArticle = MessageDialog.openQuestion(e.display.getActiveShell(), title, message);
+		if (deleteArticle) {
+			sourceAnalysator.deleteArticle(article);
+		}
 	}
 }

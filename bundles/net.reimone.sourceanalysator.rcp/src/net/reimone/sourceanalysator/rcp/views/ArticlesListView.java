@@ -28,9 +28,12 @@ import net.reimone.sourceanalysator.core.ISourceAnalysator;
 import net.reimone.sourceanalysator.rcp.Util;
 
 import org.eclipse.jface.viewers.ISelectionChangedListener;
+import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.SelectionChangedEvent;
 import org.eclipse.jface.viewers.ICheckStateListener;
 import org.eclipse.jface.viewers.CheckStateChangedEvent;
+import org.eclipse.swt.events.KeyAdapter;
+import org.eclipse.swt.events.KeyEvent;
 
 public class ArticlesListView {
 	
@@ -68,6 +71,13 @@ public class ArticlesListView {
 			}
 		});
 		table = checkboxTableViewer.getTable();
+		table.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyReleased(KeyEvent e) {
+				Util.INSTANCE.handleDeleteArticle(sourceAnalysator, checkboxTableViewer, e);
+			}
+
+		});
 		table.setLinesVisible(true);
 		library = sourceAnalysator.getSingleLibrary();
 		m_bindingContext = initDataBindings();

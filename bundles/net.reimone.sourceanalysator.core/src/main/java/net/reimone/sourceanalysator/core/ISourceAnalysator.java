@@ -14,6 +14,11 @@ import net.reimone.sourceanalysator.Source;
 public interface ISourceAnalysator {
 
 	/**
+	 * Deletes the given {@link Article article}. 
+	 */
+	public void deleteArticle(Article article);
+	
+	/**
 	 * Returns a map which maps a general source to the sources referenced by the given article
 	 */
 	public Map<GeneralSource, List<Source>> getGeneralSourcesOfArticle(Article article);
