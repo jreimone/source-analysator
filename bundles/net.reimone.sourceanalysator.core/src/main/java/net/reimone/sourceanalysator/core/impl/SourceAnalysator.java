@@ -11,6 +11,7 @@ import java.util.LinkedHashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -418,7 +419,8 @@ public class SourceAnalysator implements ISourceAnalysator {
 		}
 		
 		Map<GeneralSource, List<Source>> generalSourcesOfArticles = getGeneralSourcesOfArticles(articles);
-		File file = exporter.export(articles, generalSourcesOfArticles);
+		List<Entry<String, Integer>> statistics = exporter.generateStatisticsForGeneralSourcesOfArticles(generalSourcesOfArticles);
+		File file = exporter.export(articles, statistics);
 		return file;
 	}
 

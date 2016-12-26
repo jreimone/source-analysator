@@ -6,12 +6,14 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.stream.Collectors;
 
 import org.apache.poi.xwpf.usermodel.XWPFDocument;
 import org.apache.poi.xwpf.usermodel.XWPFParagraph;
@@ -24,6 +26,8 @@ import org.eclipse.core.runtime.Platform;
 import org.osgi.framework.Bundle;
 import org.osgi.framework.FrameworkUtil;
 
+import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
 import com.google.common.io.Files;
 
 import net.reimone.sourceanalysator.Article;
@@ -42,19 +46,19 @@ public class WordExporter implements IExporter {
 	private static final int DEFAULT_FONT_SIZE = 11;
 
 	@Override
-	public File export(List<Article> articles, Map<GeneralSource, List<Source>> generalSourcesOfArticles) {
+	public File export(List<Article> articles, List<Entry<String, Integer>> statistics) {
 		XWPFDocument template = openTemplate();
 		if (template == null) {
 			return null;
 		}
 
-		instantiateTemplate(template, articles, generalSourcesOfArticles);
+		instantiateTemplate(template, articles, statistics);
 		File file = saveDocument(template);
 		return file;
 	}
 
 	private void instantiateTemplate(XWPFDocument template, List<Article> articles,
-			Map<GeneralSource, List<Source>> generalSourcesOfArticles) {
+			List<Entry<String, Integer>> statistics) {
 		boolean placeholderAvailable = true;
 		if (articles != null && !articles.isEmpty()) {
 			for (Article article : articles) {
@@ -68,22 +72,20 @@ public class WordExporter implements IExporter {
 			}
 		}
 
-		if (generalSourcesOfArticles == null || generalSourcesOfArticles.isEmpty()) {
+		if (statistics == null || statistics.isEmpty()) {
 			return;
 		}
 
-		int totalCount = generalSourcesOfArticles.size();
+		int totalCount = statistics.size();
 		int currentEntry = 0;
 		placeholderAvailable = true;
-		for (Entry<GeneralSource, List<Source>> entry : generalSourcesOfArticles.entrySet()) {
+		for (Entry<String, Integer> entry : statistics) {
 			if (!placeholderAvailable) {
 				break;
 			}
 			currentEntry++;
-			GeneralSource generalSource = entry.getKey();
-			String name = generalSource.getName();
-			List<Source> sources = entry.getValue();
-			int sourceCount = sources.size();
+			String name = entry.getKey();
+			int sourceCount = entry.getValue();
 			String text = sourceCount + "x " + name;
 
 			boolean lastElement = (currentEntry == totalCount) ? true : false;
@@ -227,5 +229,32 @@ public class WordExporter implements IExporter {
 		}
 
 		return tempFile;
+	}
+
+	@Override
+	public List<Entry<String, Integer>> generateStatisticsForGeneralSourcesOfArticles(
+			Map<GeneralSource, List<Source>> generalSourcesOfArticles) {
+		List<Entry<String, Integer>> result = Lists.newArrayList();
+		if (generalSourcesOfArticles == null) {
+			return result;
+		}
+
+		Map<String, Integer> categoryCounts = Maps.newHashMap();
+		for (Entry<GeneralSource, List<Source>> entry : generalSourcesOfArticles.entrySet()) {
+			GeneralSource generalSource = entry.getKey();
+			List<Source> sources = entry.getValue();
+			int count = sources.size();
+			
+			String categoryName = generalSource.getName();
+			Integer finalCount = categoryCounts.get(categoryName);
+			if (finalCount == null) {
+				finalCount = 0;
+			}
+			finalCount += count;
+			categoryCounts.put(categoryName, finalCount);
+		}
+		
+		result = categoryCounts.entrySet().stream().sorted(Map.Entry.comparingByValue(Collections.reverseOrder())).collect(Collectors.toList());
+		return result;
 	}
 }

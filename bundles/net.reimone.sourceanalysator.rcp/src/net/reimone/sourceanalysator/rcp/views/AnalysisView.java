@@ -24,9 +24,11 @@ import com.google.common.collect.Lists;
 import net.reimone.sourceanalysator.Article;
 import net.reimone.sourceanalysator.GeneralSource;
 import net.reimone.sourceanalysator.Source;
+import net.reimone.sourceanalysator.core.IExporter;
 import net.reimone.sourceanalysator.core.ISourceAnalysator;
 import net.reimone.sourceanalysator.rcp.Events;
 import net.reimone.sourceanalysator.rcp.Util;
+import net.reimone.sourceanalysator.rcp.exporter.WordExporter;
 
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
@@ -93,19 +95,19 @@ public class AnalysisView {
 		lblCheckedArticles.setText(checkedArticlesString);
 		
 		Map<GeneralSource, List<Source>> generalSourcesOfArticles = sourceAnalysator.getGeneralSourcesOfArticles(checkedArticles);
-		generateStatistics(statisticsComposite, generalSourcesOfArticles);
+		IExporter exporter = new WordExporter();
+		List<Entry<String, Integer>> statistics = exporter.generateStatisticsForGeneralSourcesOfArticles(generalSourcesOfArticles);
+		generateStatistics(statisticsComposite, statistics);
 		
 		statisticsComposite.layout();
 	}
 	
-	private void generateStatistics(Composite statisticsComposite, Map<GeneralSource, List<Source>> generalSourcesOfArticles) {
+	private void generateStatistics(Composite statisticsComposite, List<Entry<String,Integer>> statistics) {
 		clearCurrentStatistics();
 		
-		for (Entry<GeneralSource, List<Source>> entry : generalSourcesOfArticles.entrySet()) {
-			GeneralSource generalSource = entry.getKey();
-			String name = generalSource.getName();
-			List<Source> sources = entry.getValue();
-			int sourceCount = sources.size();
+		for (Entry<String, Integer> entry : statistics) {
+			String name = entry.getKey();
+			int sourceCount = entry.getValue();
 			
 			Label lblGeneralSource = new Label(statisticsComposite, SWT.NONE);
 			lblGeneralSource.setText(name);
