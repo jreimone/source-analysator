@@ -3,6 +3,8 @@ package net.reimone.sourceanalysator.rcp.exporter;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Iterator;
 import java.util.List;
@@ -14,6 +16,15 @@ import java.util.logging.Logger;
 import org.apache.poi.xwpf.usermodel.XWPFDocument;
 import org.apache.poi.xwpf.usermodel.XWPFParagraph;
 import org.apache.poi.xwpf.usermodel.XWPFRun;
+import org.eclipse.core.resources.IWorkspace;
+import org.eclipse.core.resources.IWorkspaceRoot;
+import org.eclipse.core.resources.ResourcesPlugin;
+import org.eclipse.core.runtime.IPath;
+import org.eclipse.core.runtime.Platform;
+import org.osgi.framework.Bundle;
+import org.osgi.framework.FrameworkUtil;
+
+import com.google.common.io.Files;
 
 import net.reimone.sourceanalysator.Article;
 import net.reimone.sourceanalysator.GeneralSource;
@@ -27,7 +38,7 @@ public class WordExporter implements IExporter {
 	private static final String TEMPLATE_NAME = "template.docx";
 	private static final String PLACEHOLDER_ARTICLES = "<<SELECTED_ARTICLES>>";
 	private static final String PLACEHOLDER_COUNTS = "<<COUNT_AND_SOURCE>>";
-	
+
 	private static final int DEFAULT_FONT_SIZE = 11;
 
 	@Override
@@ -56,11 +67,11 @@ public class WordExporter implements IExporter {
 				placeholderAvailable = replaceTextOfSequence(template, PLACEHOLDER_ARTICLES, title, lastElement);
 			}
 		}
-		
+
 		if (generalSourcesOfArticles == null || generalSourcesOfArticles.isEmpty()) {
 			return;
 		}
-		
+
 		int totalCount = generalSourcesOfArticles.size();
 		int currentEntry = 0;
 		placeholderAvailable = true;
@@ -80,7 +91,8 @@ public class WordExporter implements IExporter {
 		}
 	}
 
-	private boolean replaceTextOfSequence(XWPFDocument template, String placeholder, String replacement, boolean lastElement) {
+	private boolean replaceTextOfSequence(XWPFDocument template, String placeholder, String replacement,
+			boolean lastElement) {
 		XWPFRun detectedRun = null;
 		XWPFParagraph detectedParagraph = null;
 		int runPosition = -1;
@@ -134,17 +146,69 @@ public class WordExporter implements IExporter {
 	}
 
 	private XWPFDocument openTemplate() {
-		URL templateURL = getClass().getResource(TEMPLATE_NAME);
-		if (templateURL == null) {
+		InputStream inputStream = null;
+		// 1. try to get the template from workspace
+		inputStream = getTemplateStream();
+
+		// 2. if not available copy the internal template
+		if (inputStream == null) {
+			URL templateURL = getClass().getResource(TEMPLATE_NAME);
+			if (templateURL != null) {
+				File templateFile = getTemplateFile();
+				try {
+					Files.copy(() -> templateURL.openStream(), templateFile);
+					inputStream = getTemplateStream();
+				} catch (IOException e) {
+					LOGGER.log(Level.SEVERE, "Couldn't load word default template", e);
+				}
+			}
+		}
+
+		if (inputStream == null) {
 			return null;
 		}
+
 		XWPFDocument document = null;
 		try {
-			document = new XWPFDocument(templateURL.openStream());
+			document = new XWPFDocument(inputStream);
 		} catch (IOException e) {
-			LOGGER.log(Level.SEVERE, "Couldn't load word template", e);
+			LOGGER.log(Level.SEVERE, "Couldn't load word default template", e);
 		}
 		return document;
+	}
+
+	private InputStream getTemplateStream() {
+		IWorkspace workspace = ResourcesPlugin.getWorkspace();
+		if (workspace == null) {
+			return null;
+		}
+		
+		IWorkspaceRoot root = workspace.getRoot();
+		if (root == null) {
+			return null;
+		}
+
+		File existingTemplateFile = getTemplateFile();
+		if (existingTemplateFile.exists() && existingTemplateFile.canRead()) {
+			try {
+				InputStream inputStream = existingTemplateFile.toURI().toURL().openStream();
+				return inputStream;
+			} catch (MalformedURLException e) {
+				LOGGER.log(Level.INFO, "Couldn't load template file from workspace, thus default template is taken", e);
+			} catch (IOException e) {
+				LOGGER.log(Level.INFO, "Couldn't load template file from workspace, thus default template is taken", e);
+			}
+		}
+
+		return null;
+	}
+
+	private File getTemplateFile() {
+		Bundle thisBundle = FrameworkUtil.getBundle(getClass());
+		IPath bundleDataArea = Platform.getStateLocation(thisBundle);
+		IPath path = bundleDataArea.append(TEMPLATE_NAME);
+		File existingTemplateFile = new File(path.toString());
+		return existingTemplateFile;
 	}
 
 	private File saveDocument(XWPFDocument document) {
