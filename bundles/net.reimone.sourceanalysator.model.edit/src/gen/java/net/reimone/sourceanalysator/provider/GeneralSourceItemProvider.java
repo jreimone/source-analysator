@@ -63,6 +63,7 @@ public class GeneralSourceItemProvider
 			addNamePropertyDescriptor(object);
 			addSourcesPropertyDescriptor(object);
 			addAliasesPropertyDescriptor(object);
+			addDontCountPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -134,6 +135,28 @@ public class GeneralSourceItemProvider
 	}
 
 	/**
+	 * This adds a property descriptor for the Dont Count feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addDontCountPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_GeneralSource_dontCount_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_GeneralSource_dontCount_feature", "_UI_GeneralSource_type"),
+				 SourceanalysatorPackage.Literals.GENERAL_SOURCE__DONT_COUNT,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.BOOLEAN_VALUE_IMAGE,
+				 null,
+				 null));
+	}
+
+	/**
 	 * This returns GeneralSource.gif.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -173,6 +196,7 @@ public class GeneralSourceItemProvider
 		switch (notification.getFeatureID(GeneralSource.class)) {
 			case SourceanalysatorPackage.GENERAL_SOURCE__NAME:
 			case SourceanalysatorPackage.GENERAL_SOURCE__ALIASES:
+			case SourceanalysatorPackage.GENERAL_SOURCE__DONT_COUNT:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
 		}

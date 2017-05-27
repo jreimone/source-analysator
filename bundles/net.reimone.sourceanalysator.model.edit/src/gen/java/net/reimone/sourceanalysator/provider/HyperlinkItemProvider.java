@@ -132,7 +132,7 @@ public class HyperlinkItemProvider
 		String label = ((Hyperlink)object).getUrl();
 		return label == null || label.length() == 0 ?
 			getString("_UI_Hyperlink_type") :
-			label;
+			getString("_UI_Hyperlink_type") + " " + label;
 	}
 	
 
