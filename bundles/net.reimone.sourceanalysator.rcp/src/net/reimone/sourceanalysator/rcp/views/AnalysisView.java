@@ -94,12 +94,25 @@ public class AnalysisView {
 		String checkedArticlesString = checkedArticles.stream().map(article -> article.getTitle()).collect(Collectors.joining(", "));
 		lblCheckedArticles.setText(checkedArticlesString);
 		
+		updateStatistics();
+		
+		statisticsComposite.layout();
+	}
+	
+	@Optional
+	@Inject
+	private void subscribeGeneralSourceDontCountChanged(
+			@UIEventTopic(Events.GENERAL_SOURCE_DONT_COUNT_CHANGED) Map<String, List<Article>> data) {
+		updateStatistics();
+		
+		statisticsComposite.layout();
+	}
+
+	private void updateStatistics() {
 		Map<GeneralSource, List<Source>> generalSourcesOfArticles = sourceAnalysator.getGeneralSourcesOfArticles(checkedArticles);
 		IExporter exporter = new WordExporter();
 		List<Entry<String, Integer>> statistics = exporter.generateStatisticsForGeneralSourcesOfArticles(generalSourcesOfArticles);
 		generateStatistics(statisticsComposite, statistics);
-		
-		statisticsComposite.layout();
 	}
 	
 	private void generateStatistics(Composite statisticsComposite, List<Entry<String,Integer>> statistics) {

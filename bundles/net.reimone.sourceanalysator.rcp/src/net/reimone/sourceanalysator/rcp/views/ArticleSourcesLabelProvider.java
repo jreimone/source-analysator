@@ -1,7 +1,6 @@
 package net.reimone.sourceanalysator.rcp.views;
 
 import java.util.function.Function;
-import java.util.function.Supplier;
 
 import org.eclipse.core.databinding.observable.map.IObservableMap;
 import org.eclipse.emf.ecore.provider.EcoreItemProviderAdapterFactory;
@@ -78,19 +77,4 @@ public class ArticleSourcesLabelProvider extends ObservableMapLabelProvider {
 		return function.apply(generalSource);
 	}
 	
-	private <R> R getTextOrImage(Object element, int columnIndex, Supplier<R> supplier,
-			Function<GeneralSource, R> function) {
-		TableColumn currentColumn = table.getColumn(columnIndex);
-		if (!tableColumnGeneralSource.equals(currentColumn)) {
-			return supplier.get();
-		}
-
-		if (!(element instanceof Source)) {
-			return supplier.get();
-		}
-
-		Source source = (Source) element;
-		GeneralSource generalSource = source.getGeneralSource();
-		return function.apply(generalSource);
-	}
 }
