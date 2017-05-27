@@ -26,6 +26,8 @@
         <details key="WARNING" value="This element was generated from an .mecore file. Removing this annotation will signal the MinimalEcore builder to keep this element."/>
       </eAnnotations>
     </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="dontCount" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean" defaultValueLiteral="false"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Source">
     <eAnnotations source="org.emftext.language.mecore.resource.mecore.mopp.MecoreWrapper">

@@ -33,6 +33,10 @@ public abstract class AbstractExporter implements IExporter {
 		Map<String, Integer> categoryCounts = Maps.newHashMap();
 		for (Entry<GeneralSource, List<Source>> entry : generalSourcesOfArticles.entrySet()) {
 			GeneralSource generalSource = entry.getKey();
+			if(generalSource.isDontCount()) {
+				continue;
+			}
+			
 			List<Source> sources = entry.getValue();
 			int count = sources.size();
 			

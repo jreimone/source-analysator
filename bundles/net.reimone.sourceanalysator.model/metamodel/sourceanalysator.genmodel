@@ -15,6 +15,7 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute sourceanalysator.ecore#//GeneralSource/name"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference sourceanalysator.ecore#//GeneralSource/sources"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute sourceanalysator.ecore#//GeneralSource/aliases"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute sourceanalysator.ecore#//GeneralSource/dontCount"/>
     </genClasses>
     <genClasses ecoreClass="sourceanalysator.ecore#//Source">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference sourceanalysator.ecore#//Source/generalSource"/>

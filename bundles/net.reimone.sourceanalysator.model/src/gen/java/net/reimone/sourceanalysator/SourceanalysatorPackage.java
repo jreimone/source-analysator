@@ -95,13 +95,22 @@ public interface SourceanalysatorPackage extends EPackage {
 	int GENERAL_SOURCE__ALIASES = 2;
 
 	/**
+	 * The feature id for the '<em><b>Dont Count</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int GENERAL_SOURCE__DONT_COUNT = 3;
+
+	/**
 	 * The number of structural features of the '<em>General Source</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int GENERAL_SOURCE_FEATURE_COUNT = 3;
+	int GENERAL_SOURCE_FEATURE_COUNT = 4;
 
 	/**
 	 * The number of operations of the '<em>General Source</em>' class.
@@ -369,6 +378,17 @@ public interface SourceanalysatorPackage extends EPackage {
 	EAttribute getGeneralSource_Aliases();
 
 	/**
+	 * Returns the meta object for the attribute '{@link net.reimone.sourceanalysator.GeneralSource#isDontCount <em>Dont Count</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Dont Count</em>'.
+	 * @see net.reimone.sourceanalysator.GeneralSource#isDontCount()
+	 * @see #getGeneralSource()
+	 * @generated
+	 */
+	EAttribute getGeneralSource_DontCount();
+
+	/**
 	 * Returns the meta object for class '{@link net.reimone.sourceanalysator.Source <em>Source</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -585,6 +605,14 @@ public interface SourceanalysatorPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute GENERAL_SOURCE__ALIASES = eINSTANCE.getGeneralSource_Aliases();
+
+		/**
+		 * The meta object literal for the '<em><b>Dont Count</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute GENERAL_SOURCE__DONT_COUNT = eINSTANCE.getGeneralSource_DontCount();
 
 		/**
 		 * The meta object literal for the '{@link net.reimone.sourceanalysator.impl.SourceImpl <em>Source</em>}' class.

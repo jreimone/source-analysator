@@ -17,6 +17,7 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link net.reimone.sourceanalysator.GeneralSource#getName <em>Name</em>}</li>
  *   <li>{@link net.reimone.sourceanalysator.GeneralSource#getSources <em>Sources</em>}</li>
  *   <li>{@link net.reimone.sourceanalysator.GeneralSource#getAliases <em>Aliases</em>}</li>
+ *   <li>{@link net.reimone.sourceanalysator.GeneralSource#isDontCount <em>Dont Count</em>}</li>
  * </ul>
  *
  * @see net.reimone.sourceanalysator.SourceanalysatorPackage#getGeneralSource()
@@ -85,5 +86,32 @@ public interface GeneralSource extends EObject {
 	 * @generated
 	 */
 	EList<String> getAliases();
+
+	/**
+	 * Returns the value of the '<em><b>Dont Count</b></em>' attribute.
+	 * The default value is <code>"false"</code>.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Dont Count</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Dont Count</em>' attribute.
+	 * @see #setDontCount(boolean)
+	 * @see net.reimone.sourceanalysator.SourceanalysatorPackage#getGeneralSource_DontCount()
+	 * @model default="false" required="true"
+	 * @generated
+	 */
+	boolean isDontCount();
+
+	/**
+	 * Sets the value of the '{@link net.reimone.sourceanalysator.GeneralSource#isDontCount <em>Dont Count</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Dont Count</em>' attribute.
+	 * @see #isDontCount()
+	 * @generated
+	 */
+	void setDontCount(boolean value);
 
 } // GeneralSource

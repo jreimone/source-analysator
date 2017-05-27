@@ -161,6 +161,15 @@ public class SourceanalysatorPackageImpl extends EPackageImpl implements Sourcea
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getGeneralSource_DontCount() {
+		return (EAttribute)generalSourceEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getSource() {
 		return sourceEClass;
 	}
@@ -323,6 +332,7 @@ public class SourceanalysatorPackageImpl extends EPackageImpl implements Sourcea
 		createEAttribute(generalSourceEClass, GENERAL_SOURCE__NAME);
 		createEReference(generalSourceEClass, GENERAL_SOURCE__SOURCES);
 		createEAttribute(generalSourceEClass, GENERAL_SOURCE__ALIASES);
+		createEAttribute(generalSourceEClass, GENERAL_SOURCE__DONT_COUNT);
 
 		sourceEClass = createEClass(SOURCE);
 		createEReference(sourceEClass, SOURCE__GENERAL_SOURCE);
@@ -378,6 +388,7 @@ public class SourceanalysatorPackageImpl extends EPackageImpl implements Sourcea
 		initEAttribute(getGeneralSource_Name(), ecorePackage.getEString(), "name", null, 1, 1, GeneralSource.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getGeneralSource_Sources(), this.getSource(), this.getSource_GeneralSource(), "sources", null, 0, -1, GeneralSource.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getGeneralSource_Aliases(), ecorePackage.getEString(), "aliases", null, 0, -1, GeneralSource.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getGeneralSource_DontCount(), ecorePackage.getEBoolean(), "dontCount", "false", 1, 1, GeneralSource.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(sourceEClass, Source.class, "Source", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getSource_GeneralSource(), this.getGeneralSource(), this.getGeneralSource_Sources(), "generalSource", null, 1, 1, Source.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

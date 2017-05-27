@@ -34,6 +34,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
  *   <li>{@link net.reimone.sourceanalysator.impl.GeneralSourceImpl#getName <em>Name</em>}</li>
  *   <li>{@link net.reimone.sourceanalysator.impl.GeneralSourceImpl#getSources <em>Sources</em>}</li>
  *   <li>{@link net.reimone.sourceanalysator.impl.GeneralSourceImpl#getAliases <em>Aliases</em>}</li>
+ *   <li>{@link net.reimone.sourceanalysator.impl.GeneralSourceImpl#isDontCount <em>Dont Count</em>}</li>
  * </ul>
  *
  * @generated
@@ -78,6 +79,26 @@ public class GeneralSourceImpl extends MinimalEObjectImpl.Container implements G
 	 * @ordered
 	 */
 	protected EList<String> aliases;
+
+	/**
+	 * The default value of the '{@link #isDontCount() <em>Dont Count</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isDontCount()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final boolean DONT_COUNT_EDEFAULT = false;
+
+	/**
+	 * The cached value of the '{@link #isDontCount() <em>Dont Count</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isDontCount()
+	 * @generated
+	 * @ordered
+	 */
+	protected boolean dontCount = DONT_COUNT_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -148,6 +169,27 @@ public class GeneralSourceImpl extends MinimalEObjectImpl.Container implements G
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public boolean isDontCount() {
+		return dontCount;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setDontCount(boolean newDontCount) {
+		boolean oldDontCount = dontCount;
+		dontCount = newDontCount;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, SourceanalysatorPackage.GENERAL_SOURCE__DONT_COUNT, oldDontCount, dontCount));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
@@ -186,6 +228,8 @@ public class GeneralSourceImpl extends MinimalEObjectImpl.Container implements G
 				return getSources();
 			case SourceanalysatorPackage.GENERAL_SOURCE__ALIASES:
 				return getAliases();
+			case SourceanalysatorPackage.GENERAL_SOURCE__DONT_COUNT:
+				return isDontCount();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -210,6 +254,9 @@ public class GeneralSourceImpl extends MinimalEObjectImpl.Container implements G
 				getAliases().clear();
 				getAliases().addAll((Collection<? extends String>)newValue);
 				return;
+			case SourceanalysatorPackage.GENERAL_SOURCE__DONT_COUNT:
+				setDontCount((Boolean)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -231,6 +278,9 @@ public class GeneralSourceImpl extends MinimalEObjectImpl.Container implements G
 			case SourceanalysatorPackage.GENERAL_SOURCE__ALIASES:
 				getAliases().clear();
 				return;
+			case SourceanalysatorPackage.GENERAL_SOURCE__DONT_COUNT:
+				setDontCount(DONT_COUNT_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -249,6 +299,8 @@ public class GeneralSourceImpl extends MinimalEObjectImpl.Container implements G
 				return sources != null && !sources.isEmpty();
 			case SourceanalysatorPackage.GENERAL_SOURCE__ALIASES:
 				return aliases != null && !aliases.isEmpty();
+			case SourceanalysatorPackage.GENERAL_SOURCE__DONT_COUNT:
+				return dontCount != DONT_COUNT_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
 	}
@@ -267,6 +319,8 @@ public class GeneralSourceImpl extends MinimalEObjectImpl.Container implements G
 		result.append(name);
 		result.append(", aliases: ");
 		result.append(aliases);
+		result.append(", dontCount: ");
+		result.append(dontCount);
 		result.append(')');
 		return result.toString();
 	}
