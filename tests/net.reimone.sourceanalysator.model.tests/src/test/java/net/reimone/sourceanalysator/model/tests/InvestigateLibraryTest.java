@@ -24,9 +24,6 @@ import net.reimone.sourceanalysator.model.tests.util.AbstractSourceAnalysatorTes
 
 public class InvestigateLibraryTest extends AbstractSourceAnalysatorTest {
 
-	private GeneralSource spiegel;
-	private GeneralSource guardian;
-	
 	@Test
 	public void analyseNullArticleTest() {
 		Article article = null;
