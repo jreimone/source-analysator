@@ -3,8 +3,8 @@ jdk:
   - oraclejdk8
 
 install:
-  # this is needed to ensure that build is run with maven 3.3.9, so that polyglot projects are supported
-  - mvn -N io.takari:maven:wrapper -Dmaven=3.3.9
+  # this is needed to ensure that build is run with maven 3.5.0, so that polyglot projects are supported
+  - mvn -N io.takari:maven:wrapper -Dmaven=3.5.0
 
 script:
   # 'mvnw' is the versioned maven wrapper, which was downloaded in the previous install step
