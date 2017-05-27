@@ -17,10 +17,8 @@ import com.google.common.collect.Lists;
 
 import net.reimone.sourceanalysator.Article;
 import net.reimone.sourceanalysator.GeneralSource;
-import net.reimone.sourceanalysator.Hyperlink;
 import net.reimone.sourceanalysator.Library;
 import net.reimone.sourceanalysator.Source;
-import net.reimone.sourceanalysator.SourceanalysatorFactory;
 import net.reimone.sourceanalysator.core.ISourceAnalysator;
 import net.reimone.sourceanalysator.model.tests.util.AbstractSourceAnalysatorTest;
 
@@ -105,66 +103,6 @@ public class InvestigateLibraryTest extends AbstractSourceAnalysatorTest {
 			List<Source> sources = generalSources.get(generalSource);
 			System.out.println(generalSource.getName() + " " + sources.size() + "x");
 		}
-	}
-	
-	private Library createSimpleLibrary() {
-		SourceanalysatorFactory factory = SourceanalysatorFactory.eINSTANCE;
-		Library library = factory.createLibrary();
-		
-		// create sources
-		spiegel = factory.createGeneralSource();
-		spiegel.setName("Spiegel");
-		library.getGeneralSources().add(spiegel);
-		
-		guardian = factory.createGeneralSource();
-		guardian.setName("Guardian");
-		library.getGeneralSources().add(guardian);
-		
-		Hyperlink spiegel1 = factory.createHyperlink();
-		spiegel1.setUrl("http://www.spon.de/crap");
-		library.getHyperlinks().add(spiegel1);
-		
-		Hyperlink spiegel2 = factory.createHyperlink();
-		spiegel2.setUrl("http://www.spiegel.de/trash");
-		library.getHyperlinks().add(spiegel2);
-		
-		Hyperlink guardian1 = factory.createHyperlink();
-		guardian1.setUrl("http://www.guardian.com/article1");
-		library.getHyperlinks().add(guardian1);
-		
-		// create articles
-		Article article1 = factory.createArticle();
-		article1.setTitle("Fuck the system");
-		Source source = factory.createSource();
-		source.setHyperlink(spiegel1);
-		source.setGeneralSource(spiegel);
-		article1.getSources().add(source);
-		
-		source = factory.createSource();
-		source.setHyperlink(spiegel2);
-		source.setGeneralSource(spiegel);
-		article1.getSources().add(source);
-		
-		source = factory.createSource();
-		source.setHyperlink(guardian1);
-		source.setGeneralSource(guardian);
-		article1.getSources().add(source);
-		library.getArticles().add(article1);
-		
-		Article article2 = factory.createArticle();
-		article2.setTitle(ARTICLE_TITLE);
-		source = factory.createSource();
-		source.setHyperlink(spiegel1);
-		source.setGeneralSource(spiegel);
-		article2.getSources().add(source);
-		
-		source = factory.createSource();
-		source.setHyperlink(guardian1);
-		source.setGeneralSource(guardian);
-		article2.getSources().add(source);
-		library.getArticles().add(article2);
-		
-		return library;
 	}
 	
 }

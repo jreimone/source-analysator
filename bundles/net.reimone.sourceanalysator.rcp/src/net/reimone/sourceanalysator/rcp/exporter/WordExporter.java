@@ -6,14 +6,11 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
 import java.util.Map.Entry;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import java.util.stream.Collectors;
 
 import org.apache.poi.xwpf.usermodel.XWPFDocument;
 import org.apache.poi.xwpf.usermodel.XWPFParagraph;
@@ -26,16 +23,13 @@ import org.eclipse.core.runtime.Platform;
 import org.osgi.framework.Bundle;
 import org.osgi.framework.FrameworkUtil;
 
-import com.google.common.collect.Lists;
-import com.google.common.collect.Maps;
 import com.google.common.io.Files;
 
 import net.reimone.sourceanalysator.Article;
-import net.reimone.sourceanalysator.GeneralSource;
-import net.reimone.sourceanalysator.Source;
+import net.reimone.sourceanalysator.core.AbstractExporter;
 import net.reimone.sourceanalysator.core.IExporter;
 
-public class WordExporter implements IExporter {
+public class WordExporter extends AbstractExporter implements IExporter {
 
 	private static final Logger LOGGER = Logger.getLogger(WordExporter.class.getName());
 
@@ -229,32 +223,5 @@ public class WordExporter implements IExporter {
 		}
 
 		return tempFile;
-	}
-
-	@Override
-	public List<Entry<String, Integer>> generateStatisticsForGeneralSourcesOfArticles(
-			Map<GeneralSource, List<Source>> generalSourcesOfArticles) {
-		List<Entry<String, Integer>> result = Lists.newArrayList();
-		if (generalSourcesOfArticles == null) {
-			return result;
-		}
-
-		Map<String, Integer> categoryCounts = Maps.newHashMap();
-		for (Entry<GeneralSource, List<Source>> entry : generalSourcesOfArticles.entrySet()) {
-			GeneralSource generalSource = entry.getKey();
-			List<Source> sources = entry.getValue();
-			int count = sources.size();
-			
-			String categoryName = generalSource.getName();
-			Integer finalCount = categoryCounts.get(categoryName);
-			if (finalCount == null) {
-				finalCount = 0;
-			}
-			finalCount += count;
-			categoryCounts.put(categoryName, finalCount);
-		}
-		
-		result = categoryCounts.entrySet().stream().sorted(Map.Entry.comparingByValue(Collections.reverseOrder())).collect(Collectors.toList());
-		return result;
 	}
 }
