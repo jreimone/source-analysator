@@ -38,6 +38,15 @@
 						</goals>
 					</execution>
 				</executions>
+				<configuration>
+					<products>
+						<product>
+							<id>SourceAnalysator Product</id>
+							<!-- <archiveFileName>SourceAnalysator-${project.version}</archiveFileName> -->
+							<archiveFileName>SourceAnalysator</archiveFileName>
+						</product>
+					</products>
+				</configuration>
 			</plugin>
 		</plugins>
 	</build>
