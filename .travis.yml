@@ -1,28 +1,24 @@
 language: java
-
 jdk:
 - oraclejdk8
-
 install:
 - mvn -N io.takari:maven:wrapper -Dmaven=3.5.0
-
 script:
 - "./mvnw clean install"
-
 after_success:
-- "./mvnw jacoco:report coveralls:report"  
-
+- "./mvnw jacoco:report coveralls:report"
 deploy:
-- provider: script
-  skip_cleanup: true
-  script: releng/publish.sh releng/net.reimone.sourceanalysator.product/target/products/SourceAnalysator-win32.win32.x86.zip RCP-32bit
-  on:
-    tags: true
-
+  matrix:
+  - provider: script
+    skip_cleanup: true
+    script: releng/publish.sh releng/net.reimone.sourceanalysator.product/target/products/SourceAnalysator-win32.win32.x86.zip RCP-32bit
+    on:
+      tags: true
+  key:
+    secure: sklsbUpFSlu6Cv/iSiGDhJWecFe8T7lpa1ZdMdwU5g1025z/6TyQac0TxBYseyluxcG731MzBykA0T+7dQdvULip+Vi/LyEINI9pZjPVrg9rFz1ux039H4SwBPqGhj4NCgPJaie4kQDuJpix3Nc3H+QbCXW8khtZVdeLrSL6rGGzpVEObG89hG8m8LHWp8PG7H1Bd6IgN/GwzgXMi9ZSl5cWiOAU6E/CFcRqcgPj3ujJzjMvlE9NgKw/z2s1uzRpXkt4HVz5nwTsBIEtSu4Fn/03g6TXbPvSwTp95HDukZYFCSKK8/APee5KrNZjF1BwCY0q9DYU/M2B2U75P6KUX9zYH5xdPVURVQ6k7aDOncvMie7RPajzOe7gf8yl4fP/hf/scPjgW/7pQ3F0ar6at8FZCnaHmwy2MGx5sNpyghYGKhYXbjNPsZTf8YPc6ioHjml1/sj58D8dZOeu+DA5sBD3PgJBS01RJgUAiRyWXHM02OcvCEPiXs2AI7uSKLPC4tXUNq74cfPEdlWR8/QTySir85fXVfiUf2S4if8KhMbpIUO/UGka91hVTJccC3hczsl7G9iDlA72fO+g65MXzPXnXPRapjWUX48M/jWD3mwO5LcAXi0II0exUsJCVXexoJVaWA/5Pqtev2HX3nQliPQ7oP21mOcu0zvPPMJ/JTs=
 env:
   global:
   - BINTRAY_USER: jreimone
   - BINTRAY_OWNER: jreimone
   - BINTRAY_REPO: source-analysator
-  # BINTRAY_API_KEY
-  - secure: DqlrAa0+8KZvHlY7TzcYWrynhBVmtDojTHlK0n7ltC4FpNeIDMxqicgAo7x0vzqibovZfKkzGvwFEHGQaVl4SnNz4iVM9y+8CBIwnzZ7Q50dGumYaFAaXwSRMEGbUeLGB/0jmfzfyxwR9C1S5OAD9yLA30Q6mqa45npwHdZ/ialw3bz7bLRQA+EkEv3bT04WORaJ46/V1fIkIEB7CC4gnKhk9wN5sz+9Ku7arWJIl6mI0j12cDinukGr3enSPdc1wDaFbE65WYmzRn0TE0nJeZym0KtGV+JepxeyVNtT2yOGB9eq2Qch4qulzqRKynr4u56doqT9cXoQ1y+4OXTvP+J5+L+AeW/ueZFEb8wTKaEi7Cjz2GH/V1ILo/PEw2JXtf4A6IZtuFSJ38mC3XIwCaDOvKKtC6d2OWQZqSj4z1kev86gvvAN5iWi1ds3lzJkUuKhRiCaWem4QUbdasNC5d/imY4AX3fvl85eg+D1lBzYr7WWwTjMQTgaTtQzoQ4QBxP5Y0Q05G3dlxuS6hfow89oN61lWWvhqd3L2sgUcmk57IAoe2erzLpw5LrRG/WUEWX3/lq0A86Zm0IWJmwd2YoZrrDB059Bsh13umYPOlFhiBXcqYKjSAjzxMJFyMN5LXNQqL3M0xNMsMCphCH/Jr47eMFQpJ7JSjk9qWqLxl0=
+#  - secure: DqlrAa0+8KZvHlY7TzcYWrynhBVmtDojTHlK0n7ltC4FpNeIDMxqicgAo7x0vzqibovZfKkzGvwFEHGQaVl4SnNz4iVM9y+8CBIwnzZ7Q50dGumYaFAaXwSRMEGbUeLGB/0jmfzfyxwR9C1S5OAD9yLA30Q6mqa45npwHdZ/ialw3bz7bLRQA+EkEv3bT04WORaJ46/V1fIkIEB7CC4gnKhk9wN5sz+9Ku7arWJIl6mI0j12cDinukGr3enSPdc1wDaFbE65WYmzRn0TE0nJeZym0KtGV+JepxeyVNtT2yOGB9eq2Qch4qulzqRKynr4u56doqT9cXoQ1y+4OXTvP+J5+L+AeW/ueZFEb8wTKaEi7Cjz2GH/V1ILo/PEw2JXtf4A6IZtuFSJ38mC3XIwCaDOvKKtC6d2OWQZqSj4z1kev86gvvAN5iWi1ds3lzJkUuKhRiCaWem4QUbdasNC5d/imY4AX3fvl85eg+D1lBzYr7WWwTjMQTgaTtQzoQ4QBxP5Y0Q05G3dlxuS6hfow89oN61lWWvhqd3L2sgUcmk57IAoe2erzLpw5LrRG/WUEWX3/lq0A86Zm0IWJmwd2YoZrrDB059Bsh13umYPOlFhiBXcqYKjSAjzxMJFyMN5LXNQqL3M0xNMsMCphCH/Jr47eMFQpJ7JSjk9qWqLxl0=
