@@ -25,6 +25,10 @@ if [ ! -z "$TAG" ]; then
   BINTRAY_PCK_VERSION=$TAG
 fi
 
+if [ ! -z "$BINTRAY_API_KEY" ]; then
+  BINTRAY_API_KEY=$secure
+fi
+
 #if [ ! -z "$REPOSITORY_PATH" ]; then
 #  pushd "$REPOSITORY_PATH"
 #else

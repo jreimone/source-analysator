@@ -11,6 +11,7 @@ script:
 
 after_success:
 - "./mvnw jacoco:report coveralls:report"
+  skip_cleanup: true
 
 deploy:
 - provider: script
