@@ -8,18 +8,17 @@ script:
 after_success:
 - "./mvnw jacoco:report coveralls:report"
 deploy:
-  provider: bintray
-#  - provider: script
+#  provider: bintray
+  - provider: script
   skip_cleanup: true
 #  file: publish.json
-#    script: releng/publish.sh releng/net.reimone.sourceanalysator.product/target/products/SourceAnalysator-win32.win32.x86.zip
-#      RCP-32bit
+  script: releng/publish.sh releng/net.reimone.sourceanalysator.product/target/products/SourceAnalysator-win32.win32.x86.zip RCP-32bit
   on:
     tags: true
-  user: jreimone
+#  user: jreimone
   key:
     secure: IgalVPL5QbZHyksxRUX9ZoX7SPm7VVMZKoRbzSr5on/NBUUH5EQ2CfkziKHa2jTKfL+EEC6Q2UbtXtv3mUbTAF9Ae4nZP1Pr69rrXlsV82ny0jwMyyOhvu8Vp4UUkJLEzazMYVPN/IhjIJg55s+67BtDaMns+mlIUj2kUu0jqvSpDdDNNT7bXTinQYlMuuoy1oQ6TTOxfAfP1srMol+W0OArA14Qrf7NzmkNnRZmnbhhHawM1D/RfO6aHI2SHTWIDeLxlMKbhrbSi0DC7k0TAY/7ui4MDB1+p59aVEzSfyfFXR3Slz6qRM7ayzRZ3/7QLNdUMfUCxvWYL3QvsuQZsJtoAE0W3wN9UY9teEalbFIShxZtUtZdrCTfwV48LdLGRHHY04UwzWtxiPEBGPurqj2+EiFGkUjeQL8ZhFuC3qPQ09uyBvi7NiRjp1ASIrAltwnaSIPwFZ7nSGR4SZqojCq6jyWG+98Uzp++DESv3gdIjNerpuqbTy8RbZbQbIZV1KKtcfAMMMNEdr8kyPqfGHDTtDqTmiCJJJn1ARZWZgNkFZSAwkxx3t4R1ZZftFzMpCV3Yv2eMdrWbt6GaJ1wYvv7MaSOYdGC6MV9lSrN3c9Tm18xnrXSdh/lsq6Y8EQ2CbvoNTAQdizH4fOVRQa2sZt5KI0MimkBSMsqjiRyEXA=
-  dry-run: true
+#  dry-run: true
 env:
   global:
   - BINTRAY_USER: jreimone

@@ -44,20 +44,15 @@ BINTRAY_OPTS="bt_package=$BINTRAY_PCK_NAME;bt_version=$BINTRAY_PCK_VERSION;publi
 
 # create version
 echo "Creating version: $BINTRAY_PCK_VERSION"
-echo curl -X POST -u${BINTRAY_USER}:${BINTRAY_API_KEY} "$API/packages/$BINTRAY_OWNER/$BINTRAY_REPO/$BINTRAY_PCK_NAME/versions" -d "{ \"name\": \"$BINTRAY_PCK_VERSION\" }" -H "Content-Type: application/json"
+curl -X POST -u${BINTRAY_USER}:${BINTRAY_API_KEY} "$API/packages/$BINTRAY_OWNER/$BINTRAY_REPO/$BINTRAY_PCK_NAME/versions" -d "{ \"name\": \"$BINTRAY_PCK_VERSION\" }" -H "Content-Type: application/json"
 
-# upload files
-#for f in ${FILES[@]}
-#do
-#if [ -f $f ]; then
-  echo "Uploading file: $FILE_TO_UPLOAD"
+# upload file
+#  echo "Uploading file: $FILE_TO_UPLOAD"
   # curl -X PUT -T $FILE_TO_UPLOAD --retry 3 -u${BINTRAY_USER}:${BINTRAY_API_KEY} "${API}/content/$BINTRAY_PATH/$FILE_TO_UPLOAD;$BINTRAY_OPTS"
-  curl -T $FILE_TO_UPLOAD -u$BINTRAY_USER:$BINTRAY_API_KEY $API/content/$BINTRAY_PATH/$FILE_TO_UPLOAD;$BINTRAY_OPTS
-#fi
-#done
+#  curl -T $FILE_TO_UPLOAD -u$BINTRAY_USER:$BINTRAY_API_KEY $API/content/$BINTRAY_PATH/$FILE_TO_UPLOAD;$BINTRAY_OPTS
 
-echo "Publishing the new version"
-curl -X POST --retry 3 -u${BINTRAY_USER}:${BINTRAY_API_KEY} "${API}/content/$BINTRAY_OWNER/$BINTRAY_REPO/$BINTRAY_PCK_NAME/$BINTRAY_PCK_VERSION/publish" -d "{ \"discard\": \"false\" }" -H "Content-Type: application/json"
+#echo "Publishing the new version"
+#curl -X POST --retry 3 -u${BINTRAY_USER}:${BINTRAY_API_KEY} "${API}/content/$BINTRAY_OWNER/$BINTRAY_REPO/$BINTRAY_PCK_NAME/$BINTRAY_PCK_VERSION/publish" -d "{ \"discard\": \"false\" }" -H "Content-Type: application/json"
 
 }
 
