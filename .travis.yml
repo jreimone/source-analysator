@@ -9,7 +9,7 @@ after_success:
 - "./mvnw jacoco:report coveralls:report"
 deploy:
 #  provider: bintray
-  - provider: script
+- provider: script
   skip_cleanup: true
 #  file: publish.json
   script: releng/publish.sh releng/net.reimone.sourceanalysator.product/target/products/SourceAnalysator-win32.win32.x86.zip RCP-32bit
